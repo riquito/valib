@@ -18,8 +18,15 @@ suite('validators',function(){
         });
         
         test('a string is not number',function(){
+            assert.isFalse(v.Type.isNumber(""));
+            assert.isFalse(v.Type.isNumber(" "));
             assert.isFalse(v.Type.isNumber("0"));
             assert.isFalse(v.Type.isNumber("1"));
+            
+            assert.isFalse(v.Type.isNumber(new String("")));
+            assert.isFalse(v.Type.isNumber(new String(" ")));
+            assert.isFalse(v.Type.isNumber(new String("0")));
+            assert.isFalse(v.Type.isNumber(new String("1")));
         });
         
         test('an array is not a number',function(){
@@ -39,6 +46,10 @@ suite('validators',function(){
         test('a boolean is not a number',function(){
             assert.isFalse(v.Type.isNumber(true));
             assert.isFalse(v.Type.isNumber(false));
+        });
+        
+        test('a date is not a number',function(){
+            assert.isFalse(v.Type.isNumber(new Date()));
         });
         
         test('is integer (like)',function(){
