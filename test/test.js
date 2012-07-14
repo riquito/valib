@@ -44,6 +44,11 @@ suite('validators',function(){
             assert.isFalse(v.Type.isNumber({'a':1}));
         });
         
+        test('a function is not a number',function(){
+            assert.isFalse(v.Type.isNumber(function(){}));
+            assert.isFalse(v.Type.isNumber(function(){ return 2+2; }));
+        });
+        
         test('a regexp is not a number',function(){
             assert.isFalse(v.Type.isNumber(/reg/));
         });
@@ -196,6 +201,11 @@ suite('validators',function(){
             assert.isFalse(v.Type.isString({'a':1}));
         });
         
+        test('a function is not a string',function(){
+            assert.isFalse(v.Type.isString(function(){}));
+            assert.isFalse(v.Type.isString(function(){ return 2+2; }));
+        });
+        
         test('a regexp is not a string',function(){
             assert.isFalse(v.Type.isString(/reg/));
         });
@@ -240,6 +250,11 @@ suite('validators',function(){
             assert.isFalse(v.Type.isBoolean([]));
             assert.isFalse(v.Type.isBoolean([0]));
             assert.isFalse(v.Type.isBoolean([1]));
+        });
+        
+        test('a function is not a boolean',function(){
+            assert.isFalse(v.Type.isBoolean(function(){}));
+            assert.isFalse(v.Type.isBoolean(function(){ return 2+2; }));
         });
         
         test('an object is not a boolean',function(){
@@ -288,6 +303,11 @@ suite('validators',function(){
             assert.isFalse(v.Type.isArray({'true':false}));
         });
         
+        test('a function is not an array',function(){
+            assert.isFalse(v.Type.isArray(function(){}));
+            assert.isFalse(v.Type.isArray(function(){ return 2+2; }));
+        });
+        
         test('a regexp is not an array',function(){
             assert.isFalse(v.Type.isArray(/true/));
         });
@@ -299,6 +319,103 @@ suite('validators',function(){
         
         test('a date is not an array',function(){
             assert.isFalse(v.Type.isArray(new Date()));
+        });
+    });
+    
+    suite('Objects',function() {
+        
+        test('literal objects and instances of Object are objects',function(){
+            assert.isTrue(v.Type.isObject({}));
+            assert.isTrue(v.Type.isObject({0:'a',1:'b'}));
+            assert.isTrue(v.Type.isObject({'a':0,'b':1}));
+            
+            assert.isTrue(v.Type.isObject(new Object()));
+            assert.isTrue(v.Type.isObject(new Object({})));
+            assert.isTrue(v.Type.isObject(new Object({'a':1})));
+        });
+        
+        test('a number is not an object',function(){
+            assert.isFalse(v.Type.isObject(0));
+            assert.isFalse(v.Type.isObject(1));
+        });
+        
+        test('a string is not an object',function(){
+            assert.isFalse(v.Type.isObject(""));
+            assert.isFalse(v.Type.isObject("0"));
+            assert.isFalse(v.Type.isObject("1"));
+            assert.isFalse(v.Type.isObject("true"));
+            assert.isFalse(v.Type.isObject("false"));
+            assert.isFalse(v.Type.isObject(" "));
+            assert.isFalse(v.Type.isObject("hello"));
+        });
+        
+        test('an array is not an object',function(){
+            assert.isFalse(v.Type.isObject([]));
+            assert.isFalse(v.Type.isObject([1,2,3]));
+        });
+        
+        test('a function is not a object',function(){
+            assert.isFalse(v.Type.isObject(function(){}));
+            assert.isFalse(v.Type.isObject(function(){ return 2+2; }));
+        });
+        
+        test('a regexp is not an object',function(){
+            assert.isFalse(v.Type.isObject(/reg/));
+        });
+        
+        test('a boolean is not an object',function(){
+            assert.isFalse(v.Type.isObject(true));
+            assert.isFalse(v.Type.isObject(false));
+        });
+        
+        test('a date is not an object',function(){
+            assert.isFalse(v.Type.isObject(new Date()));
+        });
+    });
+    
+    suite('Function',function() {
+        
+        test('function literals and instances of Function are functions',function(){
+            assert.isTrue(v.Type.isFunction(function(){}));
+            assert.isTrue(v.Type.isFunction(function(){ return 2+2; }));
+        });
+        
+        test('a number is not a function',function(){
+            assert.isFalse(v.Type.isFunction(0));
+            assert.isFalse(v.Type.isFunction(1));
+        });
+        
+        test('a string is not a function',function(){
+            assert.isFalse(v.Type.isFunction(""));
+            assert.isFalse(v.Type.isFunction("0"));
+            assert.isFalse(v.Type.isFunction("1"));
+            assert.isFalse(v.Type.isFunction("true"));
+            assert.isFalse(v.Type.isFunction("false"));
+            assert.isFalse(v.Type.isFunction(" "));
+            assert.isFalse(v.Type.isFunction("hello"));
+        });
+        
+        test('an object is not a function',function(){
+            assert.isFalse(v.Type.isFunction({}));
+            assert.isFalse(v.Type.isFunction({'a':1}));
+        });
+        
+        test('an array is not a function',function(){
+            assert.isFalse(v.Type.isFunction([]));
+            assert.isFalse(v.Type.isFunction([1,2,3]));
+        });
+        
+        test('a regexp is not a function',function(){
+            assert.isFalse(v.Type.isFunction(/reg/));
+        });
+        
+        test('a boolean is not a function',function(){
+            assert.isFalse(v.Type.isFunction(true));
+            assert.isFalse(v.Type.isFunction(false));
+        });
+        
+        test('a date is not a function',function(){
+            assert.isFalse(v.Type.isFunction(new Date()));
         });
     });
     

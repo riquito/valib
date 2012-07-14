@@ -59,6 +59,12 @@
             },
             isArray: Array.isArray || function(value) {
                 return getType(value) === 'array';
+            },
+            isObject: function(value) { // note: doesn't treat arrays as objects
+                return getType(value) === 'object';
+            },
+            isFunction: function(value) {
+                return getType(value) === 'function';
             }
         },
         Number: {
