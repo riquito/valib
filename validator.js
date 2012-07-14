@@ -49,6 +49,18 @@
                 return (opts.l_exc ? num > min : num >= min)
                         &&
                        (opts.r_exc ? num < max : num <= max);
+            },
+            lt : function(num,max) {
+                return num < max;
+            },
+            lte : function(num,max) {
+                return num <= max;
+            },
+            gt : function(num,min) {
+                return num > min;
+            },
+            gte : function(num,min) {
+                return num >= min;
             }
         }
     };

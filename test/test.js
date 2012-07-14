@@ -88,6 +88,64 @@ suite('validators',function(){
             assert.isFalse(v.Number.inRange(0, -5, 0,{r_exc:true}));
             assert.isFalse(v.Number.inRange(0,  0, 3,{l_exc:true}));
         });
+        
+        test('less than',function(){
+            assert.isTrue(v.Number.lt( 2  ,  3));
+            assert.isTrue(v.Number.lt(-2  ,  3));
+            assert.isTrue(v.Number.lt(-2  , -1));
+            assert.isTrue(v.Number.lt( 2  ,  Infinity));
+            assert.isTrue(v.Number.lt( 0  ,  1));
+            assert.isTrue(v.Number.lt( 1.1,  2));
+            
+            assert.isFalse(v.Number.lt( 3,  3));
+            assert.isFalse(v.Number.lt( 0,  0));
+            assert.isFalse(v.Number.lt(-3, -5));
+            assert.isFalse(v.Number.lt(-3, -Infinity));
+        });
+        
+        test('less than or equal',function(){
+            assert.isTrue(v.Number.lte( 2  ,  3));
+            assert.isTrue(v.Number.lte(-2  ,  3));
+            assert.isTrue(v.Number.lte(-2  , -1));
+            assert.isTrue(v.Number.lte( 2  ,  Infinity));
+            assert.isTrue(v.Number.lte( 0  ,  1));
+            assert.isTrue(v.Number.lte( 1.1,  2));
+            
+            assert.isTrue(v.Number.lte( 3,  3));
+            assert.isTrue(v.Number.lte( 0,  0));
+            
+            assert.isFalse(v.Number.lte(-3, -5));
+            assert.isFalse(v.Number.lte(-3, -Infinity));
+        });
+        
+        test('greather than',function(){
+            assert.isTrue(v.Number.gt( 3  ,  2));
+            assert.isTrue(v.Number.gt( 3  , -2));
+            assert.isTrue(v.Number.gt(-1  , -2));
+            assert.isTrue(v.Number.gt( 3  ,  -Infinity));
+            assert.isTrue(v.Number.gt( 0  , -1));
+            assert.isTrue(v.Number.gt( 2.1,  1.1));
+            
+            assert.isFalse(v.Number.gt( 3,  3));
+            assert.isFalse(v.Number.gt( 0,  0));
+            assert.isFalse(v.Number.gt(-5, -3));
+            assert.isFalse(v.Number.gt( 3, Infinity));
+        });
+        
+        test('greather than or equal',function(){
+            assert.isTrue(v.Number.gte( 3  ,  2));
+            assert.isTrue(v.Number.gte( 3  , -2));
+            assert.isTrue(v.Number.gte(-1  , -2));
+            assert.isTrue(v.Number.gte( 3  ,  -Infinity));
+            assert.isTrue(v.Number.gte( 0  , -1));
+            assert.isTrue(v.Number.gte( 2.1,  1.1));
+            
+            assert.isTrue(v.Number.gte( 3,  3));
+            assert.isTrue(v.Number.gte( 0,  0));
+            
+            assert.isFalse(v.Number.gte(-5, -3));
+            assert.isFalse(v.Number.gte( 3, Infinity));
+        });
 
     });
     
