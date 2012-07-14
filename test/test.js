@@ -72,6 +72,22 @@ suite('validators',function(){
             assert.isFalse(v.Number.isInfinity(1));
             assert.isFalse(v.Number.isInfinity(1.1));
         });
+        
+        test('in range',function(){
+            assert.isTrue(v.Number.inRange(10,  3, 20));
+            assert.isTrue(v.Number.inRange(10, 10, 20));
+            assert.isTrue(v.Number.inRange(10,  3, 10));
+            
+            assert.isFalse(v.Number.inRange(10,  3, 10,{r_exc:true}));
+            assert.isFalse(v.Number.inRange(10, 10, 20,{l_exc:true}));
+            
+            assert.isTrue(v.Number.inRange(0, -5, 3));
+            assert.isTrue(v.Number.inRange(0,  0, 3));
+            assert.isTrue(v.Number.inRange(0, -5, 0));
+            
+            assert.isFalse(v.Number.inRange(0, -5, 0,{r_exc:true}));
+            assert.isFalse(v.Number.inRange(0,  0, 3,{l_exc:true}));
+        });
 
     });
     

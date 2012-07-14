@@ -43,6 +43,12 @@
             },
             isInfinity: function(n) {
                 return n === Infinity || n === -Infinity;
+            },
+            inRange : function(num,min,max,opts) {
+                opts = opts || {l_exc : false, r_exc : false};
+                return (opts.l_exc ? num > min : num >= min)
+                        &&
+                       (opts.r_exc ? num < max : num <= max);
             }
         }
     };
