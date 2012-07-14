@@ -1,0 +1,9 @@
+{
+    "name": "validator",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+      "chai" : "1.x",
+      "mocha" : "1.x"
+    }
+}

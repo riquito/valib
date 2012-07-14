@@ -29,8 +29,21 @@
     }
 }(this, function (/*dependencies*/) {
     return {
-        
-        
-        
+        Type: {
+            isNumber : function(value) {
+                return typeof value === 'number';
+            }
+        },
+        Number: {
+            isInteger : function(n){ // note, it implies n IS a number
+                return n===+n && n===(n|0);
+            },
+            isFloat: function(n) { // note, it implies n IS a number
+                return n===+n && n!==(n|0);
+            },
+            isInfinity: function(n) {
+                return n === Infinity || n === -Infinity;
+            }
+        }
     };
 }));
