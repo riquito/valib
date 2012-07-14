@@ -65,6 +65,9 @@
             },
             isFunction: function(value) {
                 return getType(value) === 'function';
+            },
+            isUndefined: function(value) {
+                return getType(value) === 'undefined';
             }
         },
         Number: {

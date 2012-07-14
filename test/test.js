@@ -62,6 +62,10 @@ suite('validators',function(){
             assert.isFalse(v.Type.isNumber(new Date()));
         });
         
+        test('undefined is not a number',function(){
+            assert.isFalse(v.Type.isNumber(undefined));
+        });
+        
         test('is integer (like)',function(){
             assert.isTrue (v.Number.isInteger( 0   ));
             assert.isTrue (v.Number.isInteger(-0   ));
@@ -218,6 +222,10 @@ suite('validators',function(){
         test('a date is not a string',function(){
             assert.isFalse(v.Type.isString(new Date()));
         });
+        
+        test('undefined is not a string',function(){
+            assert.isFalse(v.Type.isString(undefined));
+        });
     });
     
     suite('Booleans',function() {
@@ -268,6 +276,10 @@ suite('validators',function(){
         
         test('a date is not a boolean',function(){
             assert.isFalse(v.Type.isBoolean(new Date()));
+        });
+        
+        test('undefined is not a boolean',function(){
+            assert.isFalse(v.Type.isBoolean(undefined));
         });
     });
     
@@ -320,6 +332,10 @@ suite('validators',function(){
         test('a date is not an array',function(){
             assert.isFalse(v.Type.isArray(new Date()));
         });
+        
+        test('undefined is not an array',function(){
+            assert.isFalse(v.Type.isArray(undefined));
+        });
     });
     
     suite('Objects',function() {
@@ -371,6 +387,10 @@ suite('validators',function(){
         test('a date is not an object',function(){
             assert.isFalse(v.Type.isObject(new Date()));
         });
+        
+        test('undefined is not an object',function(){
+            assert.isFalse(v.Type.isObject(undefined));
+        });
     });
     
     suite('Function',function() {
@@ -416,6 +436,60 @@ suite('validators',function(){
         
         test('a date is not a function',function(){
             assert.isFalse(v.Type.isFunction(new Date()));
+        });
+        
+        test('undefined is not a function',function(){
+            assert.isFalse(v.Type.isFunction(undefined));
+        });
+    });
+    
+    suite('Undefined',function() {
+        
+        test('undefined is undefined',function(){
+            assert.isTrue(v.Type.isUndefined(undefined));
+        });
+        
+        test('a number is not undefined',function(){
+            assert.isFalse(v.Type.isUndefined(0));
+            assert.isFalse(v.Type.isUndefined(1));
+        });
+        
+        test('a string is not undefined',function(){
+            assert.isFalse(v.Type.isUndefined(""));
+            assert.isFalse(v.Type.isUndefined("0"));
+            assert.isFalse(v.Type.isUndefined("1"));
+            assert.isFalse(v.Type.isUndefined("true"));
+            assert.isFalse(v.Type.isUndefined("false"));
+            assert.isFalse(v.Type.isUndefined(" "));
+            assert.isFalse(v.Type.isUndefined("hello"));
+        });
+        
+        test('an object is not undefined',function(){
+            assert.isFalse(v.Type.isUndefined({}));
+            assert.isFalse(v.Type.isUndefined({'a':1}));
+        });
+        
+        test('a function is not undefined',function(){
+            assert.isFalse(v.Type.isUndefined(function(){}));
+            assert.isFalse(v.Type.isUndefined(function(){ return 2+2; }));
+        });
+        
+        test('an array is not undefined',function(){
+            assert.isFalse(v.Type.isUndefined([]));
+            assert.isFalse(v.Type.isUndefined([1,2,3]));
+        });
+        
+        test('a regexp is not undefined',function(){
+            assert.isFalse(v.Type.isUndefined(/reg/));
+        });
+        
+        test('a boolean is not undefined',function(){
+            assert.isFalse(v.Type.isUndefined(true));
+            assert.isFalse(v.Type.isUndefined(false));
+        });
+        
+        test('a date is not undefined',function(){
+            assert.isFalse(v.Type.isUndefined(new Date()));
         });
     });
     
