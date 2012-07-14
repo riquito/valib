@@ -53,6 +53,9 @@
             },
             isString: function(value) {
                 return getType(value) === 'string';
+            },
+            isBoolean: function(value) {
+                return getType(value) === 'boolean';
             }
         },
         Number: {

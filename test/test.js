@@ -210,4 +210,50 @@ suite('validators',function(){
         });
     });
     
+    suite('Booleans',function() {
+        
+        test('literal booleans and instances of Boolean are booleans',function(){
+            assert.isTrue(v.Type.isBoolean(true));
+            assert.isTrue(v.Type.isBoolean(false));
+            
+            assert.isTrue(v.Type.isBoolean(new Boolean()));
+            assert.isTrue(v.Type.isBoolean(new Boolean(true)));
+            assert.isTrue(v.Type.isBoolean(new Boolean(false)));
+        });
+        
+        test('a number is not a boolean',function(){
+            assert.isFalse(v.Type.isBoolean(0));
+            assert.isFalse(v.Type.isBoolean(1));
+        });
+        
+        test('a string is not a boolean',function(){
+            assert.isFalse(v.Type.isBoolean(""));
+            assert.isFalse(v.Type.isBoolean("0"));
+            assert.isFalse(v.Type.isBoolean("1"));
+            assert.isFalse(v.Type.isBoolean("true"));
+            assert.isFalse(v.Type.isBoolean("false"));
+            assert.isFalse(v.Type.isBoolean(" "));
+            assert.isFalse(v.Type.isBoolean("hello"));
+        });
+        
+        test('an array is not a boolean',function(){
+            assert.isFalse(v.Type.isBoolean([]));
+            assert.isFalse(v.Type.isBoolean([0]));
+            assert.isFalse(v.Type.isBoolean([1]));
+        });
+        
+        test('an object is not a boolean',function(){
+            assert.isFalse(v.Type.isBoolean({}));
+            assert.isFalse(v.Type.isBoolean({'true':false}));
+        });
+        
+        test('a regexp is not a boolean',function(){
+            assert.isFalse(v.Type.isBoolean(/true/));
+        });
+        
+        test('a date is not a boolean',function(){
+            assert.isFalse(v.Type.isBoolean(new Date()));
+        });
+    });
+    
 });
