@@ -28,18 +28,36 @@
         root.validator = factory();
     }
 }(this, function (/*dependencies*/) {
+    
+    var getType = (function(){
+        
+        var classes = ["Boolean","Number","String","Function","Array","Date","RegExp","Object"],
+            class2type = {};
+        
+        for (var i=0,il=classes.length;i<il;i++) {
+          class2type[ "[object " + classes[i] + "]" ] = classes[i].toLowerCase();
+        };
+        
+        return function(value){
+            return value == null ? // match null and undefined
+                   String( value ) :
+                   class2type[ Object.prototype.toString.call(value) ] || "object";
+        };
+        
+    })();
+    
     return {
         Type: {
             isNumber : function(value) {
-                return typeof value === 'number';
+                return getType(value) === 'number';
             }
         },
         Number: {
-            isInteger : function(n){ // note, it implies n IS a number
-                return n===+n && n===(n|0);
+            isInteger : function(n){
+              return n===+n && n===(n|0);
             },
-            isFloat: function(n) { // note, it implies n IS a number
-                return n===+n && n!==(n|0);
+            isFloat: function(n) {
+              return n===+n && n!==(n|0);
             },
             isInfinity: function(n) {
                 return n === Infinity || n === -Infinity;

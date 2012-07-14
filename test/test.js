@@ -11,10 +11,15 @@ suite('validators',function(){
     
     suite('Numbers',function() {
         
-        test('a number is a number',function(){
+        test('literal numbers and instances of Number are numbers',function(){
             assert.isTrue(v.Type.isNumber(0));
             assert.isTrue(v.Type.isNumber(1));
             assert.isTrue(v.Type.isNumber(1.0));
+            
+            assert.isTrue(v.Type.isNumber(new Number()));
+            assert.isTrue(v.Type.isNumber(new Number(0)));
+            assert.isTrue(v.Type.isNumber(new Number(1)));
+            assert.isTrue(v.Type.isNumber(new Number(1.0)));
         });
         
         test('a string is not number',function(){

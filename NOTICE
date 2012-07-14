@@ -1,1 +1,3 @@
 Thanks to https://github.com/umdjs/umd for the UMD pattern
+
+The algorithm to identify a value's type is a refactoring of code found in jQuery 1.7.1
