@@ -56,6 +56,9 @@
             },
             isBoolean: function(value) {
                 return getType(value) === 'boolean';
+            },
+            isArray: Array.isArray || function(value) {
+                return getType(value) === 'array';
             }
         },
         Number: {

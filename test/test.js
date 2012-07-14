@@ -256,4 +256,50 @@ suite('validators',function(){
         });
     });
     
+    suite('Arrays',function() {
+        
+        test('literal arrays and instances of Array are arrays',function(){
+            assert.isTrue(v.Type.isArray([]));
+            assert.isTrue(v.Type.isArray([0]));
+            assert.isTrue(v.Type.isArray([1,2,3]));
+            
+            assert.isTrue(v.Type.isArray(new Array()));
+            assert.isTrue(v.Type.isArray(new Array(0)));
+            assert.isTrue(v.Type.isArray(new Array(1,2,3)));
+        });
+        
+        test('a number is not an array',function(){
+            assert.isFalse(v.Type.isArray(0));
+            assert.isFalse(v.Type.isArray(1));
+        });
+        
+        test('a string is not an array',function(){
+            assert.isFalse(v.Type.isArray(""));
+            assert.isFalse(v.Type.isArray("0"));
+            assert.isFalse(v.Type.isArray("1"));
+            assert.isFalse(v.Type.isArray("true"));
+            assert.isFalse(v.Type.isArray("false"));
+            assert.isFalse(v.Type.isArray(" "));
+            assert.isFalse(v.Type.isArray("hello"));
+        });
+        
+        test('an object is not an array',function(){
+            assert.isFalse(v.Type.isArray({}));
+            assert.isFalse(v.Type.isArray({'true':false}));
+        });
+        
+        test('a regexp is not an array',function(){
+            assert.isFalse(v.Type.isArray(/true/));
+        });
+        
+        test('a boolean is not an array',function(){
+            assert.isFalse(v.Type.isArray(true));
+            assert.isFalse(v.Type.isArray(false));
+        });
+        
+        test('a date is not an array',function(){
+            assert.isFalse(v.Type.isArray(new Date()));
+        });
+    });
+    
 });
