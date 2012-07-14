@@ -50,6 +50,9 @@
         Type: {
             isNumber : function(value) {
                 return getType(value) === 'number';
+            },
+            isString: function(value) {
+                return getType(value) === 'string';
             }
         },
         Number: {

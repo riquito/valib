@@ -165,4 +165,49 @@ suite('validators',function(){
 
     });
     
+    suite('Strings',function() {
+        
+        test('literal strings and instances of String are strings',function(){
+            assert.isTrue(v.Type.isString(""));
+            assert.isTrue(v.Type.isString(" "));
+            assert.isTrue(v.Type.isString("hello"));
+            
+            assert.isTrue(v.Type.isString(new String()));
+            assert.isTrue(v.Type.isString(new String("")));
+            assert.isTrue(v.Type.isString(new String(" ")));
+            assert.isTrue(v.Type.isString(new String("hello")));
+            assert.isTrue(v.Type.isString(new String(0)));
+            assert.isTrue(v.Type.isString(new String(1)));
+        });
+        
+        test('a number is not a string',function(){
+            assert.isFalse(v.Type.isString(0));
+            assert.isFalse(v.Type.isString(1));
+            assert.isFalse(v.Type.isString(1.0));
+        });
+        
+        test('an array is not a string',function(){
+            assert.isFalse(v.Type.isString([]));
+            assert.isFalse(v.Type.isString([1]));
+        });
+        
+        test('an object is not a string',function(){
+            assert.isFalse(v.Type.isString({}));
+            assert.isFalse(v.Type.isString({'a':1}));
+        });
+        
+        test('a regexp is not a string',function(){
+            assert.isFalse(v.Type.isString(/reg/));
+        });
+        
+        test('a boolean is not a string',function(){
+            assert.isFalse(v.Type.isString(true));
+            assert.isFalse(v.Type.isString(false));
+        });
+        
+        test('a date is not a string',function(){
+            assert.isFalse(v.Type.isString(new Date()));
+        });
+    });
+    
 });
