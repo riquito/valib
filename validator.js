@@ -49,7 +49,7 @@
     return {
         Type: {
             isNumber : function(value) {
-                return getType(value) === 'number';
+                return !this.isNaN(value) && getType(value) === 'number';
             },
             isString: function(value) {
                 return getType(value) === 'string';
@@ -73,6 +73,14 @@
                 // not really a Javascript type, but certainly not an object
                 // (typeof null === 'object')
                 return getType(value) === 'null';
+            },
+            isNaN: function(value) {
+                /* check if value is NaN, this is not the same as calling
+                   the standard isNaN (which checks if a value is coercible to a number) */
+                
+                // not really a Javascript type, but certainly not a number
+                // (typeof NaN === 'number')
+                return (typeof value === 'number') && ('NaN' == new String(value));
             }
         },
         Number: {

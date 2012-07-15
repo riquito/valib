@@ -70,6 +70,10 @@ suite('validators',function(){
             assert.isFalse(v.Type.isNumber(null));
         });
         
+        test('NaN is not a number',function(){
+            assert.isFalse(v.Type.isNumber(NaN));
+        });
+        
         test('is integer (like)',function(){
             assert.isTrue (v.Number.isInteger( 0   ));
             assert.isTrue (v.Number.isInteger(-0   ));
@@ -234,6 +238,10 @@ suite('validators',function(){
         test('null is not a string',function(){
             assert.isFalse(v.Type.isString(null));
         });
+        
+        test('NaN is not a string',function(){
+            assert.isFalse(v.Type.isString(NaN));
+        });
     });
     
     suite('Booleans',function() {
@@ -292,6 +300,10 @@ suite('validators',function(){
         
         test('null is not a boolean',function(){
             assert.isFalse(v.Type.isBoolean(null));
+        });
+        
+        test('NaN is not a boolean',function(){
+            assert.isFalse(v.Type.isBoolean(NaN));
         });
     });
     
@@ -352,6 +364,10 @@ suite('validators',function(){
         test('null is not an array',function(){
             assert.isFalse(v.Type.isArray(null));
         });
+        
+        test('NaN is not an array',function(){
+            assert.isFalse(v.Type.isArray(NaN));
+        });
     });
     
     suite('Objects',function() {
@@ -411,6 +427,10 @@ suite('validators',function(){
         test('null is not an object',function(){
             assert.isFalse(v.Type.isObject(null));
         });
+        
+        test('NaN is not an object',function(){
+            assert.isFalse(v.Type.isObject(NaN));
+        });
     });
     
     suite('Function',function() {
@@ -464,6 +484,10 @@ suite('validators',function(){
         
         test('null is not a function',function(){
             assert.isFalse(v.Type.isFunction(null));
+        });
+        
+        test('NaN is not a function',function(){
+            assert.isFalse(v.Type.isFunction(NaN));
         });
     });
     
@@ -519,6 +543,10 @@ suite('validators',function(){
         test('null is not undefined',function(){
             assert.isFalse(v.Type.isUndefined(null));
         });
+        
+        test('NaN is not undefined',function(){
+            assert.isFalse(v.Type.isUndefined(NaN));
+        });
     });
     
     suite('Null',function() {
@@ -573,6 +601,67 @@ suite('validators',function(){
         test('undefined is not null',function(){
             assert.isFalse(v.Type.isNull(undefined));
         });
+        
+        test('NaN is not null',function(){
+            assert.isFalse(v.Type.isNull(NaN));
+        });
     });
     
+    suite('NaN',function() {
+        
+        test('NaN is NaN',function(){
+            assert.isTrue(v.Type.isNaN(NaN));
+        });
+        
+        test('a number is not NaN',function(){
+            assert.isFalse(v.Type.isNaN(0));
+            assert.isFalse(v.Type.isNaN(1));
+        });
+        
+        test('a string is not NaN',function(){
+            assert.isFalse(v.Type.isNaN(""));
+            assert.isFalse(v.Type.isNaN("0"));
+            assert.isFalse(v.Type.isNaN("1"));
+            assert.isFalse(v.Type.isNaN("true"));
+            assert.isFalse(v.Type.isNaN("false"));
+            assert.isFalse(v.Type.isNaN(" "));
+            assert.isFalse(v.Type.isNaN("hello"));
+        });
+        
+        test('an object is not NaN',function(){
+            assert.isFalse(v.Type.isNaN({}));
+            assert.isFalse(v.Type.isNaN({'a':1}));
+        });
+        
+        test('a function is not NaN',function(){
+            assert.isFalse(v.Type.isNaN(function(){}));
+            assert.isFalse(v.Type.isNaN(function(){ return 2+2; }));
+        });
+        
+        test('an array is not NaN',function(){
+            assert.isFalse(v.Type.isNaN([]));
+            assert.isFalse(v.Type.isNaN([1,2,3]));
+        });
+        
+        test('a regexp is not NaN',function(){
+            assert.isFalse(v.Type.isNaN(/reg/));
+        });
+        
+        test('a boolean is not NaN',function(){
+            assert.isFalse(v.Type.isNaN(true));
+            assert.isFalse(v.Type.isNaN(false));
+        });
+        
+        test('a date is not NaN',function(){
+            assert.isFalse(v.Type.isNaN(new Date()));
+        });
+        
+        test('undefined is not NaN',function(){
+            assert.isFalse(v.Type.isNaN(undefined));
+        });
+        
+        test('null is not NaN',function(){
+            assert.isFalse(v.Type.isNaN(null));
+        });
+    });
 });
