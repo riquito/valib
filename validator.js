@@ -248,6 +248,10 @@
             // O(n)
             'in' : function(value,array) {
                 return -1 !== this.indexOf(value,array);
+            },
+            'isEmpty' : function(array){
+                if (array == null) return true;
+                return array.length === 0;
             }
         },
         Object : {

@@ -736,6 +736,17 @@ suite('validators',function(){
            assert.isFalse(v.Array.in(undefined,x));
            
         });
+        
+        test('is empty',function(){
+            assert.isTrue(v.Array.isEmpty([]));
+            assert.isTrue(v.Array.isEmpty(null));
+            assert.isTrue(v.Array.isEmpty(undefined));
+            
+            assert.isFalse(v.Array.isEmpty([0]));
+            assert.isFalse(v.Array.isEmpty([1]));
+            assert.isFalse(v.Array.isEmpty(['a']));
+            assert.isFalse(v.Array.isEmpty([{}]));
+        });
     });
     
     suite('Objects',function() {
