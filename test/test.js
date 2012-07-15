@@ -472,6 +472,7 @@ suite('validators',function(){
                 assert.isTrue(v.String.isUrl(prtc+'://255.255.255.255'));
             }
             
+            assert.isFalse(v.String.isUrl(''));
             assert.isFalse(v.String.isUrl('abc://www.xyz.com'));
             assert.isFalse(v.String.isUrl('http:/www.xyz.com'));
             assert.isFalse(v.String.isUrl('http:// spaces are not allowed'));
@@ -484,6 +485,7 @@ suite('validators',function(){
             assert.isTrue (v.String.isMD5('98c8479273b830b85d46c13187947483'));
             assert.isTrue (v.String.isMD5('0123456789abcdef5d46c13187947483'));
             
+            assert.isFalse(v.String.isMD5(''));
             assert.isFalse(v.String.isMD5('98c8479273b830b85d'));
             assert.isFalse(v.String.isMD5('g8c8479273b830b85d46c13187947483'));
             assert.isFalse(v.String.isMD5('9 c8479273b830b85d46c13187947483'));
@@ -493,6 +495,7 @@ suite('validators',function(){
             assert.isTrue (v.String.isSHA1('c1390c3fc48bb7e2c5d07c438435fc769400a3aa'));
             assert.isTrue (v.String.isSHA1('0123456789abcdefc5d07c438435fc769400a3aa'));
             
+            assert.isFalse(v.String.isSHA1(''));
             assert.isFalse(v.String.isSHA1('c1390c3fc48bb7e2c5d'));
             assert.isFalse(v.String.isSHA1('g1390c3fc48bb7e2c5d07c438435fc769400a3aa'));
             assert.isFalse(v.String.isSHA1('c 390c3fc48bb7e2c5d07c438435fc769400a3aa'));
@@ -505,11 +508,13 @@ suite('validators',function(){
             assert.isTrue(v.String.isEmailLike('an-addressl@an-host'));
             assert.isTrue(v.String.isEmailLike('user1970@host.com'));
             
-            assert.isFalse(v.String.isEmailLike("too@many@host"));
-            assert.isFalse(v.String.isEmailLike("no spaces@host"));
+            assert.isFalse(v.String.isEmailLike(''));
+            assert.isFalse(v.String.isEmailLike('too@many@host'));
+            assert.isFalse(v.String.isEmailLike('no spaces@host'));
         });
         
         test('match string',function(){
+            assert.isTrue(v.String.match(''  ,''));
             assert.isTrue(v.String.match('test'  ,'test'));
             assert.isTrue(v.String.match(' test' ,'test',{trim:true}));
             assert.isTrue(v.String.match('test ' ,'test',{trim:true}));
@@ -532,6 +537,7 @@ suite('validators',function(){
             assert.isTrue(v.String.match('test ',/test/));
             assert.isTrue(v.String.match(' test ',/test/));
             
+            assert.isFalse(v.String.match(''  ,/test/));
             assert.isFalse(v.String.match(' test' ,/^test$/));
             assert.isFalse(v.String.match('test ' ,/^test$/));
             assert.isFalse(v.String.match(' test ',/^test$/));
