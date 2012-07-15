@@ -81,6 +81,9 @@
                 // not really a Javascript type, but certainly not a number
                 // (typeof NaN === 'number')
                 return (typeof value === 'number') && ('NaN' == new String(value));
+            },
+            isDate: function(value) {
+                return getType(value) === 'date';
             }
         },
         Number: {

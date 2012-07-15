@@ -664,4 +664,63 @@ suite('validators',function(){
             assert.isFalse(v.Type.isNaN(null));
         });
     });
+    
+    suite('Dates',function() {
+        
+        test('a date is a date',function(){
+            assert.isTrue(v.Type.isDate(new Date()));
+            assert.isFalse(v.Type.isDate(Date()));
+        });
+        
+        test('a number is not a date',function(){
+            assert.isFalse(v.Type.isDate(0));
+            assert.isFalse(v.Type.isDate(1));
+        });
+        
+        test('a string is not a date',function(){
+            assert.isFalse(v.Type.isDate(""));
+            assert.isFalse(v.Type.isDate("0"));
+            assert.isFalse(v.Type.isDate("1"));
+            assert.isFalse(v.Type.isDate("true"));
+            assert.isFalse(v.Type.isDate("false"));
+            assert.isFalse(v.Type.isDate(" "));
+            assert.isFalse(v.Type.isDate("hello"));
+        });
+        
+        test('an object is not a date',function(){
+            assert.isFalse(v.Type.isDate({}));
+            assert.isFalse(v.Type.isDate({'a':1}));
+        });
+        
+        test('a function is not a date',function(){
+            assert.isFalse(v.Type.isDate(function(){}));
+            assert.isFalse(v.Type.isDate(function(){ return 2+2; }));
+        });
+        
+        test('an array is not a date',function(){
+            assert.isFalse(v.Type.isDate([]));
+            assert.isFalse(v.Type.isDate([1,2,3]));
+        });
+        
+        test('a regexp is not a date',function(){
+            assert.isFalse(v.Type.isDate(/reg/));
+        });
+        
+        test('a boolean is not a date',function(){
+            assert.isFalse(v.Type.isDate(true));
+            assert.isFalse(v.Type.isDate(false));
+        });
+        
+        test('undefined is not a date',function(){
+            assert.isFalse(v.Type.isDate(undefined));
+        });
+        
+        test('null is not a date',function(){
+            assert.isFalse(v.Type.isDate(null));
+        });
+        
+        test('NaN is not a date',function(){
+            assert.isFalse(v.Type.isDate(NaN));
+        });
+    });
 });
