@@ -836,6 +836,23 @@ suite('validators',function(){
             assert.isTrue(v.Object.hasValue('MrPurr',new Cat()));
             assert.isFalse(v.Object.hasValue(10,new Cat()));
         });
+        
+        test('is empty',function(){
+            assert.isTrue(v.Object.isEmpty({}));
+            assert.isTrue(v.Object.isEmpty(null));
+            assert.isTrue(v.Object.isEmpty(undefined));
+            
+            assert.isFalse(v.Object.isEmpty({'x':1}));
+            
+            // isEmpty must ignore prototype inheritance
+            function Cat(){ }
+            function Mammal(){ this.weight = 10; }
+            
+            Cat.prototype = new Mammal();
+            
+            assert.isTrue(v.Object.isEmpty(new Cat()));
+            assert.isFalse(v.Object.isEmpty(new Mammal()));
+        });
     });
     
     suite('Function',function() {

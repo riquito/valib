@@ -260,6 +260,11 @@
                     if (object.hasOwnProperty(key) && object[key] === value) return true;
                 }
                 return false;
+            },
+            'isEmpty' : function(object){
+                if (object == null) return true;
+                for (var key in object) if (this.hasKey(key,object)) return false;
+                return true;
             }
         }
     };
