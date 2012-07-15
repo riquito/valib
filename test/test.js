@@ -497,6 +497,17 @@ suite('validators',function(){
             assert.isFalse(v.String.isSHA1('g1390c3fc48bb7e2c5d07c438435fc769400a3aa'));
             assert.isFalse(v.String.isSHA1('c 390c3fc48bb7e2c5d07c438435fc769400a3aa'));
         });
+        
+        test('is an e-mail',function(){
+            assert.isTrue(v.String.isEmailLike('user@host.com'));
+            assert.isTrue(v.String.isEmailLike('user@host'));
+            assert.isTrue(v.String.isEmailLike("o'connel@host"));
+            assert.isTrue(v.String.isEmailLike('an-addressl@an-host'));
+            assert.isTrue(v.String.isEmailLike('user1970@host.com'));
+            
+            assert.isFalse(v.String.isEmailLike("too@many@host"));
+            assert.isFalse(v.String.isEmailLike("no spaces@host"));
+        });
     });
     
     suite('Booleans',function() {

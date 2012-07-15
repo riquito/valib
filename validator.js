@@ -201,6 +201,11 @@
             },
             isSHA1 : function(value){
                 return /^[0-9a-f]{40}$/i.test(value);
+            },
+            // check if it is similar to an e-mail (no hope to comply with the rfc and the mess that's the real world)
+            isEmailLike : function(value){
+                // something@something with no spaces, one and only one @
+                return /^[^\s@]+@[^\s@]{3,}$/.test(value);
             }
         }
     };
