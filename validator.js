@@ -84,6 +84,9 @@
             },
             isDate: function(value) {
                 return getType(value) === 'date';
+            },
+            isRegExp: function(value) {
+                return getType(value) === 'regexp';
             }
         },
         Number: {

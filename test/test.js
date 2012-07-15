@@ -50,6 +50,8 @@ suite('validators',function(){
         });
         
         test('a regexp is not a number',function(){
+            assert.isFalse(v.Type.isNumber(new RegExp()));
+            assert.isFalse(v.Type.isNumber(new RegExp('reg')));
             assert.isFalse(v.Type.isNumber(/reg/));
         });
         
@@ -219,6 +221,8 @@ suite('validators',function(){
         });
         
         test('a regexp is not a string',function(){
+            assert.isFalse(v.Type.isString(new RegExp()));
+            assert.isFalse(v.Type.isString(new RegExp('reg')));
             assert.isFalse(v.Type.isString(/reg/));
         });
         
@@ -287,7 +291,11 @@ suite('validators',function(){
         });
         
         test('a regexp is not a boolean',function(){
+            assert.isFalse(v.Type.isBoolean(new RegExp()));
+            assert.isFalse(v.Type.isBoolean(new RegExp('true')));
+            assert.isFalse(v.Type.isBoolean(new RegExp('false')));
             assert.isFalse(v.Type.isBoolean(/true/));
+            assert.isFalse(v.Type.isBoolean(/false/));
         });
         
         test('a date is not a boolean',function(){
@@ -345,7 +353,9 @@ suite('validators',function(){
         });
         
         test('a regexp is not an array',function(){
-            assert.isFalse(v.Type.isArray(/true/));
+            assert.isFalse(v.Type.isArray(new RegExp()));
+            assert.isFalse(v.Type.isArray(new RegExp('reg')));
+            assert.isFalse(v.Type.isArray(/reg/));
         });
         
         test('a boolean is not an array',function(){
@@ -408,6 +418,8 @@ suite('validators',function(){
         });
         
         test('a regexp is not an object',function(){
+            assert.isFalse(v.Type.isObject(new RegExp()));
+            assert.isFalse(v.Type.isObject(new RegExp('reg')));
             assert.isFalse(v.Type.isObject(/reg/));
         });
         
@@ -466,6 +478,8 @@ suite('validators',function(){
         });
         
         test('a regexp is not a function',function(){
+            assert.isFalse(v.Type.isFunction(new RegExp()));
+            assert.isFalse(v.Type.isFunction(new RegExp('reg')));
             assert.isFalse(v.Type.isFunction(/reg/));
         });
         
@@ -528,6 +542,8 @@ suite('validators',function(){
         });
         
         test('a regexp is not undefined',function(){
+            assert.isFalse(v.Type.isUndefined(new RegExp()));
+            assert.isFalse(v.Type.isUndefined(new RegExp('reg')));
             assert.isFalse(v.Type.isUndefined(/reg/));
         });
         
@@ -586,6 +602,8 @@ suite('validators',function(){
         });
         
         test('a regexp is not null',function(){
+            assert.isFalse(v.Type.isNull(new RegExp()));
+            assert.isFalse(v.Type.isNull(new RegExp('reg')));
             assert.isFalse(v.Type.isNull(/reg/));
         });
         
@@ -644,6 +662,8 @@ suite('validators',function(){
         });
         
         test('a regexp is not NaN',function(){
+            assert.isFalse(v.Type.isNaN(new RegExp()));
+            assert.isFalse(v.Type.isNaN(new RegExp('reg')));
             assert.isFalse(v.Type.isNaN(/reg/));
         });
         
@@ -703,6 +723,8 @@ suite('validators',function(){
         });
         
         test('a regexp is not a date',function(){
+            assert.isFalse(v.Type.isDate(new RegExp()));
+            assert.isFalse(v.Type.isDate(new RegExp('reg')));
             assert.isFalse(v.Type.isDate(/reg/));
         });
         
@@ -721,6 +743,66 @@ suite('validators',function(){
         
         test('NaN is not a date',function(){
             assert.isFalse(v.Type.isDate(NaN));
+        });
+    });
+    
+    suite('Regular expressions',function() {
+        
+        test('a regexp is a regexp',function(){
+            assert.isTrue(v.Type.isRegExp(new RegExp()));
+            assert.isTrue(v.Type.isRegExp(new RegExp('reg')));
+            assert.isTrue(v.Type.isRegExp(/reg/));
+        });
+        
+        test('a number is not a regexp',function(){
+            assert.isFalse(v.Type.isRegExp(0));
+            assert.isFalse(v.Type.isRegExp(1));
+        });
+        
+        test('a string is not a regexp',function(){
+            assert.isFalse(v.Type.isRegExp(""));
+            assert.isFalse(v.Type.isRegExp("0"));
+            assert.isFalse(v.Type.isRegExp("1"));
+            assert.isFalse(v.Type.isRegExp("true"));
+            assert.isFalse(v.Type.isRegExp("false"));
+            assert.isFalse(v.Type.isRegExp(" "));
+            assert.isFalse(v.Type.isRegExp("hello"));
+        });
+        
+        test('an object is not a regexp',function(){
+            assert.isFalse(v.Type.isRegExp({}));
+            assert.isFalse(v.Type.isRegExp({'a':1}));
+        });
+        
+        test('a function is not a regexp',function(){
+            assert.isFalse(v.Type.isRegExp(function(){}));
+            assert.isFalse(v.Type.isRegExp(function(){ return 2+2; }));
+        });
+        
+        test('an array is not a regexp',function(){
+            assert.isFalse(v.Type.isRegExp([]));
+            assert.isFalse(v.Type.isRegExp([1,2,3]));
+        });
+        
+        test('a boolean is not a regexp',function(){
+            assert.isFalse(v.Type.isRegExp(true));
+            assert.isFalse(v.Type.isRegExp(false));
+        });
+        
+        test('a date is not a regexp',function(){
+            assert.isFalse(v.Type.isRegExp(new Date()));
+        });
+        
+        test('undefined is not a regexp',function(){
+            assert.isFalse(v.Type.isRegExp(undefined));
+        });
+        
+        test('null is not a regexp',function(){
+            assert.isFalse(v.Type.isRegExp(null));
+        });
+        
+        test('NaN is not a regexp',function(){
+            assert.isFalse(v.Type.isRegExp(NaN));
         });
     });
 });
