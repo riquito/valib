@@ -66,6 +66,10 @@ suite('validators',function(){
             assert.isFalse(v.Type.isNumber(undefined));
         });
         
+        test('null is not a number',function(){
+            assert.isFalse(v.Type.isNumber(null));
+        });
+        
         test('is integer (like)',function(){
             assert.isTrue (v.Number.isInteger( 0   ));
             assert.isTrue (v.Number.isInteger(-0   ));
@@ -226,6 +230,10 @@ suite('validators',function(){
         test('undefined is not a string',function(){
             assert.isFalse(v.Type.isString(undefined));
         });
+        
+        test('null is not a string',function(){
+            assert.isFalse(v.Type.isString(null));
+        });
     });
     
     suite('Booleans',function() {
@@ -280,6 +288,10 @@ suite('validators',function(){
         
         test('undefined is not a boolean',function(){
             assert.isFalse(v.Type.isBoolean(undefined));
+        });
+        
+        test('null is not a boolean',function(){
+            assert.isFalse(v.Type.isBoolean(null));
         });
     });
     
@@ -336,6 +348,10 @@ suite('validators',function(){
         test('undefined is not an array',function(){
             assert.isFalse(v.Type.isArray(undefined));
         });
+        
+        test('null is not an array',function(){
+            assert.isFalse(v.Type.isArray(null));
+        });
     });
     
     suite('Objects',function() {
@@ -391,6 +407,10 @@ suite('validators',function(){
         test('undefined is not an object',function(){
             assert.isFalse(v.Type.isObject(undefined));
         });
+        
+        test('null is not an object',function(){
+            assert.isFalse(v.Type.isObject(null));
+        });
     });
     
     suite('Function',function() {
@@ -441,6 +461,10 @@ suite('validators',function(){
         test('undefined is not a function',function(){
             assert.isFalse(v.Type.isFunction(undefined));
         });
+        
+        test('null is not a function',function(){
+            assert.isFalse(v.Type.isFunction(null));
+        });
     });
     
     suite('Undefined',function() {
@@ -490,6 +514,64 @@ suite('validators',function(){
         
         test('a date is not undefined',function(){
             assert.isFalse(v.Type.isUndefined(new Date()));
+        });
+        
+        test('null is not undefined',function(){
+            assert.isFalse(v.Type.isUndefined(null));
+        });
+    });
+    
+    suite('Null',function() {
+        
+        test('null is null',function(){
+            assert.isTrue(v.Type.isNull(null));
+        });
+        
+        test('a number is not null',function(){
+            assert.isFalse(v.Type.isNull(0));
+            assert.isFalse(v.Type.isNull(1));
+        });
+        
+        test('a string is not null',function(){
+            assert.isFalse(v.Type.isNull(""));
+            assert.isFalse(v.Type.isNull("0"));
+            assert.isFalse(v.Type.isNull("1"));
+            assert.isFalse(v.Type.isNull("true"));
+            assert.isFalse(v.Type.isNull("false"));
+            assert.isFalse(v.Type.isNull(" "));
+            assert.isFalse(v.Type.isNull("hello"));
+        });
+        
+        test('an object is not null',function(){
+            assert.isFalse(v.Type.isNull({}));
+            assert.isFalse(v.Type.isNull({'a':1}));
+        });
+        
+        test('a function is not null',function(){
+            assert.isFalse(v.Type.isNull(function(){}));
+            assert.isFalse(v.Type.isNull(function(){ return 2+2; }));
+        });
+        
+        test('an array is not null',function(){
+            assert.isFalse(v.Type.isNull([]));
+            assert.isFalse(v.Type.isNull([1,2,3]));
+        });
+        
+        test('a regexp is not null',function(){
+            assert.isFalse(v.Type.isNull(/reg/));
+        });
+        
+        test('a boolean is not null',function(){
+            assert.isFalse(v.Type.isNull(true));
+            assert.isFalse(v.Type.isNull(false));
+        });
+        
+        test('a date is not null',function(){
+            assert.isFalse(v.Type.isNull(new Date()));
+        });
+        
+        test('undefined is not null',function(){
+            assert.isFalse(v.Type.isNull(undefined));
         });
     });
     

@@ -68,6 +68,11 @@
             },
             isUndefined: function(value) {
                 return getType(value) === 'undefined';
+            },
+            isNull: function(value) {
+                // not really a Javascript type, but certainly not an object
+                // (typeof null === 'object')
+                return getType(value) === 'null';
             }
         },
         Number: {
