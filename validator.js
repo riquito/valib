@@ -225,6 +225,9 @@
             },
             startsWith: function(str,starts){
                 return str.length >= starts.length && str.substring(0, starts.length) === starts;
+            },
+            endsWith: function(str,ends){
+                return str.length >= ends.length && str.substring(str.length - ends.length) === ends;
             }
         }
     };

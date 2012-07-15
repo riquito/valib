@@ -552,6 +552,18 @@ suite('validators',function(){
             assert.isFalse(v.String.startsWith(' hello world','hello'));
             assert.isFalse(v.String.startsWith('',' '));
         });
+        
+        test('ends with suffix',function(){
+            assert.isTrue(v.String.endsWith('',''));
+            assert.isTrue(v.String.endsWith('test','test'));
+            assert.isTrue(v.String.endsWith('test',''));
+            assert.isTrue(v.String.endsWith('hello world','world'));
+            assert.isTrue(v.String.endsWith('hello world','hello world'));
+            
+            assert.isFalse(v.String.endsWith('hello world','hello'));
+            assert.isFalse(v.String.endsWith('hello world ','world'));
+            assert.isFalse(v.String.endsWith('',' '));
+        });
     });
     
     suite('Booleans',function() {
