@@ -254,6 +254,12 @@
             'hasKey' : function(key,object){
                 if (object == null) return false;
                 return Object.prototype.hasOwnProperty.call(object,key);
+            },
+            'hasValue' : function(value,object){
+                for (var key in object) {
+                    if (object.hasOwnProperty(key) && object[key] === value) return true;
+                }
+                return false;
             }
         }
     };

@@ -818,6 +818,24 @@ suite('validators',function(){
             
             assert.isFalse(v.Object.hasKey('genre',new Cat()));
         });
+        
+        test('has value',function(){
+            assert.isTrue(v.Object.hasValue(1,{'x':1,'y':2}));
+            
+            assert.isFalse(v.Object.hasValue(1,undefined));
+            assert.isFalse(v.Object.hasValue(1,null));
+            assert.isFalse(v.Object.hasValue(1,{}));
+            assert.isFalse(v.Object.hasValue(1,{'y':2}));
+            
+            // hasValue must ignore prototype inheritance
+            function Cat(){ this.name = 'MrPurr'; }
+            function Mammal(){ this.weight = 10; }
+            
+            Cat.prototype = new Mammal();
+            
+            assert.isTrue(v.Object.hasValue('MrPurr',new Cat()));
+            assert.isFalse(v.Object.hasValue(10,new Cat()));
+        });
     });
     
     suite('Function',function() {
