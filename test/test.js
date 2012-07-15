@@ -488,6 +488,15 @@ suite('validators',function(){
             assert.isFalse(v.String.isMD5('g8c8479273b830b85d46c13187947483'));
             assert.isFalse(v.String.isMD5('9 c8479273b830b85d46c13187947483'));
         });
+        
+        test('is SHA1',function(){
+            assert.isTrue (v.String.isSHA1('c1390c3fc48bb7e2c5d07c438435fc769400a3aa'));
+            assert.isTrue (v.String.isSHA1('0123456789abcdefc5d07c438435fc769400a3aa'));
+            
+            assert.isFalse(v.String.isSHA1('c1390c3fc48bb7e2c5d'));
+            assert.isFalse(v.String.isSHA1('g1390c3fc48bb7e2c5d07c438435fc769400a3aa'));
+            assert.isFalse(v.String.isSHA1('c 390c3fc48bb7e2c5d07c438435fc769400a3aa'));
+        });
     });
     
     suite('Booleans',function() {

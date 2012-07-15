@@ -198,6 +198,9 @@
             })(),
             isMD5 : function(value){
                 return /^[0-9a-f]{32}$/i.test(value);
+            },
+            isSHA1 : function(value){
+                return /^[0-9a-f]{40}$/i.test(value);
             }
         }
     };
