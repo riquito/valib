@@ -222,7 +222,10 @@
                   return regOrString.test(value);
                 }
                 else return regOrString === value;
-           }
+            },
+            startsWith: function(str,starts){
+                return str.length >= starts.length && str.substring(0, starts.length) === starts;
+            }
         }
     };
     

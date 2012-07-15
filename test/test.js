@@ -540,6 +540,18 @@ suite('validators',function(){
             assert.isTrue(v.String.match('test ' ,/^test$/,{trim:true}));
             assert.isTrue(v.String.match(' test ',/^test$/,{trim:true}));
         });
+        
+        test('starts with prefix',function(){
+            assert.isTrue(v.String.startsWith('',''));
+            assert.isTrue(v.String.startsWith('test','test'));
+            assert.isTrue(v.String.startsWith('test',''));
+            assert.isTrue(v.String.startsWith('hello world','hello'));
+            assert.isTrue(v.String.startsWith('hello world','hello world'));
+            
+            assert.isFalse(v.String.startsWith('hello world','world'));
+            assert.isFalse(v.String.startsWith(' hello world','hello'));
+            assert.isFalse(v.String.startsWith('',' '));
+        });
     });
     
     suite('Booleans',function() {
