@@ -570,6 +570,16 @@ suite('validators',function(){
             assert.isFalse(v.String.endsWith('hello world ','world'));
             assert.isFalse(v.String.endsWith('',' '));
         });
+        
+        test('is empty',function(){
+            assert.isTrue(v.String.isEmpty(''));
+            assert.isTrue(v.String.isEmpty(null));
+            assert.isTrue(v.String.isEmpty(undefined));
+            
+            assert.isFalse(v.String.isEmpty(' '));
+            assert.isFalse(v.String.isEmpty('a'));
+            assert.isFalse(v.String.isEmpty('foo'));
+        });
     });
     
     suite('Booleans',function() {

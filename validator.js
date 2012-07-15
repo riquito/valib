@@ -228,6 +228,9 @@
             },
             endsWith: function(str,ends){
                 return str.length >= ends.length && str.substring(str.length - ends.length) === ends;
+            },
+            isEmpty : function(str){
+                return !str;
             }
         },
         Array : {
