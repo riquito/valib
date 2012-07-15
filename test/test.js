@@ -713,6 +713,23 @@ suite('validators',function(){
            assert.equal(-1,v.Array.indexOf(undefined,x));
            
         });
+        
+        test('element in array',function(){
+           assert.isTrue(v.Array.in('a',['a','b','c']));
+           assert.isTrue(v.Array.in('b',['a','b','c']));
+           assert.isTrue(v.Array.in('c',['a','b','c']));
+           assert.isTrue(v.Array.in('',['','b','c']));
+           
+           assert.isFalse(v.Array.in('d',['a','b','c']));
+           assert.isFalse(v.Array.in('d',null));
+           assert.isFalse(v.Array.in('d',undefined));
+           
+           var x = ['a',undefined,'c'];
+           assert.isTrue(v.Array.in(undefined,x));
+           delete(x[1]);
+           assert.isFalse(v.Array.in(undefined,x));
+           
+        });
     });
     
     suite('Objects',function() {

@@ -244,6 +244,10 @@
                     return -1;
                     
                 } else return array.indexOf(value);
+            },
+            // O(n)
+            'in' : function(value,array) {
+                return -1 !== this.indexOf(value,array);
             }
         }
     };
