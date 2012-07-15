@@ -22,10 +22,10 @@
         module.exports = factory();
     } else if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define([], factory);
+        define(factory);
     } else {
         // Browser globals
-        root.validator = factory();
+        root.valib = factory();
     }
 }(this, function (/*dependencies*/) {
     
@@ -70,7 +70,7 @@
         };
     }
     
-    var Validator = {
+    var valib = {
         Type: {
             isNumber : function(value) {
                 return !this.isNaN(value) && getType(value) === 'number';
@@ -221,7 +221,7 @@
                 
                 if (opts.trim) value = trim(value);
                 
-                if (Validator.Type.isRegExp(regOrString)) {
+                if (valib.Type.isRegExp(regOrString)) {
                   return regOrString.test(value);
                 }
                 else return regOrString === value;
@@ -279,6 +279,6 @@
         }
     };
     
-    return Validator;
+    return valib;
 
 }));

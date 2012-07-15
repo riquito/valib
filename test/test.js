@@ -5,7 +5,7 @@ chai.Assertion.includeStack = false; // show backtrace on test error
 
 var assert = chai.assert;
 
-var validator = v = require('../validator.js')
+var validator = v = require('../valib.js')
 
 suite('validators',function(){
     
