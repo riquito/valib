@@ -56,17 +56,14 @@
         };
     } else {
         trim = function(str) {
-            return str == null ? // null and undefined
-                ""
-                :
-                str = str.replace(/^\s+/, '');
-                for (var i = str.length - 1; i >= 0; i--) {
-                    if (/\S/.test(str.charAt(i))) {
-                        str = str.substring(0, i + 1);
-                        break;
-                    }
-                }
-                return str;
+            if (str == null) return ''; // null and undefined
+            // slightly modified version of trim12 found at
+            // http://blog.stevenlevithan.com/archives/faster-trim-javascript
+            str = str.replace(/^[\s\u200B]+/, '');
+            var ws = /[\s\u200B]/,
+                i = str.length;
+            while (ws.test(str.charAt(--i)));
+            return str.slice(0, i + 1);
         };
     }
     
@@ -234,7 +231,8 @@
             },
             isEmpty : function(str){
                 return !str;
-            }
+            },
+            trim : trim
         },
         Array : {
             // O(n)

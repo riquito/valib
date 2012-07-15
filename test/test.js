@@ -592,6 +592,18 @@ suite('validators',function(){
             assert.isFalse(v.String.isEmpty('a'));
             assert.isFalse(v.String.isEmpty('foo'));
         });
+        
+        test('trim',function(){
+            assert.equal('',v.String.trim(''));
+            assert.equal('',v.String.trim(' '));
+            assert.equal('',v.String.trim('  '));
+            assert.equal('',v.String.trim('\t\n\r'));
+            assert.equal('',v.String.trim('\u0020\u00A0\u1680'));
+            assert.equal('',v.String.trim('\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007'));
+            assert.equal('',v.String.trim('\u2008\u2009\u200A\u200B\u202F\u205F\u3000'));
+            
+            assert.equal('foo',v.String.trim(' foo '));
+        });
     });
     
     suite('Booleans',function() {
