@@ -801,6 +801,23 @@ suite('validators',function(){
         test('NaN is not an object',function(){
             assert.isFalse(v.Type.isObject(NaN));
         });
+        
+        test('has key',function(){
+            assert.isTrue(v.Object.hasKey('x',{'x':1,'y':2}));
+            
+            assert.isFalse(v.Object.hasKey('x',undefined));
+            assert.isFalse(v.Object.hasKey('x',null));
+            assert.isFalse(v.Object.hasKey('x',{}));
+            assert.isFalse(v.Object.hasKey('x',{'y':2}));
+            
+            // hasKey must ignore prototype inheritance
+            function Cat(){ this.name = 'MrPurr'; }
+            function Mammal(){ this.genre = ''; }
+            
+            Cat.prototype = new Mammal();
+            
+            assert.isFalse(v.Object.hasKey('genre',new Cat()));
+        });
     });
     
     suite('Function',function() {

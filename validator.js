@@ -249,6 +249,12 @@
             'in' : function(value,array) {
                 return -1 !== this.indexOf(value,array);
             }
+        },
+        Object : {
+            'hasKey' : function(key,object){
+                if (object == null) return false;
+                return Object.prototype.hasOwnProperty.call(object,key);
+            }
         }
     };
     
