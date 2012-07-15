@@ -360,6 +360,63 @@ suite('validators',function(){
             assert.isFalse(v.String.isNumeric('+0001.23',{"simple":true,"canBeSigned":false}));
             assert.isFalse(v.String.isNumeric('-0001.23',{"simple":true,"canBeSigned":false}));
         });
+        
+        test('to number',function(){
+            assert.equal(0,v.String.toNumber('0'));
+            
+            assert.equal( 1,v.String.toNumber(' 1'));
+            assert.equal( 1,v.String.toNumber('+1'));
+            assert.equal(-1,v.String.toNumber('-1'));
+            
+            assert.equal( 1.2,v.String.toNumber(' 1.2'));
+            assert.equal( 1.2,v.String.toNumber('+1.2'));
+            assert.equal(-1.2,v.String.toNumber('-1.2'));
+            
+            assert.equal( 1,v.String.toNumber(' 1.'));
+            assert.equal( 1,v.String.toNumber('+1.'));
+            assert.equal(-1,v.String.toNumber('-1.'));
+            
+            assert.equal( 0.1,v.String.toNumber(' .1'));
+            assert.equal( 0.1,v.String.toNumber('+.1'));
+            assert.equal(-0.1,v.String.toNumber('-.1'));
+            
+            assert.equal( 2000,v.String.toNumber(' 2e3'));
+            assert.equal( 2000,v.String.toNumber('+2e3'));
+            assert.equal(-2000,v.String.toNumber('-2e3'));
+            
+            assert.equal( 8,v.String.toNumber(' 010'));
+            assert.equal( 8,v.String.toNumber('+010'));
+            assert.equal(-8,v.String.toNumber('-010'));
+            
+            assert.equal( 21,v.String.toNumber(' 0x15'));
+            assert.equal( 21,v.String.toNumber('+0x15'));
+            assert.equal(-21,v.String.toNumber('-0x15'));
+            
+            assert.equal( 0,v.String.toNumber('0000'));
+            assert.equal( 0,v.String.toNumber('+0000'));
+            assert.equal(-0,v.String.toNumber('-0000'));
+            
+            assert.equal( 1,v.String.toNumber(' 0001'));
+            assert.equal( 1,v.String.toNumber('+0001'));
+            assert.equal(-1,v.String.toNumber('-0001'));
+            
+            assert.equal( 1.23,v.String.toNumber(' 0001.23'));
+            assert.equal( 1.23,v.String.toNumber('+0001.23'));
+            assert.equal(-1.23,v.String.toNumber('-0001.23'));
+            
+            assert.isNull(v.String.toNumber(''));
+            assert.isNull(v.String.toNumber('a'));
+            assert.isNull(v.String.toNumber('1a'));
+            assert.isNull(v.String.toNumber('.'));
+            assert.isNull(v.String.toNumber('Infinity'));
+            assert.isNull(v.String.toNumber('-a'));
+            assert.isNull(v.String.toNumber('-1a'));
+            assert.isNull(v.String.toNumber('-.'));
+            assert.isNull(v.String.toNumber('-Infinity'));
+            assert.isNull(v.String.toNumber(' 0x1H'));
+            assert.isNull(v.String.toNumber('+0x1H'));
+            assert.isNull(v.String.toNumber('-0x1H'));
+        });
     });
     
     suite('Booleans',function() {

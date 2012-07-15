@@ -162,6 +162,14 @@
                 if (opts.simple) return /^[+-]?(0|[1-9][0-9]*)(\.[0-9]+)?$/.test(str);
                 
                 return true;
+            },
+            toNumber : function(str) {
+                if (!this.isNumeric(str)) return null;
+                
+                if (str.indexOf('x') !== -1) return parseInt(str); // hex number
+                else if (/^\s*[+-]?0[1-9]/.test(str)) return parseInt(str); // oct number
+                else return parseFloat(str);
+                
             }
         }
     };
