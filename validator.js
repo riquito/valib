@@ -229,6 +229,22 @@
             endsWith: function(str,ends){
                 return str.length >= ends.length && str.substring(str.length - ends.length) === ends;
             }
+        },
+        Array : {
+            // O(n)
+            'indexOf' : function(value,array) {
+                if (array == null) return -1; // null and undefined
+                
+                if (!Array.prototype.indexOf) {
+                    
+                    for (var i=0,il=array.length;i<il;i++) {
+                        // check if i in array to differentiate between deleted items and keys set to undefined
+                        if (i in array && array[i] === value) return i;
+                    }
+                    return -1;
+                    
+                } else return array.indexOf(value);
+            }
         }
     };
     

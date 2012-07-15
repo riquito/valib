@@ -696,6 +696,23 @@ suite('validators',function(){
         test('NaN is not an array',function(){
             assert.isFalse(v.Type.isArray(NaN));
         });
+        
+        test('index of element',function(){
+           assert.equal(0,v.Array.indexOf('a',['a','b','c']));
+           assert.equal(1,v.Array.indexOf('b',['a','b','c']));
+           assert.equal(2,v.Array.indexOf('c',['a','b','c']));
+           assert.equal(0,v.Array.indexOf('',['','b','c']));
+           
+           assert.equal(-1,v.Array.indexOf('d',['a','b','c']));
+           assert.equal(-1,v.Array.indexOf('d',null));
+           assert.equal(-1,v.Array.indexOf('d',undefined));
+           
+           var x = ['a',undefined,'c'];
+           assert.equal(1,v.Array.indexOf(undefined,x));
+           delete(x[1]);
+           assert.equal(-1,v.Array.indexOf(undefined,x));
+           
+        });
     });
     
     suite('Objects',function() {
