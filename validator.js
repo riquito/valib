@@ -46,6 +46,30 @@
         
     })();
     
+    var trim = null;
+    if (String.prototype.trim) {
+        trim = function(str) {
+            return str == null ? // null and undefined
+                   ""
+                   :
+                   String.prototype.trim.call(str);
+        };
+    } else {
+        trim = function(str) {
+            return str == null ? // null and undefined
+                ""
+                :
+                str = str.replace(/^\s+/, '');
+                for (var i = str.length - 1; i >= 0; i--) {
+                    if (/\S/.test(str.charAt(i))) {
+                        str = str.substring(0, i + 1);
+                        break;
+                    }
+                }
+                return str;
+        };
+    }
+    
     return {
         Type: {
             isNumber : function(value) {
@@ -116,6 +140,28 @@
             },
             gte : function(num,min) {
                 return num >= min;
+            }
+        },
+        String: {
+            isNumeric : function(str,opts) {
+                opts = opts || {};
+                if (opts.canBeSigned === undefined) opts.canBeSigned = true; // this let the user pass just {simple:true}
+                if (opts.simple === undefined) opts.simple = false;
+                
+                str = trim(str);
+                
+                // see http://stackoverflow.com/questions/18082/validate-numbers-in-javascript-isnumeric
+                var isNumeric = !isNaN(parseFloat(str)) && isFinite(str);
+                
+                if (!isNumeric) return false;
+                
+                if (!opts.canBeSigned && str.length && (str[0]==='+' || str[0]==='-')) {
+                    return false;
+                }
+                
+                if (opts.simple) return /^[+-]?(0|[1-9][0-9]*)(\.[0-9]+)?$/.test(str);
+                
+                return true;
             }
         }
     };

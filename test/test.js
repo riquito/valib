@@ -246,6 +246,120 @@ suite('validators',function(){
         test('NaN is not a string',function(){
             assert.isFalse(v.Type.isString(NaN));
         });
+        
+        test('is numeric',function(){
+            assert.isTrue(v.String.isNumeric('0'));
+            
+            assert.isTrue(v.String.isNumeric(' 1'));
+            assert.isTrue(v.String.isNumeric('+1'));
+            assert.isTrue(v.String.isNumeric('-1'));
+            
+            assert.isTrue(v.String.isNumeric(' 1.2'));
+            assert.isTrue(v.String.isNumeric('+1.2'));
+            assert.isTrue(v.String.isNumeric('-1.2'));
+            
+            assert.isTrue(v.String.isNumeric(' 1.'));
+            assert.isTrue(v.String.isNumeric('+1.'));
+            assert.isTrue(v.String.isNumeric('-1.'));
+            
+            assert.isTrue(v.String.isNumeric(' .1'));
+            assert.isTrue(v.String.isNumeric('+.1'));
+            assert.isTrue(v.String.isNumeric('-.1'));
+            
+            assert.isTrue(v.String.isNumeric(' 2e3'));
+            assert.isTrue(v.String.isNumeric('+2e3'));
+            assert.isTrue(v.String.isNumeric('-2e3'));
+            
+            assert.isTrue(v.String.isNumeric(' 010'));
+            assert.isTrue(v.String.isNumeric('+010'));
+            assert.isTrue(v.String.isNumeric('-010'));
+            
+            assert.isTrue(v.String.isNumeric(' 0x15'));
+            assert.isTrue(v.String.isNumeric('+0x15'));
+            assert.isTrue(v.String.isNumeric('-0x15'));
+            
+            assert.isTrue(v.String.isNumeric('0000'));
+            assert.isTrue(v.String.isNumeric('0001'));
+            assert.isTrue(v.String.isNumeric('0001.23'));
+            
+            assert.isFalse(v.String.isNumeric(''));
+            assert.isFalse(v.String.isNumeric('a'));
+            assert.isFalse(v.String.isNumeric('1a'));
+            assert.isFalse(v.String.isNumeric('.'));
+            assert.isFalse(v.String.isNumeric('Infinity'));
+            assert.isFalse(v.String.isNumeric('-a'));
+            assert.isFalse(v.String.isNumeric('-1a'));
+            assert.isFalse(v.String.isNumeric('-.'));
+            assert.isFalse(v.String.isNumeric('-Infinity'));
+            assert.isFalse(v.String.isNumeric(' 0x1H'));
+            assert.isFalse(v.String.isNumeric('+0x1H'));
+            assert.isFalse(v.String.isNumeric('-0x1H'));
+            
+            assert.isTrue(v.String.isNumeric(' 1  ',{"simple":true}));
+            assert.isTrue(v.String.isNumeric('+1  ',{"simple":true}));
+            assert.isTrue(v.String.isNumeric('-1  ',{"simple":true}));
+            assert.isTrue(v.String.isNumeric(' 1.2',{"simple":true}));
+            assert.isTrue(v.String.isNumeric('+1.2',{"simple":true}));
+            assert.isTrue(v.String.isNumeric('-1.2',{"simple":true}));
+            
+            assert.isFalse(v.String.isNumeric(' 2e3', {"simple":true}));
+            assert.isFalse(v.String.isNumeric('+2e3', {"simple":true}));
+            assert.isFalse(v.String.isNumeric('-2e3', {"simple":true}));
+            assert.isFalse(v.String.isNumeric(' 010', {"simple":true}));
+            assert.isFalse(v.String.isNumeric('+010', {"simple":true}));
+            assert.isFalse(v.String.isNumeric('-010', {"simple":true}));
+            assert.isFalse(v.String.isNumeric(' 0x15',{"simple":true}));
+            assert.isFalse(v.String.isNumeric('+0x15',{"simple":true}));
+            assert.isFalse(v.String.isNumeric('-0x15',{"simple":true}));
+            assert.isFalse(v.String.isNumeric('0000', {"simple":true}));
+            assert.isFalse(v.String.isNumeric('0001', {"simple":true}));
+            assert.isFalse(v.String.isNumeric('0001.23',{"simple":true}));
+            
+            assert.isFalse(v.String.isNumeric('+0  ',{"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('-0  ',{"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('+1  ',{"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('-1  ',{"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('+1.2',{"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('-1.2',{"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('+2e3',{"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('-2e3',{"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('+0x15',{"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('-0x15',{"canBeSigned":false}));
+            
+            assert.isTrue(v.String.isNumeric(' 0  ',{"simple":true,"canBeSigned":false}));
+            assert.isTrue(v.String.isNumeric(' 0.0',{"simple":true,"canBeSigned":false}));
+            assert.isTrue(v.String.isNumeric(' 1  ',{"simple":true,"canBeSigned":false}));
+            assert.isTrue(v.String.isNumeric(' 1.2',{"simple":true,"canBeSigned":false}));
+            
+            assert.isFalse(v.String.isNumeric('+0',{"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('-0',{"simple":true,"canBeSigned":false}));
+            
+            assert.isFalse(v.String.isNumeric('+1  ',{"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('-1  ',{"simple":true,"canBeSigned":false}));
+            
+            assert.isFalse(v.String.isNumeric('+1.2',{"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('-1.2',{"simple":true,"canBeSigned":false}));
+            
+            assert.isFalse(v.String.isNumeric(' 2e3', {"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('+2e3', {"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('-2e3', {"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric(' 010', {"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('+010', {"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('-010', {"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric(' 0x15',{"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('+0x15',{"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('-0x15',{"simple":true,"canBeSigned":false}));
+            
+            assert.isFalse(v.String.isNumeric(' 0000', {"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('+0000', {"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('-0000', {"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric(' 0001', {"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('+0001', {"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('-0001', {"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric(' 0001.23',{"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('+0001.23',{"simple":true,"canBeSigned":false}));
+            assert.isFalse(v.String.isNumeric('-0001.23',{"simple":true,"canBeSigned":false}));
+        });
     });
     
     suite('Booleans',function() {
