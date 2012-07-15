@@ -417,6 +417,68 @@ suite('validators',function(){
             assert.isNull(v.String.toNumber('+0x1H'));
             assert.isNull(v.String.toNumber('-0x1H'));
         });
+        
+        test('url',function(){
+            
+            var protocols = ['http','https','ftp'],
+                hosts = ['www.domain.com','domain.com','xyz.domain.com','1.2.3.4'],
+                prtc = null,
+                host = null;
+            
+            for (var i=0,il=protocols.length;i<il;i++) {
+                
+                prtc = protocols[i];
+                
+                for (var j=0,jl=hosts.length;j<jl;j++) {
+                    
+                    host = hosts[j];
+                    
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host));
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+'/page'));
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+'/page/'));
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+'/page/subpage'));
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+'/page/subpage/'));
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+'/page/subpage/index.htm'));
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+'/page/subpage/index.htm?'));
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+'/page/subpage/index.htm?x=1'));
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+'/page/subpage/index.htm?x=1&y=2'));
+                    
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+':1234'));
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+':1234/page'));
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+':1234/page/'));
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+':1234/page/subpage'));
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+':1234/page/subpage/'));
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+':1234/page/subpage/index.htm'));
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+':1234/page/subpage/index.htm?'));
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+':1234/page/subpage/index.htm?x=1'));
+                    assert.isTrue(v.String.isUrl(prtc+'://'+host+':1234/page/subpage/index.htm?x=1&y=2'));
+                    
+                    assert.isTrue(v.String.isUrl(prtc+'://user:password@'+host+':1234'));
+                    assert.isTrue(v.String.isUrl(prtc+'://user:password@'+host+':1234/'));
+                    assert.isTrue(v.String.isUrl(prtc+'://user:password@'+host+':1234/page'));
+                    assert.isTrue(v.String.isUrl(prtc+'://user:password@'+host+':1234/page/subpage'));
+                    assert.isTrue(v.String.isUrl(prtc+'://user:password@'+host+':1234/page/subpage/'));
+                    assert.isTrue(v.String.isUrl(prtc+'://user:password@'+host+':1234/page/subpage/index.htm'));
+                    assert.isTrue(v.String.isUrl(prtc+'://user:password@'+host+':1234/page/subpage/index.htm?'));
+                    assert.isTrue(v.String.isUrl(prtc+'://user:password@'+host+':1234/page/subpage/index.htm?x=1'));
+                    assert.isTrue(v.String.isUrl(prtc+'://user:password@'+host+':1234/page/subpage/index.htm?x=1&y=2'));
+                    
+                }
+                
+                assert.isTrue(v.String.isUrl(prtc+'://localhost'));
+                assert.isTrue(v.String.isUrl(prtc+'://sub.domain'));
+                
+                assert.isTrue(v.String.isUrl(prtc+'://1.2.3.4'));
+                assert.isTrue(v.String.isUrl(prtc+'://255.255.255.255'));
+            }
+            
+            assert.isFalse(v.String.isUrl('abc://www.xyz.com'));
+            assert.isFalse(v.String.isUrl('http:/www.xyz.com'));
+            assert.isFalse(v.String.isUrl('http:// spaces are not allowed'));
+            assert.isFalse(v.String.isUrl('http://1.2.3.4.5'));
+            assert.isFalse(v.String.isUrl('http://256.255.255.255'));
+            
+        });
     });
     
     suite('Booleans',function() {

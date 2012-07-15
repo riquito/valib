@@ -170,7 +170,32 @@
                 else if (/^\s*[+-]?0[1-9]/.test(str)) return parseInt(str); // oct number
                 else return parseFloat(str);
                 
-            }
+            },
+            isUrl : (function(){ // only http(s)/ftp urls, requires protocol
+                // javascript version of the regexp found at
+                // http://stackoverflow.com/questions/161738/what-is-the-best-regular-expression-to-check-if-a-string-is-a-valid-url
+                var reg = new RegExp(
+                  "^(https?|ftp)://" +                                             // protocol
+                  "(([a-z0-9$_\\.\\+!\\*\\'\\(\\),;\\?&=-]|%[0-9a-f]{2})+" +       // username
+                  "(:([a-z0-9$_\\.\\+!\\*\\'\\(\\),;\\?&=-]|%[0-9a-f]{2})+)?" +    // password
+                  "@)?" +                                                          // auth requires @
+                  "((([a-z0-9][a-z0-9-]*[a-z0-9]\\.)*" +                           // domain segments AND
+                  "[a-z][a-z0-9-]*[a-z0-9]" +                                      // top level domain  OR
+                  "|((\\d|[1-9]\\d|1\\d{2}|2[0-4][0-9]|25[0-5])\\.){3}" +
+                  "(\\d|[1-9]\\d|1\\d{2}|2[0-4][0-9]|25[0-5])" +                   // IP address
+                  ")(:\\d+)?" +                                                    // port
+                  ")(((/+([a-z0-9$_\\.\\+!\\*\\'\\(\\),;:@&=-]|%[0-9a-f]{2})*)*" + // path
+                  "(\\?([a-z0-9$_\\.\\+!\\*\\'\\(\\),;:@&=-]|%[0-9a-f]{2})*)" +    // query string
+                  "?)?)?" +                                                        // path and query string optional
+                  "(#([a-z0-9$_\\.\\+!\\*\\'\\(\\),;:@&=-]|%[0-9a-f]{2})*)?" +     // fragment
+                  "$"
+                ,"i");
+                
+                return function(value){
+                  return reg.test(value);
+                };
+                
+            })()
         }
     };
 }));
