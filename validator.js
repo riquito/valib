@@ -195,7 +195,10 @@
                   return reg.test(value);
                 };
                 
-            })()
+            })(),
+            isMD5 : function(value){
+                return /^[0-9a-f]{32}$/i.test(value);
+            }
         }
     };
 }));

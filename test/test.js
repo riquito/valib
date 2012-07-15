@@ -479,6 +479,15 @@ suite('validators',function(){
             assert.isFalse(v.String.isUrl('http://256.255.255.255'));
             
         });
+        
+        test('is MD5',function(){
+            assert.isTrue (v.String.isMD5('98c8479273b830b85d46c13187947483'));
+            assert.isTrue (v.String.isMD5('0123456789abcdef5d46c13187947483'));
+            
+            assert.isFalse(v.String.isMD5('98c8479273b830b85d'));
+            assert.isFalse(v.String.isMD5('g8c8479273b830b85d46c13187947483'));
+            assert.isFalse(v.String.isMD5('9 c8479273b830b85d46c13187947483'));
+        });
     });
     
     suite('Booleans',function() {
