@@ -508,6 +508,38 @@ suite('validators',function(){
             assert.isFalse(v.String.isEmailLike("too@many@host"));
             assert.isFalse(v.String.isEmailLike("no spaces@host"));
         });
+        
+        test('match string',function(){
+            assert.isTrue(v.String.match('test'  ,'test'));
+            assert.isTrue(v.String.match(' test' ,'test',{trim:true}));
+            assert.isTrue(v.String.match('test ' ,'test',{trim:true}));
+            assert.isTrue(v.String.match(' test ','test',{trim:true}));
+            
+            assert.isFalse(v.String.match(' test','test'));
+            assert.isFalse(v.String.match('test ','test'));
+            assert.isFalse(v.String.match(' test ','test'));
+            assert.isFalse(v.String.match('hello world','hello'));
+            assert.isFalse(v.String.match('hello world','world'));
+        });
+        
+        test('match regexp',function(){
+            assert.isTrue(v.String.match('test'  ,/test/));
+            assert.isTrue(v.String.match(' test' ,/test/,{trim:true}));
+            assert.isTrue(v.String.match('test ' ,/test/,{trim:true}));
+            assert.isTrue(v.String.match(' test ',/test/,{trim:true}));
+            
+            assert.isTrue(v.String.match(' test',/test/));
+            assert.isTrue(v.String.match('test ',/test/));
+            assert.isTrue(v.String.match(' test ',/test/));
+            
+            assert.isFalse(v.String.match(' test' ,/^test$/));
+            assert.isFalse(v.String.match('test ' ,/^test$/));
+            assert.isFalse(v.String.match(' test ',/^test$/));
+            
+            assert.isTrue(v.String.match(' test' ,/^test$/,{trim:true}));
+            assert.isTrue(v.String.match('test ' ,/^test$/,{trim:true}));
+            assert.isTrue(v.String.match(' test ',/^test$/,{trim:true}));
+        });
     });
     
     suite('Booleans',function() {

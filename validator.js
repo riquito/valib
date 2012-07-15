@@ -70,7 +70,7 @@
         };
     }
     
-    return {
+    var Validator = {
         Type: {
             isNumber : function(value) {
                 return !this.isNaN(value) && getType(value) === 'number';
@@ -206,7 +206,26 @@
             isEmailLike : function(value){
                 // something@something with no spaces, one and only one @
                 return /^[^\s@]+@[^\s@]{3,}$/.test(value);
-            }
+            },
+            /**
+            * If regOrString is a regular espression check if value match it
+            * If regOrString is a string check if it's equal to value
+            *
+            * If the option {trim:true} is passed then trailing whitespaces will be ignored on 'value'
+            */
+            match: function(value,regOrString,opts){
+                opts = opts || {trim:false};
+                
+                if (opts.trim) value = trim(value);
+                
+                if (Validator.Type.isRegExp(regOrString)) {
+                  return regOrString.test(value);
+                }
+                else return regOrString === value;
+           }
         }
     };
+    
+    return Validator;
+
 }));
