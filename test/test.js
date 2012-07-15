@@ -181,7 +181,19 @@ suite('validators',function(){
             assert.isFalse(v.Number.gte(-5, -3));
             assert.isFalse(v.Number.gte( 3, Infinity));
         });
-
+        
+        test('is zero',function(){
+            assert.isTrue(v.Number.isZero(0));
+            assert.isTrue(v.Number.isZero(-0));
+            
+            assert.isFalse(v.Number.isZero(1));
+            assert.isFalse(v.Number.isZero(-1));
+            assert.isFalse(v.Number.isZero(null));
+            assert.isFalse(v.Number.isZero(undefined));
+            assert.isFalse(v.Number.isZero(''));
+            assert.isFalse(v.Number.isZero([]));
+            assert.isFalse(v.Number.isZero({}));
+        });
     });
     
     suite('Strings',function() {
