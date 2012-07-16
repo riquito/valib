@@ -1,11 +1,15 @@
 "strict";
 
-var chai = require('chai');
+if (typeof window === 'undefined') {
+    var chai = require('chai');
+    var valib = require('../valib.js');
+} 
+
 chai.Assertion.includeStack = false; // show backtrace on test error
 
 var assert = chai.assert;
+var v = valib;
 
-var validator = v = require('../valib.js')
 
 suite('validators',function(){
     
