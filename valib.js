@@ -46,26 +46,18 @@
         
     })();
     
-    var trim = null;
-    if (String.prototype.trim) {
-        trim = function(str) {
-            return str == null ? // null and undefined
-                   ""
-                   :
-                   String.prototype.trim.call(str);
-        };
-    } else {
-        trim = function(str) {
-            if (str == null) return ''; // null and undefined
-            // slightly modified version of trim12 found at
-            // http://blog.stevenlevithan.com/archives/faster-trim-javascript
-            str = str.replace(/^[\s\u200B]+/, '');
-            var ws = /[\s\u200B]/,
-                i = str.length;
-            while (ws.test(str.charAt(--i)));
-            return str.slice(0, i + 1);
-        };
-    }
+    // Even if they have String.prototype.trim, browsers have different
+    // implementations with more or less whitespace characters, so we use this
+    var trim = function(str) {
+        if (str == null) return ''; // null and undefined
+        /* modified version of trim12 from
+           http://blog.stevenlevithan.com/archives/faster-trim-javascript */
+        str = str.replace(/^[\s\u200B\u0085]+/, '');
+        var ws = /[\s\u200B\u0085]/,
+            i = str.length;
+        while (ws.test(str.charAt(--i)));
+        return str.slice(0, i + 1);
+    };
     
     var valib = {
         Type: {
@@ -166,7 +158,7 @@
             toNumber : function(str) {
                 if (!this.isNumeric(str)) return null;
                 
-                if (str.indexOf('x') !== -1) return parseInt(str); // hex number
+                if (str.toUpperCase().indexOf('X') !== -1) return parseInt(str); // hex number
                 else if (/^\s*[+-]?0[1-9]/.test(str)) return parseInt(str); // oct number
                 else return parseFloat(str);
                 
