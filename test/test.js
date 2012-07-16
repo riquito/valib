@@ -264,6 +264,7 @@ suite('validators',function(){
         });
         
         test('is numeric',function(){
+            
             assert.isTrue(v.String.isNumeric('0'));
             
             assert.isTrue(v.String.isNumeric(' 1'));
@@ -302,6 +303,8 @@ suite('validators',function(){
             assert.isTrue(v.String.isNumeric('0001'));
             assert.isTrue(v.String.isNumeric('0001.23'));
             
+            assert.isFalse(v.String.isNumeric(null));
+            assert.isFalse(v.String.isNumeric(undefined));
             assert.isFalse(v.String.isNumeric(''));
             assert.isFalse(v.String.isNumeric('a'));
             assert.isFalse(v.String.isNumeric('1a'));
