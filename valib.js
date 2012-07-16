@@ -142,16 +142,23 @@
                 
                 str = trim(str);
                 
-                // see http://stackoverflow.com/questions/18082/validate-numbers-in-javascript-isnumeric
+                /* below the isNumeric assignment is bugged in firefox up to at
+                /* least 13 with signed hexadecimals, so we extract the sign */
+                
+                var sign = null;
+                if (str.length && str[0] === '-' || str[0] === '+') {
+                    sign = str[0];
+                    str = str.slice(1);
+                }
+                
+                /* see http://stackoverflow.com/questions/18082 */
                 var isNumeric = !isNaN(parseFloat(str)) && isFinite(str);
                 
                 if (!isNumeric) return false;
                 
-                if (!opts.canBeSigned && str.length && (str[0]==='+' || str[0]==='-')) {
-                    return false;
-                }
+                if (sign && !opts.canBeSigned) return false;
                 
-                if (opts.simple) return /^[+-]?(0|[1-9][0-9]*)(\.[0-9]+)?$/.test(str);
+                if (opts.simple) return /^(0|[1-9][0-9]*)(\.[0-9]+)?$/.test(str);
                 
                 return true;
             },
