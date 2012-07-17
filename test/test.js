@@ -793,6 +793,10 @@ suite('validators',function(){
            delete(x[1]);
            assert.equal(-1,v.Array.indexOf(x,undefined));
            
+           assert.equal( 1,v.Array.indexOf(['a','b','c'],'b',1));
+           assert.equal(-1,v.Array.indexOf(['a','b','c'],'b',2));
+           assert.equal(-1,v.Array.indexOf(['a','b','c'],'b',-1));
+           
         });
         
         test('element in array',function(){
@@ -809,6 +813,10 @@ suite('validators',function(){
            assert.isTrue(v.Array.in(x,undefined));
            delete(x[1]);
            assert.isFalse(v.Array.in(x,undefined));
+           
+           assert.isTrue (v.Array.in(['a','b','c'],'b',1));
+           assert.isFalse(v.Array.in(['a','b','c'],'b',2));
+           assert.isFalse(v.Array.in(['a','b','c'],'b',-1));
            
         });
         

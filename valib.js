@@ -251,22 +251,26 @@
         // Array Functions
         // --------------
         Array : {
-            'indexOf' : function(array,value) { // O(n)
+            'indexOf' : function(array,value,fromIndex) { // O(n)
                 if (array == null) return -1; // null and undefined
                 
+                if (array.length === 0) return -1;
+                
                 if (!Array.prototype.indexOf) {
+                    if (!fromIndex) fromIndex = 0;
+                    if (fromIndex<0) fromIndex = array.length - 1;
                     
-                    for (var i=0,il=array.length;i<il;i++) {
+                    for (var i=fromIndex,il=array.length;i<il;i++) {
                         // check if `i` is inside `array` to differentiate
                         // between deleted items and keys set to undefined
                         if (i in array && array[i] === value) return i;
                     }
                     return -1;
                     
-                } else return array.indexOf(value);
+                } else return array.indexOf(value,fromIndex);
             },
-            'in' : function(array,value) { // O(n)
-                return -1 !== this.indexOf(array,value);
+            'in' : function(array,value,fromIndex) { // O(n)
+                return -1 !== this.indexOf(array,value,fromIndex);
             },
             'isEmpty' : function(array){
                 if (array == null) return true;
