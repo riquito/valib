@@ -779,36 +779,36 @@ suite('validators',function(){
         });
         
         test('index of element',function(){
-           assert.equal(0,v.Array.indexOf('a',['a','b','c']));
-           assert.equal(1,v.Array.indexOf('b',['a','b','c']));
-           assert.equal(2,v.Array.indexOf('c',['a','b','c']));
-           assert.equal(0,v.Array.indexOf('',['','b','c']));
+           assert.equal(0,v.Array.indexOf(['a','b','c'],'a'));
+           assert.equal(1,v.Array.indexOf(['a','b','c'],'b'));
+           assert.equal(2,v.Array.indexOf(['a','b','c'],'c'));
+           assert.equal(0,v.Array.indexOf(['','b','c'],''));
            
-           assert.equal(-1,v.Array.indexOf('d',['a','b','c']));
-           assert.equal(-1,v.Array.indexOf('d',null));
-           assert.equal(-1,v.Array.indexOf('d',undefined));
+           assert.equal(-1,v.Array.indexOf(['a','b','c'],'d'));
+           assert.equal(-1,v.Array.indexOf(null,'d'));
+           assert.equal(-1,v.Array.indexOf(undefined,'d'));
            
            var x = ['a',undefined,'c'];
-           assert.equal(1,v.Array.indexOf(undefined,x));
+           assert.equal(1,v.Array.indexOf(x,undefined));
            delete(x[1]);
-           assert.equal(-1,v.Array.indexOf(undefined,x));
+           assert.equal(-1,v.Array.indexOf(x,undefined));
            
         });
         
         test('element in array',function(){
-           assert.isTrue(v.Array.in('a',['a','b','c']));
-           assert.isTrue(v.Array.in('b',['a','b','c']));
-           assert.isTrue(v.Array.in('c',['a','b','c']));
-           assert.isTrue(v.Array.in('',['','b','c']));
+           assert.isTrue(v.Array.in(['a','b','c'],'a'));
+           assert.isTrue(v.Array.in(['a','b','c'],'b'));
+           assert.isTrue(v.Array.in(['a','b','c'],'c'));
+           assert.isTrue(v.Array.in(['','b','c'],''));
            
-           assert.isFalse(v.Array.in('d',['a','b','c']));
-           assert.isFalse(v.Array.in('d',null));
-           assert.isFalse(v.Array.in('d',undefined));
+           assert.isFalse(v.Array.in(['a','b','c'],'d'));
+           assert.isFalse(v.Array.in(null,'d'));
+           assert.isFalse(v.Array.in(undefined,'d'));
            
            var x = ['a',undefined,'c'];
-           assert.isTrue(v.Array.in(undefined,x));
+           assert.isTrue(v.Array.in(x,undefined));
            delete(x[1]);
-           assert.isFalse(v.Array.in(undefined,x));
+           assert.isFalse(v.Array.in(x,undefined));
            
         });
         
@@ -889,12 +889,12 @@ suite('validators',function(){
         });
         
         test('has key',function(){
-            assert.isTrue(v.Object.hasKey('x',{'x':1,'y':2}));
+            assert.isTrue(v.Object.hasKey({'x':1,'y':2},'x'));
             
-            assert.isFalse(v.Object.hasKey('x',undefined));
-            assert.isFalse(v.Object.hasKey('x',null));
-            assert.isFalse(v.Object.hasKey('x',{}));
-            assert.isFalse(v.Object.hasKey('x',{'y':2}));
+            assert.isFalse(v.Object.hasKey(undefined,'x'));
+            assert.isFalse(v.Object.hasKey(null,'x'));
+            assert.isFalse(v.Object.hasKey({},'x'));
+            assert.isFalse(v.Object.hasKey({'y':2},'x'));
             
             // hasKey must ignore prototype inheritance
             function Cat(){ this.name = 'MrPurr'; }
@@ -902,16 +902,16 @@ suite('validators',function(){
             
             Cat.prototype = new Mammal();
             
-            assert.isFalse(v.Object.hasKey('genre',new Cat()));
+            assert.isFalse(v.Object.hasKey(new Cat(),'genre'));
         });
         
         test('has value',function(){
-            assert.isTrue(v.Object.hasValue(1,{'x':1,'y':2}));
+            assert.isTrue(v.Object.hasValue({'x':1,'y':2},1));
             
-            assert.isFalse(v.Object.hasValue(1,undefined));
-            assert.isFalse(v.Object.hasValue(1,null));
-            assert.isFalse(v.Object.hasValue(1,{}));
-            assert.isFalse(v.Object.hasValue(1,{'y':2}));
+            assert.isFalse(v.Object.hasValue(undefined,1));
+            assert.isFalse(v.Object.hasValue(null,1));
+            assert.isFalse(v.Object.hasValue({},1));
+            assert.isFalse(v.Object.hasValue({'y':2},1));
             
             // hasValue must ignore prototype inheritance
             function Cat(){ this.name = 'MrPurr'; }
@@ -919,12 +919,12 @@ suite('validators',function(){
             
             Cat.prototype = new Mammal();
             
-            assert.isTrue(v.Object.hasValue('MrPurr',new Cat()));
-            assert.isFalse(v.Object.hasValue(10,new Cat()));
+            assert.isTrue(v.Object.hasValue(new Cat(),'MrPurr'));
+            assert.isFalse(v.Object.hasValue(new Cat(),10));
         });
         
         test('is empty',function(){
-            assert.isTrue(v.Object.isEmpty({}));
+            assert.isTrue(v.Object.isEmpty({}),',essa');
             assert.isTrue(v.Object.isEmpty(null));
             assert.isTrue(v.Object.isEmpty(undefined));
             
