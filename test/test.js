@@ -1,4 +1,4 @@
-"strict";
+"use strict";
 
 if (typeof window === 'undefined') {
     var chai = require('chai');

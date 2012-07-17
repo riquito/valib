@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+"use strict";
+
 // Apply the returnExports.js UMD pattern  
 // See [https://github.com/umdjs/umd](https://github.com/umdjs/umd)
 (function (root, factory) {
