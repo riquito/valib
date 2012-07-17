@@ -126,23 +126,23 @@
             isZero : function(n){
                 return n === 0;
             },
-            inRange : function(num,min,max,opts) {
+            inRange : function(n,min,max,opts) {
                 opts = opts || {l_exc : false, r_exc : false};
-                return (opts.l_exc ? num > min : num >= min)
+                return (opts.l_exc ? n > min : n >= min)
                         &&
-                       (opts.r_exc ? num < max : num <= max);
+                       (opts.r_exc ? n < max : n <= max);
             },
-            lt : function(num,max) {
-                return num < max;
+            lt : function(n,max) {
+                return n < max;
             },
-            lte : function(num,max) {
-                return num <= max;
+            lte : function(n,max) {
+                return n <= max;
             },
-            gt : function(num,min) {
-                return num > min;
+            gt : function(n,min) {
+                return n > min;
             },
-            gte : function(num,min) {
-                return num >= min;
+            gte : function(n,min) {
+                return n >= min;
             }
         },
         // String Functions
