@@ -1,5 +1,6 @@
 /**
- * Copyright 2012 Riccardo Attilio Galli <riccardo@sideralis.org> [http://www.sideralis.org]
+ * Copyright 2012 Riccardo Attilio Galli <riccardo@sideralis.org>
+ * [http://www.sideralis.org]
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +15,8 @@
  * limitations under the License.
  */
 
+// Apply the returnExports.js UMD pattern  
+// See [https://github.com/umdjs/umd](https://github.com/umdjs/umd)
 (function (root, factory) {
     if (typeof exports === 'object') {
         // Node. Does not work with strict CommonJS, but
@@ -29,9 +32,12 @@
     }
 }(this, function (/*dependencies*/) {
     
+    // Detect a variable's type  
+    // (Refactoring of code found in jQuery 1.7.1)
     var getType = (function(){
         
-        var classes = ["Boolean","Number","String","Function","Array","Date","RegExp","Object"],
+        var classes = ["Boolean","Number","String","Function","Array",
+                       "Date","RegExp","Object"],
             class2type = {};
         
         for (var i=0,il=classes.length;i<il;i++) {
@@ -46,8 +52,8 @@
         
     })();
     
-    // Even if they have String.prototype.trim, browsers have different
-    // implementations with more or less whitespace characters, so we use this
+    // Even if they have String.prototype.trim, browsers discord
+    // on the whitespace characters, so we use a custom trim
     var trim = function(str) {
         if (str == null) return ''; // null and undefined
         /* modified version of trim12 from
@@ -60,6 +66,8 @@
     };
     
     var valib = {
+        // Type Functions
+        // --------------
         Type: {
             isNumber : function(value) {
                 return !this.isNaN(value) && getType(value) === 'number';
@@ -88,8 +96,9 @@
                 return getType(value) === 'null';
             },
             isNaN: function(value) {
-                /* check if value is NaN, this is not the same as calling
-                   the standard isNaN (which checks if a value is coercible to a number) */
+                // Test if `value` is NaN, this is not the same as calling
+                // the standard isNaN() (which checks if a value is coercible
+                // to a number)
                 
                 // not really a Javascript type, but certainly not a number
                 // (typeof NaN === 'number')
@@ -102,6 +111,8 @@
                 return getType(value) === 'regexp';
             }
         },
+        // Number Functions
+        // --------------
         Number: {
             isInteger : function(n){
               return n===+n && n===(n|0);
@@ -134,16 +145,20 @@
                 return num >= min;
             }
         },
+        // String Functions
+        // --------------
         String: {
             isNumeric : function(str,opts) {
                 opts = opts || {};
-                if (opts.canBeSigned === undefined) opts.canBeSigned = true; // this let the user pass just {simple:true}
+                // This way the user can just pass {simple:true}
+                if (opts.canBeSigned === undefined) opts.canBeSigned = true;
                 if (opts.simple === undefined) opts.simple = false;
                 
                 str = trim(str);
                 
-                /* below the isNumeric assignment is bugged in firefox up to at
-                /* least 13 with signed hexadecimals, so we extract the sign */
+                // Below isFinite() may choke with signed hexadecimals (Firefox
+                // return NaN as the standard requires, others parse them, so
+                // we remove the sign alltogether)
                 
                 var sign = null;
                 if (str.length && str[0] === '-' || str[0] === '+') {
@@ -151,7 +166,7 @@
                     str = str.slice(1);
                 }
                 
-                /* see http://stackoverflow.com/questions/18082 */
+                // see http://stackoverflow.com/questions/18082
                 var isNumeric = !isNaN(parseFloat(str)) && isFinite(str);
                 
                 if (!isNumeric) return false;
@@ -171,8 +186,8 @@
                 
             },
             isUrl : (function(){ // only http(s)/ftp urls, requires protocol
-                // javascript version of the regexp found at
-                // http://stackoverflow.com/questions/161738/what-is-the-best-regular-expression-to-check-if-a-string-is-a-valid-url
+                // javascript version of the regexp found at  
+                // http://stackoverflow.com/questions/161738
                 var reg = new RegExp(
                   "^(https?|ftp)://" +                                             // protocol
                   "(([a-z0-9$_\\.\\+!\\*\\'\\(\\),;\\?&=-]|%[0-9a-f]{2})+" +       // username
@@ -233,23 +248,24 @@
             },
             trim : trim
         },
+        // Array Functions
+        // --------------
         Array : {
-            // O(n)
-            'indexOf' : function(value,array) {
+            'indexOf' : function(value,array) { // O(n)
                 if (array == null) return -1; // null and undefined
                 
                 if (!Array.prototype.indexOf) {
                     
                     for (var i=0,il=array.length;i<il;i++) {
-                        // check if i in array to differentiate between deleted items and keys set to undefined
+                        // check if `i` is inside `array` to differentiate
+                        // between deleted items and keys set to undefined
                         if (i in array && array[i] === value) return i;
                     }
                     return -1;
                     
                 } else return array.indexOf(value);
             },
-            // O(n)
-            'in' : function(value,array) {
+            'in' : function(value,array) { // O(n)
                 return -1 !== this.indexOf(value,array);
             },
             'isEmpty' : function(array){
@@ -257,6 +273,8 @@
                 return array.length === 0;
             }
         },
+        // Object Functions
+        // --------------
         Object : {
             'hasKey' : function(key,object){
                 if (object == null) return false;
