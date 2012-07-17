@@ -205,21 +205,21 @@
                   "$"
                 ,"i");
                 
-                return function(value){
-                  return reg.test(value);
+                return function(str){
+                  return reg.test(str);
                 };
                 
             })(),
-            isMD5 : function(value){
-                return /^[0-9a-f]{32}$/i.test(value);
+            isMD5 : function(str){
+                return /^[0-9a-f]{32}$/i.test(str);
             },
-            isSHA1 : function(value){
-                return /^[0-9a-f]{40}$/i.test(value);
+            isSHA1 : function(str){
+                return /^[0-9a-f]{40}$/i.test(str);
             },
             // check if it is similar to an e-mail (no hope to comply with the rfc and the mess that's the real world)
-            isEmailLike : function(value){
+            isEmailLike : function(str){
                 // something@something with no spaces, one and only one @
-                return /^[^\s@]+@[^\s@]{3,}$/.test(value);
+                return /^[^\s@]+@[^\s@]{3,}$/.test(str);
             },
             /**
             * If regOrString is a regular espression check if value match it
@@ -227,15 +227,15 @@
             *
             * If the option {trim:true} is passed then trailing whitespaces will be ignored on 'value'
             */
-            match: function(value,regOrString,opts){
+            match: function(str,regOrString,opts){
                 opts = opts || {trim:false};
                 
-                if (opts.trim) value = trim(value);
+                if (opts.trim) str = trim(str);
                 
                 if (valib.Type.isRegExp(regOrString)) {
-                  return regOrString.test(value);
+                  return regOrString.test(str);
                 }
-                else return regOrString === value;
+                else return regOrString === str;
             },
             startsWith: function(str,starts){
                 return str.length >= starts.length && str.substring(0, starts.length) === starts;
