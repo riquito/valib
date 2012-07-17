@@ -799,24 +799,24 @@ suite('validators',function(){
            
         });
         
-        test('element in array',function(){
-           assert.isTrue(v.Array.in(['a','b','c'],'a'));
-           assert.isTrue(v.Array.in(['a','b','c'],'b'));
-           assert.isTrue(v.Array.in(['a','b','c'],'c'));
-           assert.isTrue(v.Array.in(['','b','c'],''));
+        test('array has element',function(){
+           assert.isTrue(v.Array.has(['a','b','c'],'a'));
+           assert.isTrue(v.Array.has(['a','b','c'],'b'));
+           assert.isTrue(v.Array.has(['a','b','c'],'c'));
+           assert.isTrue(v.Array.has(['','b','c'],''));
            
-           assert.isFalse(v.Array.in(['a','b','c'],'d'));
-           assert.isFalse(v.Array.in(null,'d'));
-           assert.isFalse(v.Array.in(undefined,'d'));
+           assert.isFalse(v.Array.has(['a','b','c'],'d'));
+           assert.isFalse(v.Array.has(null,'d'));
+           assert.isFalse(v.Array.has(undefined,'d'));
            
            var x = ['a',undefined,'c'];
-           assert.isTrue(v.Array.in(x,undefined));
+           assert.isTrue(v.Array.has(x,undefined));
            delete(x[1]);
-           assert.isFalse(v.Array.in(x,undefined));
+           assert.isFalse(v.Array.has(x,undefined));
            
-           assert.isTrue (v.Array.in(['a','b','c'],'b',1));
-           assert.isFalse(v.Array.in(['a','b','c'],'b',2));
-           assert.isFalse(v.Array.in(['a','b','c'],'b',-1));
+           assert.isTrue (v.Array.has(['a','b','c'],'b',1));
+           assert.isFalse(v.Array.has(['a','b','c'],'b',2));
+           assert.isFalse(v.Array.has(['a','b','c'],'b',-1));
            
         });
         

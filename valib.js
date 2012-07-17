@@ -271,7 +271,7 @@
                     
                 } else return array.indexOf(value,fromIndex);
             },
-            'in' : function(array,value,fromIndex) { // O(n)
+            'has' : function(array,value,fromIndex) { // O(n)
                 return -1 !== this.indexOf(array,value,fromIndex);
             },
             'isEmpty' : function(array){
