@@ -237,11 +237,11 @@
                 }
                 else return regOrString === str;
             },
-            startsWith: function(str,starts){
-                return str.length >= starts.length && str.substring(0, starts.length) === starts;
+            startsWith: function(str,prefix){
+                return str.length >= prefix.length && str.substring(0, prefix.length) === prefix;
             },
-            endsWith: function(str,ends){
-                return str.length >= ends.length && str.substring(str.length - ends.length) === ends;
+            endsWith: function(str,suffix){
+                return str.length >= suffix.length && str.substring(str.length - suffix.length) === suffix;
             },
             isEmpty : function(str){
                 return !str;
