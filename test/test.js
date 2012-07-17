@@ -431,18 +431,18 @@ suite('validators',function(){
             assert.equal( 1.23,v.String.toNumber('+0001.23'));
             assert.equal(-1.23,v.String.toNumber('-0001.23'));
             
-            assert.isNull(v.String.toNumber(''));
-            assert.isNull(v.String.toNumber('a'));
-            assert.isNull(v.String.toNumber('1a'));
-            assert.isNull(v.String.toNumber('.'));
-            assert.isNull(v.String.toNumber('Infinity'));
-            assert.isNull(v.String.toNumber('-a'));
-            assert.isNull(v.String.toNumber('-1a'));
-            assert.isNull(v.String.toNumber('-.'));
-            assert.isNull(v.String.toNumber('-Infinity'));
-            assert.isNull(v.String.toNumber(' 0x1H'));
-            assert.isNull(v.String.toNumber('+0x1H'));
-            assert.isNull(v.String.toNumber('-0x1H'));
+            assert.isTrue(v.Type.isNaN(v.String.toNumber('')));
+            assert.isTrue(v.Type.isNaN(v.String.toNumber('a')));
+            assert.isTrue(v.Type.isNaN(v.String.toNumber('1a')));
+            assert.isTrue(v.Type.isNaN(v.String.toNumber('.')));
+            assert.isTrue(v.Type.isNaN(v.String.toNumber('Infinity')));
+            assert.isTrue(v.Type.isNaN(v.String.toNumber('-a')));
+            assert.isTrue(v.Type.isNaN(v.String.toNumber('-1a')));
+            assert.isTrue(v.Type.isNaN(v.String.toNumber('-.')));
+            assert.isTrue(v.Type.isNaN(v.String.toNumber('-Infinity')));
+            assert.isTrue(v.Type.isNaN(v.String.toNumber(' 0x1H')));
+            assert.isTrue(v.Type.isNaN(v.String.toNumber('+0x1H')));
+            assert.isTrue(v.Type.isNaN(v.String.toNumber('-0x1H')));
         });
         
         test('url',function(){
