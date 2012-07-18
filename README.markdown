@@ -8,7 +8,7 @@ Works either as
 - an AMD module
 - a generic library
 
-You can read through the [annotated source code](http://riquito.github.com/valib/web/docs/valib.htm)
+You can read through the [annotated source code](http://riquito.github.com/valib/web/docs/valib.html)
 and [run the tests](http://riquito.github.com/valib/web/tests.htm) from your browser
 
 Note: for brevity, all the examples will suppose `valib` was assigned to `v`
