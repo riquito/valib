@@ -1325,6 +1325,17 @@ suite('validators',function(){
             someDay.setMilliseconds(1);
             assert.notEqual(someDay.getTime(),v.Date.yesterday().getTime());
         });
+        
+        test('is today',function(){
+            assert.isTrue(v.Date.isToday(new Date()));
+            
+            assert.isFalse(v.Date.isToday(v.Date.tomorrow()));
+            assert.isFalse(v.Date.isToday(v.Date.yesterday()));
+            
+            var x = new Date();
+            x.setFullYear(x.getFullYear()-1);
+            assert.isFalse(v.Date.isToday(x));
+        });
     });
     
     suite('Regular expressions',function() {

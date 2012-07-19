@@ -307,6 +307,9 @@
         // Date Functions
         // --------------
         Date : {
+            isToday : function(d) {
+                return d > this.yesterday() && d < this.tomorrow();
+            },
             toStartOfTheDay : function(d) {
                 return new Date(d.getFullYear(),d.getMonth(),d.getDate());
             },
