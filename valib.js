@@ -322,6 +322,10 @@
                        && d.getMonth() === yesterday.getMonth()
                        && d.getDate() === yesterday.getDate();
             },
+            isTheNextDay : function(d,future) {
+                return future.getTime() > d.getTime() &&
+                      (future.getTime() - d.getTime() <= 24 * 60 * 60 * 1000);
+            },
             toStartOfTheDay : function(d) {
                 return new Date(d.getFullYear(),d.getMonth(),d.getDate());
             },

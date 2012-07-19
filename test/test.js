@@ -1350,6 +1350,16 @@ suite('validators',function(){
             assert.isFalse(v.Date.isYesterday(v.Date.tomorrow()));
             assert.isFalse(v.Date.isYesterday(v.Date.today()));
         });
+        
+        test('is the next day',function(){
+            var a = new Date('2020/01/01 10:14:30 GMT+0100'),
+                b = new Date('2020/01/02 10:14:30 GMT+0100'),
+                c = new Date('2020/01/03 10:14:30 GMT+0100');
+            
+            assert.isTrue(v.Date.isTheNextDay(b,c));
+            
+            assert.isFalse(v.Date.isTheNextDay(b,a));
+        });
     });
     
     suite('Regular expressions',function() {
