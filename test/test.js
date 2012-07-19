@@ -1402,6 +1402,19 @@ suite('validators',function(){
             assert.equal(4,v.Date.elapsedDays(a,c));
             assert.equal(1,v.Date.elapsedDays(b,c));
         });
+        
+        test('is the same day',function(){
+            
+            var a = new Date('2012/02/27 10:14:30'),
+                b = new Date('2012/03/02 04:01:42'),
+                c = new Date('2012/03/02 23:59:59');
+            
+            assert.isTrue(v.Date.isSameDay(c,b));
+            assert.isTrue(v.Date.isSameDay(b,c));
+            
+            assert.isFalse(v.Date.isSameDay(a,c));
+            assert.isFalse(v.Date.isSameDay(a,b));
+        });
     });
     
     suite('Regular expressions',function() {

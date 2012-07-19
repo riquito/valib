@@ -357,6 +357,11 @@
             },
             isEqual : function(d1,d2) {
                 return d1.getTime() === d2.getTime();
+            },
+            // check if two dates are the same day of the same year
+            // (the dates must be in the same timezone)
+            isSameDay : function(d1,d2) {
+                return this.isEqual(this.toStartOfTheDay(d1),this.toStartOfTheDay(d2));
             }
         }
     };
