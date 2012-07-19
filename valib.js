@@ -362,6 +362,12 @@
             // (the dates must be in the same timezone)
             isSameDay : function(d1,d2) {
                 return this.isEqual(this.toStartOfTheDay(d1),this.toStartOfTheDay(d2));
+            },
+            // check if two dates are in the same year/month
+            // (the dates must be in the same timezone)
+            isSameMonth : function(d1,d2) {
+                return d1.getFullYear() === d2.getFullYear()
+                       && d1.getMonth() === d2.getMonth();
             }
         }
     };

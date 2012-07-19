@@ -1415,6 +1415,19 @@ suite('validators',function(){
             assert.isFalse(v.Date.isSameDay(a,c));
             assert.isFalse(v.Date.isSameDay(a,b));
         });
+        
+        test('is the same month',function(){
+            
+            var a = new Date('2012/02/01 10:14:30'),
+                b = new Date('2012/02/29 04:01:42'),
+                c = new Date('2012/03/02 23:59:59');
+            
+            assert.isTrue(v.Date.isSameMonth(a,b));
+            assert.isTrue(v.Date.isSameMonth(b,a));
+            
+            assert.isFalse(v.Date.isSameMonth(a,c));
+            assert.isFalse(v.Date.isSameMonth(b,c));
+        });
     });
     
     suite('Regular expressions',function() {
