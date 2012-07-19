@@ -198,6 +198,27 @@ suite('validators',function(){
             assert.isFalse(v.Number.isZero([]));
             assert.isFalse(v.Number.isZero({}));
         });
+
+        test('is positive',function(){
+            assert.isTrue(v.Number.isPositive(1));
+
+            assert.isFalse(v.Number.isPositive(-1));
+            assert.isFalse(v.Number.isPositive(0));
+            assert.isFalse(v.Number.isPositive(null));
+            assert.isFalse(v.Number.isPositive(undefined));
+
+        });
+        
+        test('is negative',function(){
+            assert.isTrue(v.Number.isNegative(-1));
+
+            assert.isFalse(v.Number.isNegative(1));
+            assert.isFalse(v.Number.isNegative(0));
+            assert.isFalse(v.Number.isNegative(null));
+            assert.isFalse(v.Number.isNegative(undefined));
+
+        });
+
     });
     
     suite('Strings',function() {

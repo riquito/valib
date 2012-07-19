@@ -145,6 +145,12 @@
             },
             gte : function(n,min) {
                 return n >= min;
+            },
+            isPositive: function(n) {
+                return n > 0;
+            },
+            isNegative: function(n) {
+                return n < 0;
             }
         },
         // String Functions
