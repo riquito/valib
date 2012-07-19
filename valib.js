@@ -303,6 +303,13 @@
                 for (var key in object) if (this.hasKey(object,key)) return false;
                 return true;
             }
+        },
+        // Date Functions
+        // --------------
+        Date : {
+            toStartOfTheDay : function(d) {
+                return new Date(d.getFullYear(),d.getMonth(),d.getDate());
+            }
         }
     };
     

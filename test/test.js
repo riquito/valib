@@ -1269,6 +1269,18 @@ suite('validators',function(){
         test('NaN is not a date',function(){
             assert.isFalse(v.Type.isDate(NaN));
         });
+        
+        test('to start of the day',function(){
+            
+            var someDay = new Date(
+                                  new Date('2020/01/02 10:14:30 GMT+0100').getTime()
+                                  + 123 // add some millis not be on a split second
+                                 );
+            
+            assert.equal(new Date('2020/01/02 00:00:00 GMT+0100').getTime(),
+                        v.Date.toStartOfTheDay(someDay).getTime()
+                        );
+        });
     });
     
     suite('Regular expressions',function() {
