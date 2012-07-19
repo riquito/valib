@@ -1343,6 +1343,13 @@ suite('validators',function(){
             assert.isFalse(v.Date.isTomorrow(v.Date.today()));
             assert.isFalse(v.Date.isTomorrow(v.Date.yesterday()));
         });
+        
+        test('is yesterday',function(){
+            assert.isTrue(v.Date.isYesterday(new Date(new Date().getTime() - 24*60*60*1000)));
+            
+            assert.isFalse(v.Date.isYesterday(v.Date.tomorrow()));
+            assert.isFalse(v.Date.isYesterday(v.Date.today()));
+        });
     });
     
     suite('Regular expressions',function() {

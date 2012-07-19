@@ -316,6 +316,12 @@
                        && d.getMonth() === tomorrow.getMonth()
                        && d.getDate() === tomorrow.getDate();
             },
+            isYesterday : function(d) {
+                var yesterday = this.yesterday();
+                return    d.getFullYear() === yesterday.getFullYear()
+                       && d.getMonth() === yesterday.getMonth()
+                       && d.getDate() === yesterday.getDate();
+            },
             toStartOfTheDay : function(d) {
                 return new Date(d.getFullYear(),d.getMonth(),d.getDate());
             },
