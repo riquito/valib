@@ -348,6 +348,9 @@
             },
             clone : function(d) {
                 return new Date(d.getTime());
+            },
+            isEqual : function(d1,d2) {
+                return d1.getTime() === d2.getTime();
             }
         }
     };

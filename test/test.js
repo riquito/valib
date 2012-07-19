@@ -1377,6 +1377,18 @@ suite('validators',function(){
             
             assert.isTrue(orig !== cloned && orig.getTime() === cloned.getTime());
         });
+        
+        test('is equal',function(){
+            
+            var dateStr = '2020/01/01 10:14:30 GMT+0100',
+                a = new Date(dateStr),
+                b = new Date(dateStr),
+                c = new Date('2030/08/03 02:11:29 GMT+0100');
+            
+            assert.isTrue(v.Date.isEqual(a,b));
+            
+            assert.isFalse(v.Date.isEqual(a,c));
+        });
     });
     
     suite('Regular expressions',function() {
