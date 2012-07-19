@@ -312,6 +312,11 @@
             },
             today : function() {
                 return this.toStartOfTheDay(new Date());
+            },
+            tomorrow : function(){
+                var d = this.today();
+                d.setDate(d.getDate()+1);
+                return d;
             }
         }
     };

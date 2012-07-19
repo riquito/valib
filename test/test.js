@@ -1295,6 +1295,21 @@ suite('validators',function(){
             someDay.setMilliseconds(1);
             assert.notEqual(someDay.getTime(),v.Date.today().getTime());
         });
+        
+        test('tomorrow',function(){
+            
+            var someDay = new Date();
+            someDay.setTime(someDay.getTime() + 24 * 60 * 60 * 1000);
+            someDay.setMinutes(0);
+            someDay.setHours(0);
+            someDay.setSeconds(0);
+            someDay.setMilliseconds(0);
+            
+            assert.equal(someDay.getTime(),v.Date.tomorrow().getTime());
+            
+            someDay.setMilliseconds(1);
+            assert.notEqual(someDay.getTime(),v.Date.tomorrow().getTime());
+        });
     });
     
     suite('Regular expressions',function() {
