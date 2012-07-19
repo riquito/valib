@@ -1281,6 +1281,20 @@ suite('validators',function(){
                         v.Date.toStartOfTheDay(someDay).getTime()
                         );
         });
+        
+        test('today',function(){
+            
+            var someDay = new Date();
+            someDay.setMinutes(0);
+            someDay.setHours(0);
+            someDay.setSeconds(0);
+            someDay.setMilliseconds(0);
+            
+            assert.equal(someDay.getTime(),v.Date.today().getTime());
+            
+            someDay.setMilliseconds(1);
+            assert.notEqual(someDay.getTime(),v.Date.today().getTime());
+        });
     });
     
     suite('Regular expressions',function() {

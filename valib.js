@@ -309,6 +309,9 @@
         Date : {
             toStartOfTheDay : function(d) {
                 return new Date(d.getFullYear(),d.getMonth(),d.getDate());
+            },
+            today : function() {
+                return this.toStartOfTheDay(new Date());
             }
         }
     };
