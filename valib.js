@@ -317,6 +317,11 @@
                 var d = this.today();
                 d.setDate(d.getDate()+1);
                 return d;
+            },
+            yesterday : function() {
+                var d = this.today();
+                d.setDate(d.getDate()-1);
+                return d;
             }
         }
     };
