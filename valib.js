@@ -330,6 +330,12 @@
                 return d.getTime() > past.getTime() &&
                       (d.getTime() - past.getTime() <= 24 * 60 * 60 * 1000);
             },
+            elapsedDays : function(d1,d2) { // the number of calendar days passed (not > 24h)
+                return Math.abs(this.toStartOfTheDay(d1).getTime() 
+                                - 
+                                this.toStartOfTheDay(d2).getTime())
+                       / (24 * 60 * 60 * 1000);
+            },
             toStartOfTheDay : function(d) {
                 return new Date(d.getFullYear(),d.getMonth(),d.getDate());
             },

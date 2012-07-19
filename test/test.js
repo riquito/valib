@@ -1389,6 +1389,19 @@ suite('validators',function(){
             
             assert.isFalse(v.Date.isEqual(a,c));
         });
+        
+        test('elapsed days',function(){
+            
+            // NOTE: 2012 is a leap year
+            var a = new Date('2012/02/27 10:14:30 GMT+0100'),
+                b = new Date('2012/03/01 23:59:59 GMT+0100'),
+                c = new Date('2012/03/02 00:00:00 GMT+0100');
+            
+            assert.equal(0,v.Date.elapsedDays(a,a));
+            assert.equal(3,v.Date.elapsedDays(a,b));
+            assert.equal(4,v.Date.elapsedDays(a,c));
+            assert.equal(1,v.Date.elapsedDays(b,c));
+        });
     });
     
     suite('Regular expressions',function() {
