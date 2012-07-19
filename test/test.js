@@ -1370,6 +1370,13 @@ suite('validators',function(){
             
             assert.isFalse(v.Date.isThePreviousDay(b,c));
         });
+        
+        test('clone',function(){
+            var orig = new Date('2020/01/01 10:14:30 GMT+0100'),
+                cloned = v.Date.clone(orig);
+            
+            assert.isTrue(orig !== cloned && orig.getTime() === cloned.getTime());
+        });
     });
     
     suite('Regular expressions',function() {

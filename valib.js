@@ -345,6 +345,9 @@
                 var d = this.today();
                 d.setDate(d.getDate()-1);
                 return d;
+            },
+            clone : function(d) {
+                return new Date(d.getTime());
             }
         }
     };
