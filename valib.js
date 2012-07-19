@@ -368,6 +368,21 @@
             isSameMonth : function(d1,d2) {
                 return d1.getFullYear() === d2.getFullYear()
                        && d1.getMonth() === d2.getMonth();
+            },
+            // check if two dates are in the same week and the same year
+            // (the dates must be in the same timezone)
+            isSameWeek : function(d1,d2,weekStartsAtSunday/*=true*/) {
+                if (d2 < d1) { var tmp = d1; d1 = d2; d2 = tmp; } // swap
+                if (weekStartsAtSunday !== false) weekStartsAtSunday = true;
+                
+                return this.isSameMonth(d1,d2)
+                       && Math.abs(d1.getDate() - d2.getDate()) < 7
+                       && (
+                            (!weekStartsAtSunday && d1.getDay() === 0 ? 7 : d1.getDay())
+                            <=
+                            (!weekStartsAtSunday && d2.getDay() === 0 ? 7 : d2.getDay())
+                          )
+                        ; 
             }
         }
     };

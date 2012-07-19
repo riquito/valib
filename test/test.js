@@ -1428,6 +1428,32 @@ suite('validators',function(){
             assert.isFalse(v.Date.isSameMonth(a,c));
             assert.isFalse(v.Date.isSameMonth(b,c));
         });
+        
+        test('is the same week',function(){
+            
+            var sun1 = new Date('2012/07/08 10:14:30'),
+                mon1 = new Date('2012/07/09 04:01:42'),
+                sat1 = new Date('2012/07/14 23:59:59'),
+                sun2 = new Date('2012/07/15 15:23:02'),
+                mon2 = new Date('2012/07/16 04:41:11');
+            
+            // week starts at sunday
+            assert.isTrue(v.Date.isSameWeek(sun1,mon1));
+            assert.isTrue(v.Date.isSameWeek(sun1,sat1));
+            
+            assert.isFalse(v.Date.isSameWeek(sun1,sun2));
+            assert.isFalse(v.Date.isSameWeek(sun1,mon2));
+            assert.isFalse(v.Date.isSameWeek(sat1,sun2));
+            
+            // week starts at monday
+            assert.isTrue(v.Date.isSameWeek(mon1,sat1,false));
+            assert.isTrue(v.Date.isSameWeek(mon1,sun2,false));
+            assert.isTrue(v.Date.isSameWeek(sat1,sun2,false));
+            
+            assert.isFalse(v.Date.isSameWeek(sun1,mon1,false));
+            assert.isFalse(v.Date.isSameWeek(sat1,mon2,false));
+            assert.isFalse(v.Date.isSameWeek(sun2,mon2,false));
+        });
     });
     
     suite('Regular expressions',function() {
