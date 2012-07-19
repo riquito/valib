@@ -326,6 +326,10 @@
                 return future.getTime() > d.getTime() &&
                       (future.getTime() - d.getTime() <= 24 * 60 * 60 * 1000);
             },
+            isThePreviousDay : function(d,past) {
+                return d.getTime() > past.getTime() &&
+                      (d.getTime() - past.getTime() <= 24 * 60 * 60 * 1000);
+            },
             toStartOfTheDay : function(d) {
                 return new Date(d.getFullYear(),d.getMonth(),d.getDate());
             },
