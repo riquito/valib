@@ -310,6 +310,12 @@
             isToday : function(d) {
                 return d > this.yesterday() && d < this.tomorrow();
             },
+            isTomorrow :function(d) {
+                var tomorrow = this.tomorrow();
+                return    d.getFullYear() === tomorrow.getFullYear()
+                       && d.getMonth() === tomorrow.getMonth()
+                       && d.getDate() === tomorrow.getDate();
+            },
             toStartOfTheDay : function(d) {
                 return new Date(d.getFullYear(),d.getMonth(),d.getDate());
             },

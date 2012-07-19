@@ -1336,6 +1336,13 @@ suite('validators',function(){
             x.setFullYear(x.getFullYear()-1);
             assert.isFalse(v.Date.isToday(x));
         });
+        
+        test('is tomorrow',function(){
+            assert.isTrue(v.Date.isTomorrow(new Date(new Date().getTime() + 24*60*60*1000)));
+            
+            assert.isFalse(v.Date.isTomorrow(v.Date.today()));
+            assert.isFalse(v.Date.isTomorrow(v.Date.yesterday()));
+        });
     });
     
     suite('Regular expressions',function() {
