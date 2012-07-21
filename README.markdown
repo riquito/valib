@@ -514,6 +514,181 @@ v.Object.isEmpty({'x':1})
 => false
 ```
 
+
+## Date Functions ##
+
+Date functions have to be used with care, because dates are complicated.
+If a function accept more than a date, make sure that they are in the same
+timezone.
+If a function will had to use the current time to detect something, it will
+use the current local time (e.g. isToday(date) will compare the current LOCAL
+datetime to the date provided).
+
+**isToday** v.Date.isToday(d)
+
+Test if `d` match the current day (in localtime);
+
+```javascript
+v.Date.isToday(new Date())
+=> true
+```
+
+**isTomorrow** v.Date.isTomorrow(d)
+
+Test if `d` match tomorrow's day (in localtime);
+
+```javascript
+// assuming today is 2020/01/06
+v.Date.isTomorrow(new Date('2020/01/07'))
+=> true
+
+v.Date.isTomorrow(new Date())
+=> false
+```
+
+**isYesterday** v.Date.isYesterday(d)
+
+Test if `d` match yesterday's day (in localtime);
+
+```javascript
+// assuming today is 2020/01/06
+v.Date.isYesterday(new Date('2020/01/05'))
+=> true
+
+v.Date.isYesterday(new Date())
+=> false
+```
+
+**today** v.Date.today()
+
+Return today's date (in localtime) at 00:00:00
+
+```javascript
+// assuming today is 2020/01/06
+v.Date.today()
+=> Date {Mon Jan 06 2020 00:00:00 GMT+0100 (CET)} // timezone may vary
+```
+
+**tomorrow** v.Date.tomorrow()
+
+Return tomorrow's date (in localtime) at 00:00:00
+
+```javascript
+// assuming today is 2020/01/06
+v.Date.tomorrow()
+=> Date {Tue Jan 07 2020 00:00:00 GMT+0100 (CET)} // timezone may vary
+```
+
+**yesterday** v.Date.yesterday()
+
+Test if `d` match yesterday's day (in localtime);
+
+```javascript
+// assuming today is 2020/01/06
+v.Date.yesterday()
+=> Date {Sun Jan 05 2020 00:00:00 GMT+0100 (CET)} // timezone may vary
+```
+
+**isTheNextDay** v.Date.isTheNextDay(d,future)
+
+Test if `future` is the day after `d`
+
+```javascript
+v.Date.isTheNextDay(new Date('2020/01/07'),new Date('2020/01/08'))
+=> true
+```
+
+**isThePreviousDay** v.Date.isThePreviousDay(d,past)
+
+Test if `past` is the day before `d`
+
+```javascript
+v.Date.isThePreviousDay(new Date('2020/01/07'),new Date('2020/01/06'))
+=> true
+```
+
+**isSameDay** v.Date.isSameDay(d1,d2)
+
+Test if `d1` has the same year/month/day as `d2`
+
+```javascript
+v.Date.isSameDay(new Date('2020/01/07 12:30:46'),new Date('2020/01/07 23:02:18'))
+=> true
+```
+
+**isSameMonth** v.Date.isSameMonth(d1,d2)
+
+Test if `d1` has the same year/month as `d2`
+
+```javascript
+v.Date.isSameMonth(new Date('2020/01/07 12:30:46'),new Date('2020/01/23 23:02:18'))
+=> true
+```
+
+**isSameWeek** v.Date.isSameWeek(d1,d2[,weekStartsAtSunday=true])
+
+Test if `d1` is in the same week of the year as `d2`.
+If the optional weekStartsAtSunday is set to `false` weeks will start at Monday
+
+```javascript
+// 2020/01/05 is Sunday
+v.Date.isSameWeek(new Date('2020/01/05'),new Date('2020/01/06'))
+=> true
+
+v.Date.isSameWeek(new Date('2020/01/05'),new Date('2020/01/06'),false)
+=> false
+```
+
+**clone** v.Date.clone(d)
+
+Return a copy of the date `d`
+
+```javascript
+v.Date.clone(new Date('2020/01/07 12:30:46'))
+=> Date {Tue Jan 07 2020 12:30:46 GMT+0100 (CET)}
+```
+
+**isEqual** v.Date.isEqual(d1,d2)
+
+Test if `d1` and `d2` represent the exact same datetime
+
+```javascript
+var dateStr = '2020/01/07 12:30:46',
+    d1 = new Date(dateStr),
+    d2 = new Date(dateStr);
+
+v.Date.isEqual(d1,d2)
+=> true
+```
+
+**elapsedDays** v.Date.elapsedDays(d1,d2)
+
+Return the absolute difference in number of (calendar) days between two dates
+
+```javascript
+v.Date.elapsedDays(
+    new Date('2020/01/07 00:00:00'),
+    new Date('2020/01/08 18:00:00'),
+)
+=> 1
+```
+
+**toStartOfTheDay** v.Date.toStartOfTheDay(d)
+
+Return a new date at the same year/month/day of `d` but with the time set at
+00:00:00 (and 0 milliseconds)
+
+```javascript
+var d1 = new Date('2020/01/07 12:30:46'),
+    d2 = null;
+
+d2 = v.Date.toStartOfTheDay(d1)
+=> Date {Tue Jan 07 2020 00:00:00 GMT+0100 (CET)}
+
+d1
+=> Date {Tue Jan 07 2020 12:30:46 GMT+0100 (CET)}
+```
+
 ## Contribute ##
 
 Fork & pull request. Don't forget about tests.  
