@@ -666,6 +666,32 @@ suite('validators',function(){
             
             assert.equal('foo',v.String.trim(' foo '));
         });
+        
+        test('length',function(){
+            assert.isTrue(v.String.length.eq('',0));
+            assert.isTrue(v.String.length.eq('a',1));
+            assert.isTrue(v.String.length.eq('ab',2));
+            
+            assert.isTrue (v.String.length.lt('',1));
+            assert.isTrue (v.String.length.lt('a',2));
+            assert.isTrue (v.String.length.lt('ab',3));
+            assert.isFalse(v.String.length.lt('ab',2));
+            
+            assert.isTrue (v.String.length.gt('',-1));
+            assert.isTrue (v.String.length.gt('a',0));
+            assert.isTrue (v.String.length.gt('ab',1));
+            assert.isFalse(v.String.length.gt('ab',2));
+            
+            assert.isTrue (v.String.length.lte('',0));
+            assert.isTrue (v.String.length.lte('a',1));
+            assert.isTrue (v.String.length.lte('ab',2));
+            assert.isFalse(v.String.length.lte('ab',1));
+            
+            assert.isTrue (v.String.length.gte('',0));
+            assert.isTrue (v.String.length.gte('a',1));
+            assert.isTrue (v.String.length.gte('ab',2));
+            assert.isFalse(v.String.length.gte('ab',3));
+        });
     });
     
     suite('Booleans',function() {

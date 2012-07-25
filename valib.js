@@ -254,7 +254,14 @@
             isEmpty : function(str){
                 return !str;
             },
-            trim : trim
+            trim : trim,
+            length: {
+                eq  : function(str,n) { return str.length === n},
+                gt  : function(str,n) { return str.length >   n},
+                gte : function(str,n) { return str.length >=  n},
+                lt  : function(str,n) { return str.length <   n},
+                lte : function(str,n) { return str.length <=  n}
+            }
         },
         // Array Functions
         // --------------

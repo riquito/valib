@@ -432,6 +432,31 @@ v.String.isURL('http://user:password@host.com/foo?bar=1')
 => true
 ```
 
+**length.eq** v.String.length.eq(str,n)  
+**length.gt** v.String.length.gt(str,n)  
+**length.gte** v.String.length.gte(str,n)  
+**length.lt** v.String.length.lt(str,n)  
+**length.lte** v.String.length.lte(str,n)  
+
+Test if `str` length is within some constraints (lesser/greater/equal to `n`)
+
+```javascript
+v.String.length.eq('abc',3)
+=> true
+
+v.String.length.gt('abc',1)
+=> true
+
+v.String.length.gte('abc',4)
+=> false
+
+v.String.length.lt('abc',3)
+=> false
+
+v.String.length.lte('abc',3)
+=> true
+```
+
 ## Array Functions ##
 
 
