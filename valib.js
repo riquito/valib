@@ -343,13 +343,15 @@
                 return this.toStartOfTheDay(new Date());
             },
             tomorrow : function(){
-                var d = this.today();
-                d.setDate(d.getDate()+1);
-                return d;
+                return this.nDaysFromDate(1);
             },
             yesterday : function() {
-                var d = this.today();
-                d.setDate(d.getDate()-1);
+                return this.nDaysFromDate(-1);
+            },
+            nDaysFromDate : function(n,d) {
+                if (!d) d = this.today();
+                else d = this.clone(d);
+                d.setDate(d.getDate() + n);
                 return d;
             },
             clone : function(d) {

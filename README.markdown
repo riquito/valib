@@ -673,6 +673,25 @@ v.Date.elapsedDays(
 => 1
 ```
 
+**nDaysFromDate** v.Date.nDaysFromDate(n[,d])
+
+Return the nth day after/before `d`.  
+`n` is the (positive or negative) number of days to move from `d`.  
+If `d` is missing the current date is used.
+
+```javascript
+// assuming today is 2020/01/06
+v.Date.nDaysFromDate(2)
+=> Date {Wed Jan 08 2020 00:00:00 GMT+0100 (CET)}
+
+// assuming today is 2020/01/06
+v.Date.nDaysFromDate(-2)
+=> Date {Sat Jan 04 2020 00:00:00 GMT+0100 (CET)}
+
+v.Date.nDaysFromDate(2,new Date('2020/12/03'))
+=> Date {Sat Dec 05 2020 00:00:00 GMT+0100 (CET)}
+```
+
 **toStartOfTheDay** v.Date.toStartOfTheDay(d)
 
 Return a new date at the same year/month/day of `d` but with the time set at

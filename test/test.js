@@ -1454,6 +1454,41 @@ suite('validators',function(){
             assert.isFalse(v.Date.isSameWeek(sat1,mon2,false));
             assert.isFalse(v.Date.isSameWeek(sun2,mon2,false));
         });
+        
+        test('n days from date',function(){
+            
+            var day0 = new Date(2012,1,28,0,0,0,0), // a leap year
+                day1 = new Date(day0.getTime() + 24 * 60 * 60 * 1000),
+                day2 = new Date(day0.getTime() + 48 * 60 * 60 * 1000),
+                oneYearFromNow;
+            
+            oneYearFromNow = new Date(day0.getFullYear()+1,day0.getMonth(),day0.getDate());
+            
+            assert.isTrue(v.Date.isEqual(v.Date.nDaysFromDate(0,day0),
+                                        day0
+                                       ));
+            
+            assert.isTrue(v.Date.isEqual(v.Date.nDaysFromDate(1,day0),
+                                        day1
+                                       ));
+            
+            assert.isTrue(v.Date.isEqual(v.Date.nDaysFromDate(2,day0),
+                                        day2
+                                       ));
+            
+            assert.isTrue(v.Date.isEqual(v.Date.nDaysFromDate(366,day0),
+                                        oneYearFromNow
+                                       ));
+            
+            assert.isTrue(v.Date.isEqual(v.Date.nDaysFromDate(-1,day1),
+                                        day0
+                                       ));
+            
+            assert.isTrue(v.Date.isEqual(v.Date.nDaysFromDate(-1),
+                                         v.Date.yesterday()
+                                       ));
+        });
+        
     });
     
     suite('Regular expressions',function() {
