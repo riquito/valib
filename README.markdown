@@ -482,6 +482,31 @@ v.Array.isEmpty(['a','b','c'])
 => false
 ```
 
+**length.eq** v.Array.length.eq(array,n)  
+**length.gt** v.Array.length.gt(array,n)  
+**length.gte** v.Array.length.gte(array,n)  
+**length.lt** v.Array.length.lt(array,n)  
+**length.lte** v.Array.length.lte(array,n)  
+
+Test if `array` length is within some constraints (lesser/greater/equal to `n`)
+
+```javascript
+v.Array.length.eq(['a','b','c'],3)
+=> true
+
+v.Array.length.gt(['a','b','c'],1)
+=> true
+
+v.Array.length.gte(['a','b','c'],4)
+=> false
+
+v.Array.length.lt(['a','b','c'],3)
+=> false
+
+v.Array.length.lte(['a','b','c'],3)
+=> true
+```
+
 ## Object Functions ##
 
 **hasKey** v.Object.hasKey(object,key)

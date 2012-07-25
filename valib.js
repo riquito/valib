@@ -283,6 +283,13 @@
             isEmpty : function(array){
                 if (array == null) return true;
                 return array.length === 0;
+            },
+            length: {
+                eq  : function(array,n) { return array.length === n},
+                gt  : function(array,n) { return array.length >   n},
+                gte : function(array,n) { return array.length >=  n},
+                lt  : function(array,n) { return array.length <   n},
+                lte : function(array,n) { return array.length <=  n}
             }
         },
         // Object Functions

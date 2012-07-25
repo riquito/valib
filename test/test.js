@@ -851,6 +851,32 @@ suite('validators',function(){
             assert.isFalse(v.Array.isEmpty(['a']));
             assert.isFalse(v.Array.isEmpty([{}]));
         });
+        
+        test('length',function(){
+            assert.isTrue(v.Array.length.eq([],0));
+            assert.isTrue(v.Array.length.eq(['a'],1));
+            assert.isTrue(v.Array.length.eq(['a','b'],2));
+            
+            assert.isTrue (v.Array.length.lt([],1));
+            assert.isTrue (v.Array.length.lt(['a'],2));
+            assert.isTrue (v.Array.length.lt(['a','b'],3));
+            assert.isFalse(v.Array.length.lt(['a','b'],2));
+            
+            assert.isTrue (v.Array.length.gt([],-1));
+            assert.isTrue (v.Array.length.gt(['a'],0));
+            assert.isTrue (v.Array.length.gt(['a','b'],1));
+            assert.isFalse(v.Array.length.gt(['a','b'],2));
+            
+            assert.isTrue (v.Array.length.lte([],0));
+            assert.isTrue (v.Array.length.lte(['a'],1));
+            assert.isTrue (v.Array.length.lte(['a','b'],2));
+            assert.isFalse(v.Array.length.lte(['a','b'],1));
+            
+            assert.isTrue (v.Array.length.gte([],0));
+            assert.isTrue (v.Array.length.gte(['a'],1));
+            assert.isTrue (v.Array.length.gte(['a','b'],2));
+            assert.isFalse(v.Array.length.gte(['a','b'],3));
+        });
     });
     
     suite('Objects',function() {
