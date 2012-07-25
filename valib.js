@@ -354,6 +354,13 @@
                 d.setDate(d.getDate() + n);
                 return d;
             },
+            isWithinDays : function(d,n_days,startFrom){
+                if (!startFrom) startFrom = this.today();
+                else startFrom = this.toStartOfTheDay(startFrom);
+                
+                return this.toStartOfTheDay(d) >= this.toStartOfTheDay(startFrom)
+                       && this.elapsedDays(startFrom,d) <= n_days;
+            },
             clone : function(d) {
                 return new Date(d.getTime());
             },

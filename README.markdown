@@ -692,6 +692,25 @@ v.Date.nDaysFromDate(2,new Date('2020/12/03'))
 => Date {Sat Dec 05 2020 00:00:00 GMT+0100 (CET)}
 ```
 
+**isWithinDays** v.Date.isWithinDays(d,n_days[,startFrom])
+
+Test if `d` is not farer than `n_days` days since `startFrom`.  
+If `startFrom` is missing the current date is used.  
+If `d` is an earlier date than `startFrom` the function will always return `false`
+
+```javascript
+// assuming today is 2020/01/06
+v.Date.isWithinDays(new Date('2020/01/07'),1)
+=> true
+
+// assuming today is 2020/01/06
+v.Date.isWithinDays(new Date('2020/01/07'),5)
+=> true
+
+v.Date.isWithinDays(new Date('2020/12/05 01:00:00'),4,new Date('2020/12/01 23:00:00'))
+=> true
+```
+
 **toStartOfTheDay** v.Date.toStartOfTheDay(d)
 
 Return a new date at the same year/month/day of `d` but with the time set at

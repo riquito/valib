@@ -1489,6 +1489,25 @@ suite('validators',function(){
                                        ));
         });
         
+        test('is within n days',function(){
+            
+            var sun1 = new Date('2012/07/08 10:14:30'),
+                mon1 = new Date('2012/07/09 04:01:42'),
+                sat1 = new Date('2012/07/14 23:59:59'),
+                sun2 = new Date('2012/07/15 15:23:02');
+            
+            assert.isTrue(v.Date.isWithinDays(sun1,0,sun1),'same date');
+            assert.isTrue(v.Date.isWithinDays(sun1,0,new Date(sun1.getTime()+1)),'same day, different hours');
+            assert.isTrue(v.Date.isWithinDays(mon1,1,sun1),'one day difference');
+            assert.isTrue(v.Date.isWithinDays(sat1,6,sun1),'some days difference');
+            assert.isTrue(v.Date.isWithinDays(sun2,7,sun1),'one week difference');
+            assert.isTrue(v.Date.isWithinDays(sun2,1,sat1),'less than 24 hours but different days');
+            
+            assert.isFalse(v.Date.isWithinDays(sun1,7,sun2),'day in the past');
+            
+            assert.isTrue(v.Date.isWithinDays(v.Date.tomorrow(),1),'using default starting date (today)');
+            assert.isTrue(v.Date.isWithinDays(v.Date.tomorrow(),5),'within a bigger number of days than the dates\' difference');
+        });
     });
     
     suite('Regular expressions',function() {
