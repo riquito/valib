@@ -259,7 +259,7 @@
         // Array Functions
         // --------------
         Array : {
-            'indexOf' : function(array,value,fromIndex) { // O(n)
+            indexOf : function(array,value,fromIndex) { // O(n)
                 if (array == null) return -1; // null and undefined
                 
                 if (array.length === 0) return -1;
@@ -277,10 +277,10 @@
                     
                 } else return array.indexOf(value,fromIndex);
             },
-            'has' : function(array,value,fromIndex) { // O(n)
+            has : function(array,value,fromIndex) { // O(n)
                 return -1 !== this.indexOf(array,value,fromIndex);
             },
-            'isEmpty' : function(array){
+            isEmpty : function(array){
                 if (array == null) return true;
                 return array.length === 0;
             }
@@ -288,17 +288,17 @@
         // Object Functions
         // --------------
         Object : {
-            'hasKey' : function(object,key){
+            hasKey : function(object,key){
                 if (object == null) return false;
                 return Object.prototype.hasOwnProperty.call(object,key);
             },
-            'hasValue' : function(object,value){
+            hasValue : function(object,value){
                 for (var key in object) {
                     if (object.hasOwnProperty(key) && object[key] === value) return true;
                 }
                 return false;
             },
-            'isEmpty' : function(object){
+            isEmpty : function(object){
                 if (object == null) return true;
                 for (var key in object) if (this.hasKey(object,key)) return false;
                 return true;
