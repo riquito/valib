@@ -1020,6 +1020,21 @@ suite('validators',function(){
             assert.isTrue(v.Object.isEmpty(new Cat()));
             assert.isFalse(v.Object.isEmpty(new Mammal()));
         });
+        
+        test('count keys',function(){
+            assert.equal(0, v.Object.countKeys({}));
+            assert.equal(1, v.Object.countKeys({'a':1}));
+            assert.equal(2, v.Object.countKeys({'a':1,'b':2}));
+            
+            // countKeys must ignore prototype inheritance
+            function Cat(){ this.name = 'tom'; }
+            function Mammal(){ this.weight = 10; }
+            
+            Cat.prototype = new Mammal();
+            
+            assert.equal(1,v.Object.countKeys(new Cat()));
+            assert.equal(1,v.Object.countKeys(new Mammal()));
+        });
     });
     
     suite('Function',function() {

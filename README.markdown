@@ -564,6 +564,17 @@ v.Object.isEmpty({'x':1})
 => false
 ```
 
+**countKeys** v.Object.countKeys(object)
+
+Return the number of properties in `object` (skipping inherited properties)
+
+```javascript
+v.Object.countKeys({})
+=> 0
+
+v.Object.countKeys({'x':10,'y':5})
+=> 2
+```
 
 ## Date Functions ##
 

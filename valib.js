@@ -316,6 +316,13 @@
                 if (object == null) return true;
                 for (var key in object) if (this.hasKey(object,key)) return false;
                 return true;
+            },
+            countKeys: function(object){
+                var k = 0;
+                for (var key in object) {
+                    if (object.hasOwnProperty(key)) k++;
+                }
+                return k;
             }
         },
         // Date Functions
