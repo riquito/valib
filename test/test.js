@@ -1,14 +1,24 @@
 "use strict";
 
+var v = null;
+var root = {};
+
+// when testing with nodejs use require(), else use the globally loaded scripts
 if (typeof window === 'undefined') {
-    var chai = require('chai');
-    var valib = require('../valib.js');
-} 
+    root.chai = require('chai');
+    /*
+     * var valib = require('../valib.js'); // can't use it, IE8 obliterate the var
+     *                                     //even if the block isn't executed
+     */
+    v = require('../valib.js'); 
+} else {
+    root.chai = chai;
+    v = valib;
+}
 
-chai.Assertion.includeStack = false; // show backtrace on test error
+root.chai.Assertion.includeStack = false; // show backtrace on test error
 
-var assert = chai.assert;
-var v = valib;
+var assert = root.chai.assert;
 
 
 suite('validators',function(){
