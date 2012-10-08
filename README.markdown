@@ -578,12 +578,13 @@ v.Object.countKeys({'x':10,'y':5})
 
 ## Date Functions ##
 
-Date functions have to be used with care, because dates are complicated.
-If a function accept more than a date, make sure that they are in the same
-timezone.
-If a function will had to use the current time to detect something, it will
-use the current local time (e.g. isToday(date) will compare the current LOCAL
-datetime to the date provided).
+Dates are complicated and these functions have to be used with care.
+If a function accept multiple dates they must be in the same timezone.
+You are also limited to the browser's default timezone, so do not use dates that
+have been created/modified elsewhere. This is a big known limitation, you
+can't set a timezone: if a function must use the current time to detect 
+something, it will use the current local time (e.g. isToday(date) will compare 
+the current LOCAL datetime to the date provided).
 
 **isToday** v.Date.isToday(d)
 
