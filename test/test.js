@@ -1350,11 +1350,11 @@ suite('validators',function(){
         test('to start of the day',function(){
             
             var someDay = new Date(
-                                  new Date('2020/01/02 10:14:30 GMT+0100').getTime()
+                                  new Date('2020/01/02 10:14:30').getTime()
                                   + 123 // add some millis not be on a split second
                                  );
             
-            assert.equal(new Date('2020/01/02 00:00:00 GMT+0100').getTime(),
+            assert.equal(new Date('2020/01/02 00:00:00').getTime(),
                         v.Date.toStartOfTheDay(someDay).getTime()
                         );
         });
@@ -1429,9 +1429,9 @@ suite('validators',function(){
         });
         
         test('is the next day',function(){
-            var a = new Date('2020/01/01 10:14:30 GMT+0100'),
-                b = new Date('2020/01/02 10:14:30 GMT+0100'),
-                c = new Date('2020/01/03 10:14:30 GMT+0100');
+            var a = new Date('2020/01/01 10:14:30'),
+                b = new Date('2020/01/02 10:14:30'),
+                c = new Date('2020/01/03 10:14:30');
             
             assert.isTrue(v.Date.isTheNextDay(b,c));
             
@@ -1439,9 +1439,9 @@ suite('validators',function(){
         });
         
         test('is the previous day',function(){
-            var a = new Date('2020/01/01 10:14:30 GMT+0100'),
-                b = new Date('2020/01/02 10:14:30 GMT+0100'),
-                c = new Date('2020/01/03 10:14:30 GMT+0100');
+            var a = new Date('2020/01/01 10:14:30'),
+                b = new Date('2020/01/02 10:14:30'),
+                c = new Date('2020/01/03 10:14:30');
             
             assert.isTrue(v.Date.isThePreviousDay(b,a));
             
@@ -1449,7 +1449,7 @@ suite('validators',function(){
         });
         
         test('clone',function(){
-            var orig = new Date('2020/01/01 10:14:30 GMT+0100'),
+            var orig = new Date('2020/01/01 10:14:30'),
                 cloned = v.Date.clone(orig);
             
             assert.isTrue(orig !== cloned && orig.getTime() === cloned.getTime());
@@ -1457,10 +1457,10 @@ suite('validators',function(){
         
         test('is equal',function(){
             
-            var dateStr = '2020/01/01 10:14:30 GMT+0100',
+            var dateStr = '2020/01/01 10:14:30',
                 a = new Date(dateStr),
                 b = new Date(dateStr),
-                c = new Date('2030/08/03 02:11:29 GMT+0100');
+                c = new Date('2030/08/03 02:11:29');
             
             assert.isTrue(v.Date.isEqual(a,b));
             
@@ -1470,9 +1470,9 @@ suite('validators',function(){
         test('elapsed days',function(){
             
             // NOTE: 2012 is a leap year
-            var a = new Date('2012/02/27 10:14:30 GMT+0100'),
-                b = new Date('2012/03/01 23:59:59 GMT+0100'),
-                c = new Date('2012/03/02 00:00:00 GMT+0100');
+            var a = new Date('2012/02/27 10:14:30'),
+                b = new Date('2012/03/01 23:59:59'),
+                c = new Date('2012/03/02 00:00:00');
             
             assert.equal(0,v.Date.elapsedDays(a,a));
             assert.equal(3,v.Date.elapsedDays(a,b));
