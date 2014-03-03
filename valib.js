@@ -15,11 +15,12 @@
  * limitations under the License.
  */
 
-"use strict";
 
 // Apply the returnExports.js UMD pattern  
 // See [https://github.com/umdjs/umd](https://github.com/umdjs/umd)
 (function (root, factory) {
+    "use strict";
+
     if (typeof exports === 'object') {
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
@@ -33,6 +34,7 @@
         root.valib = factory();
     }
 }(this, function (/*dependencies*/) {
+    "use strict";
     
     // Detect a variable's type  
     // (Refactoring of code found in jQuery 1.7.1)
