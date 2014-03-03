@@ -119,10 +119,10 @@
         // --------------
         Number: {
             isInteger : function(n){
-              return n===+n && n===(n|0);
+              return n === +n && n === (n|0);
             },
             isFloat: function(n) {
-              return n===+n && n!==(n|0);
+              return n === +n && n !== (n|0);
             },
             isInfinity: function(n) {
                 return n === Infinity || n === -Infinity;
@@ -275,7 +275,7 @@
                 
                 if (!Array.prototype.indexOf) {
                     if (!fromIndex) fromIndex = 0;
-                    if (fromIndex<0) fromIndex = array.length - 1;
+                    if (fromIndex < 0) fromIndex = array.length - 1;
                     
                     for (var i=fromIndex,il=array.length;i<il;i++) {
                         // check if `i` is inside `array` to differentiate
