@@ -46,7 +46,7 @@
         
         for (var i=0,il=classes.length;i<il;i++) {
           class2type[ "[object " + classes[i] + "]" ] = classes[i].toLowerCase();
-        };
+        }
         
         return function(value){
             return value == null ? // match null and undefined
@@ -258,11 +258,11 @@
             },
             trim : trim,
             length: {
-                eq  : function(str,n) { return str.length === n},
-                gt  : function(str,n) { return str.length >   n},
-                gte : function(str,n) { return str.length >=  n},
-                lt  : function(str,n) { return str.length <   n},
-                lte : function(str,n) { return str.length <=  n}
+                eq  : function(str,n) { return str.length === n; },
+                gt  : function(str,n) { return str.length >   n; },
+                gte : function(str,n) { return str.length >=  n; },
+                lt  : function(str,n) { return str.length <   n; },
+                lte : function(str,n) { return str.length <=  n; }
             }
         },
         // Array Functions
@@ -294,11 +294,11 @@
                 return array.length === 0;
             },
             length: {
-                eq  : function(array,n) { return array.length === n},
-                gt  : function(array,n) { return array.length >   n},
-                gte : function(array,n) { return array.length >=  n},
-                lt  : function(array,n) { return array.length <   n},
-                lte : function(array,n) { return array.length <=  n}
+                eq  : function(array,n) { return array.length === n; },
+                gt  : function(array,n) { return array.length >   n; },
+                gte : function(array,n) { return array.length >=  n; },
+                lt  : function(array,n) { return array.length <   n; },
+                lte : function(array,n) { return array.length <=  n; }
             }
         },
         // Object Functions
