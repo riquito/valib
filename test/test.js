@@ -1436,6 +1436,14 @@ suite('validators',function(){
             assert.isTrue(v.Date.isTheNextDay(b,c));
             
             assert.isFalse(v.Date.isTheNextDay(b,a));
+
+            // If tested with CET locale, the following 
+            // dates have 48h 30m of difference
+            // (daylight saving)
+            var d = new Date('2013/10/26 00:00:00'),
+                e = new Date('2013/10/27 23:30:00');
+            
+            assert.isTrue(v.Date.isTheNextDay(d, e));
         });
         
         test('is the previous day',function(){
@@ -1446,6 +1454,14 @@ suite('validators',function(){
             assert.isTrue(v.Date.isThePreviousDay(b,a));
             
             assert.isFalse(v.Date.isThePreviousDay(b,c));
+            
+            // If tested with CET locale, the following 
+            // dates have 48h 30m of difference
+            // (daylight saving)
+            var d = new Date('2013/10/26 00:00:00'),
+                e = new Date('2013/10/27 23:30:00');
+            
+            assert.isTrue(v.Date.isThePreviousDay(e, d));
         });
         
         test('clone',function(){

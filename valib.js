@@ -346,12 +346,12 @@
                        && d.getDate() === yesterday.getDate();
             },
             isTheNextDay : function(d, future) {
-                return future.getTime() > d.getTime() &&
-                      (future.getTime() - d.getTime() <= 24 * 60 * 60 * 1000);
+                return    this.nDaysFromDate(1, this.toStartOfTheDay(d)).getTime()
+                       == this.toStartOfTheDay(future).getTime();
             },
             isThePreviousDay : function(d, past) {
-                return d.getTime() > past.getTime() &&
-                      (d.getTime() - past.getTime() <= 24 * 60 * 60 * 1000);
+                return    this.nDaysFromDate(-1, this.toStartOfTheDay(d)).getTime()
+                       == this.toStartOfTheDay(past).getTime();
             },
             elapsedDays : function(d1, d2) { // the number of calendar days passed (not > 24h)
                 return Math.abs(this.toStartOfTheDay(d1).getTime() 
