@@ -38,17 +38,17 @@
     
     // Detect a variable's type.
     // (Refactoring of code found in jQuery 1.7.1)
-    var getType = (function(){
+    var getType = (function() {
         
         var classes = ["Boolean","Number","String","Function","Array",
                        "Date","RegExp","Object"],
             class2type = {};
         
-        for (var i=0,il=classes.length;i<il;i++) {
-          class2type[ "[object " + classes[i] + "]" ] = classes[i].toLowerCase();
+        for (var i=0,il=classes.length; i<il; i++) {
+            class2type[ "[object " + classes[i] + "]" ] = classes[i].toLowerCase();
         }
         
-        return function(value){
+        return function(value) {
             return value == null ? // match null and undefined
                    String( value ) :
                    class2type[ Object.prototype.toString.call(value) ] || "object";
@@ -118,16 +118,16 @@
         // Number Functions
         // --------------
         Number: {
-            isInteger : function(n){
-              return n === +n && n === (n|0);
+            isInteger : function(n) {
+                return n === +n && n === (n|0);
             },
             isFloat: function(n) {
-              return n === +n && n !== (n|0);
+                return n === +n && n !== (n|0);
             },
             isInfinity: function(n) {
                 return n === Infinity || n === -Infinity;
             },
-            isZero : function(n){
+            isZero : function(n) {
                 return n === 0;
             },
             inRange : function(n,min,max,opts) {
@@ -195,7 +195,7 @@
                 else return parseFloat(str);
                 
             },
-            isUrl : (function(){ // only http(s)/ftp urls, requires protocol
+            isUrl : (function() { // only http(s)/ftp urls, requires protocol
                 // Javascript version of the regexp found at
                 // http://stackoverflow.com/questions/161738
                 var reg = new RegExp(
@@ -215,19 +215,19 @@
                   "$"
                 ,"i");
                 
-                return function(str){
-                  return reg.test(str);
+                return function(str) {
+                    return reg.test(str);
                 };
                 
             })(),
-            isMD5 : function(str){
+            isMD5 : function(str) {
                 return /^[0-9a-f]{32}$/i.test(str);
             },
-            isSHA1 : function(str){
+            isSHA1 : function(str) {
                 return /^[0-9a-f]{40}$/i.test(str);
             },
             // Check if it is similar to an e-mail (no hope to comply with the rfc and the mess that's the real world).
-            isEmailLike : function(str){
+            isEmailLike : function(str) {
                 // something@something with no spaces, one and only one @
                 return /^[^\s@]+@[^\s@]{3,}$/.test(str);
             },
@@ -237,38 +237,38 @@
             *
             * If the option {trim:true} is passed then trailing whitespaces will be ignored on `str`.
             */
-            match: function(str,regOrString,opts){
+            match: function(str, regOrString, opts) {
                 opts = opts || {trim:false};
                 
                 if (opts.trim) str = trim(str);
                 
                 if (valib.Type.isRegExp(regOrString)) {
-                  return regOrString.test(str);
+                    return regOrString.test(str);
                 }
                 else return regOrString === str;
             },
-            startsWith: function(str,prefix){
+            startsWith: function(str, prefix) {
                 return str.length >= prefix.length && str.substring(0, prefix.length) === prefix;
             },
-            endsWith: function(str,suffix){
+            endsWith: function(str, suffix) {
                 return str.length >= suffix.length && str.substring(str.length - suffix.length) === suffix;
             },
-            isEmpty : function(str){
+            isEmpty : function(str) {
                 return !str;
             },
             trim : trim,
             length: {
-                eq  : function(str,n) { return str.length === n; },
-                gt  : function(str,n) { return str.length >   n; },
-                gte : function(str,n) { return str.length >=  n; },
-                lt  : function(str,n) { return str.length <   n; },
-                lte : function(str,n) { return str.length <=  n; }
+                eq  : function(str, n) { return str.length === n; },
+                gt  : function(str, n) { return str.length >   n; },
+                gte : function(str, n) { return str.length >=  n; },
+                lt  : function(str, n) { return str.length <   n; },
+                lte : function(str, n) { return str.length <=  n; }
             }
         },
         // Array Functions
         // --------------
         Array : {
-            indexOf : function(array,value,fromIndex) { // O(n)
+            indexOf : function(array, value, fromIndex) { // O(n)
                 if (array == null) return -1; // null and undefined
                 
                 if (array.length === 0) return -1;
@@ -277,49 +277,49 @@
                     if (!fromIndex) fromIndex = 0;
                     if (fromIndex < 0) fromIndex = array.length - 1;
                     
-                    for (var i=fromIndex,il=array.length;i<il;i++) {
+                    for (var i=fromIndex,il=array.length; i<il; i++) {
                         // Check if `i` is inside `array` to differentiate
                         // between deleted items and keys set to undefined.
                         if (i in array && array[i] === value) return i;
                     }
                     return -1;
                     
-                } else return array.indexOf(value,fromIndex);
+                } else return array.indexOf(value, fromIndex);
             },
-            has : function(array,value,fromIndex) { // O(n)
-                return -1 !== this.indexOf(array,value,fromIndex);
+            has : function(array, value, fromIndex) { // O(n)
+                return -1 !== this.indexOf(array, value, fromIndex);
             },
-            isEmpty : function(array){
+            isEmpty : function(array) {
                 if (array == null) return true;
                 return array.length === 0;
             },
             length: {
-                eq  : function(array,n) { return array.length === n; },
-                gt  : function(array,n) { return array.length >   n; },
-                gte : function(array,n) { return array.length >=  n; },
-                lt  : function(array,n) { return array.length <   n; },
-                lte : function(array,n) { return array.length <=  n; }
+                eq  : function(array, n) { return array.length === n; },
+                gt  : function(array, n) { return array.length >   n; },
+                gte : function(array, n) { return array.length >=  n; },
+                lt  : function(array, n) { return array.length <   n; },
+                lte : function(array, n) { return array.length <=  n; }
             }
         },
         // Object Functions
         // --------------
         Object : {
-            hasKey : function(object,key){
+            hasKey : function(object, key) {
                 if (object == null) return false;
-                return Object.prototype.hasOwnProperty.call(object,key);
+                return Object.prototype.hasOwnProperty.call(object, key);
             },
-            hasValue : function(object,value){
+            hasValue : function(object, value) {
                 for (var key in object) {
                     if (object.hasOwnProperty(key) && object[key] === value) return true;
                 }
                 return false;
             },
-            isEmpty : function(object){
+            isEmpty : function(object) {
                 if (object == null) return true;
-                for (var key in object) if (this.hasKey(object,key)) return false;
+                for (var key in object) if (this.hasKey(object, key)) return false;
                 return true;
             },
-            countKeys: function(object){
+            countKeys: function(object) {
                 var k = 0;
                 for (var key in object) {
                     if (object.hasOwnProperty(key)) k++;
@@ -345,69 +345,69 @@
                        && d.getMonth() === yesterday.getMonth()
                        && d.getDate() === yesterday.getDate();
             },
-            isTheNextDay : function(d,future) {
+            isTheNextDay : function(d, future) {
                 return future.getTime() > d.getTime() &&
                       (future.getTime() - d.getTime() <= 24 * 60 * 60 * 1000);
             },
-            isThePreviousDay : function(d,past) {
+            isThePreviousDay : function(d, past) {
                 return d.getTime() > past.getTime() &&
                       (d.getTime() - past.getTime() <= 24 * 60 * 60 * 1000);
             },
-            elapsedDays : function(d1,d2) { // the number of calendar days passed (not > 24h)
+            elapsedDays : function(d1, d2) { // the number of calendar days passed (not > 24h)
                 return Math.abs(this.toStartOfTheDay(d1).getTime() 
                                 - 
                                 this.toStartOfTheDay(d2).getTime())
                        / (24 * 60 * 60 * 1000);
             },
             toStartOfTheDay : function(d) {
-                return new Date(d.getFullYear(),d.getMonth(),d.getDate());
+                return new Date(d.getFullYear(), d.getMonth(), d.getDate());
             },
             today : function() {
                 return this.toStartOfTheDay(new Date());
             },
-            tomorrow : function(){
+            tomorrow : function() {
                 return this.nDaysFromDate(1);
             },
             yesterday : function() {
                 return this.nDaysFromDate(-1);
             },
-            nDaysFromDate : function(n,d) {
+            nDaysFromDate : function(n, d) {
                 if (!d) d = this.today();
                 else d = this.clone(d);
                 d.setDate(d.getDate() + n);
                 return d;
             },
-            isWithinDays : function(d,n_days,startFrom){
+            isWithinDays : function(d, n_days, startFrom) {
                 if (!startFrom) startFrom = this.today();
                 else startFrom = this.toStartOfTheDay(startFrom);
                 
                 return this.toStartOfTheDay(d) >= this.toStartOfTheDay(startFrom)
-                       && this.elapsedDays(startFrom,d) <= n_days;
+                       && this.elapsedDays(startFrom, d) <= n_days;
             },
             clone : function(d) {
                 return new Date(d.getTime());
             },
-            isEqual : function(d1,d2) {
+            isEqual : function(d1, d2) {
                 return d1.getTime() === d2.getTime();
             },
             // Check if two dates are the same day of the same year
             // (the dates must be in the same timezone).
-            isSameDay : function(d1,d2) {
-                return this.isEqual(this.toStartOfTheDay(d1),this.toStartOfTheDay(d2));
+            isSameDay : function(d1, d2) {
+                return this.isEqual(this.toStartOfTheDay(d1), this.toStartOfTheDay(d2));
             },
             // Check if two dates are in the same year/month
             // (the dates must be in the same timezone).
-            isSameMonth : function(d1,d2) {
+            isSameMonth : function(d1, d2) {
                 return d1.getFullYear() === d2.getFullYear()
                        && d1.getMonth() === d2.getMonth();
             },
             // Check if two dates are in the same week and the same year
             // (the dates must be in the same timezone).
-            isSameWeek : function(d1,d2,weekStartsAtSunday/*=true*/) {
+            isSameWeek : function(d1, d2, weekStartsAtSunday/*=true*/) {
                 if (d2 < d1) { var tmp = d1; d1 = d2; d2 = tmp; } // swap
                 if (weekStartsAtSunday !== false) weekStartsAtSunday = true;
                 
-                return this.isSameMonth(d1,d2)
+                return this.isSameMonth(d1, d2)
                        && Math.abs(d1.getDate() - d2.getDate()) < 7
                        && (
                             (!weekStartsAtSunday && d1.getDay() === 0 ? 7 : d1.getDay())
