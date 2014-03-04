@@ -1,367 +1,863 @@
-<!DOCTYPE html>  <html> <head>   <title>valib.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               valib.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/**</span>
-<span class="cm"> * Copyright 2012 Riccardo Attilio Galli &lt;riccardo@sideralis.org&gt;</span>
-<span class="cm"> * [http://www.sideralis.org]</span>
-<span class="cm"> * </span>
-<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="cm"> * you may not use this file except in compliance with the License.</span>
-<span class="cm"> * You may obtain a copy of the License at</span>
-<span class="cm"> * </span>
-<span class="cm"> *     http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="cm"> * </span>
-<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
-<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="cm"> * See the License for the specific language governing permissions and</span>
-<span class="cm"> * limitations under the License.</span>
-<span class="cm"> */</span>
+<!DOCTYPE html>
 
-<span class="s2">&quot;use strict&quot;</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>Apply the returnExports.js UMD pattern <br />
-See <a href="https://github.com/umdjs/umd">https://github.com/umdjs/umd</a></p>             </td>             <td class="code">               <div class="highlight"><pre><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">factory</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">exports</span> <span class="o">===</span> <span class="s1">&#39;object&#39;</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Node. Does not work with strict CommonJS, but
+<html>
+<head>
+  <title>valib.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>valib.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/**
+ * Copyright 2012 Riccardo Attilio Galli &lt;riccardo@sideralis.org&gt;
+ * [http://www.sideralis.org]
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Apply the returnExports.js UMD pattern<br>See <a href="https://github.com/umdjs/umd"><a href="https://github.com/umdjs/umd">https://github.com/umdjs/umd</a></a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(root, factory)</span> {</span>
+<span class="hljs-pi">    "use strict"</span>;
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> exports === <span class="hljs-string">'object'</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Node. Does not work with strict CommonJS, but
 only CommonJS-like enviroments that support module.exports,
-like Node.</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">factory</span><span class="p">();</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">define</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">define</span><span class="p">.</span><span class="nx">amd</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>AMD. Register as an anonymous module.</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nx">define</span><span class="p">(</span><span class="nx">factory</span><span class="p">);</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>Browser globals</p>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nx">root</span><span class="p">.</span><span class="nx">valib</span> <span class="o">=</span> <span class="nx">factory</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">}(</span><span class="k">this</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="cm">/*dependencies*/</span><span class="p">)</span> <span class="p">{</span>
-    </pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>Detect a variable's type <br />
-(Refactoring of code found in jQuery 1.7.1)</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">getType</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+like Node.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        module.exports = factory();
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> define === <span class="hljs-string">'function'</span> &amp;&amp; define.amd) {</pre></div></div>
+            
+        </li>
         
-        <span class="kd">var</span> <span class="nx">classes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Boolean&quot;</span><span class="p">,</span><span class="s2">&quot;Number&quot;</span><span class="p">,</span><span class="s2">&quot;String&quot;</span><span class="p">,</span><span class="s2">&quot;Function&quot;</span><span class="p">,</span><span class="s2">&quot;Array&quot;</span><span class="p">,</span>
-                       <span class="s2">&quot;Date&quot;</span><span class="p">,</span><span class="s2">&quot;RegExp&quot;</span><span class="p">,</span><span class="s2">&quot;Object&quot;</span><span class="p">],</span>
-            <span class="nx">class2type</span> <span class="o">=</span> <span class="p">{};</span>
         
-        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="nx">il</span><span class="o">=</span><span class="nx">classes</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">il</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nx">class2type</span><span class="p">[</span> <span class="s2">&quot;[object &quot;</span> <span class="o">+</span> <span class="nx">classes</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span> <span class="p">]</span> <span class="o">=</span> <span class="nx">classes</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">toLowerCase</span><span class="p">();</span>
-        <span class="p">};</span>
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>AMD. Register as an anonymous module.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        define(factory);
+    } <span class="hljs-keyword">else</span> {</pre></div></div>
+            
+        </li>
         
-        <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">){</span>
-            <span class="k">return</span> <span class="nx">value</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="c1">// match null and undefined</span>
-                   <span class="nb">String</span><span class="p">(</span> <span class="nx">value</span> <span class="p">)</span> <span class="o">:</span>
-                   <span class="nx">class2type</span><span class="p">[</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">]</span> <span class="o">||</span> <span class="s2">&quot;object&quot;</span><span class="p">;</span>
-        <span class="p">};</span>
         
-    <span class="p">})();</span>
-    </pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>Even if they have String.prototype.trim, browsers discord
-on the whitespace characters, so we use a custom trim</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">trim</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">str</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">;</span> <span class="c1">// null and undefined</span>
-        <span class="cm">/* modified version of trim12 from</span>
-<span class="cm">           http://blog.stevenlevithan.com/archives/faster-trim-javascript */</span>
-        <span class="nx">str</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^[\s\u200B\u0085]+/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
-        <span class="kd">var</span> <span class="nx">ws</span> <span class="o">=</span> <span class="sr">/[\s\u200B\u0085]/</span><span class="p">,</span>
-            <span class="nx">i</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-        <span class="k">while</span> <span class="p">(</span><span class="nx">ws</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="o">--</span><span class="nx">i</span><span class="p">)));</span>
-        <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-    <span class="p">};</span>
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Browser globals</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        root.valib = factory();
+    }
+}(<span class="hljs-keyword">this</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(<span class="hljs-comment">/*dependencies*/</span>)</span> {</span>
+<span class="hljs-pi">    "use strict"</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Detect a variable’s type.
+(Refactoring of code found in jQuery 1.7.1)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> getType = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+        
+        <span class="hljs-keyword">var</span> classes = [<span class="hljs-string">"Boolean"</span>,<span class="hljs-string">"Number"</span>,<span class="hljs-string">"String"</span>,<span class="hljs-string">"Function"</span>,<span class="hljs-string">"Array"</span>,
+                       <span class="hljs-string">"Date"</span>,<span class="hljs-string">"RegExp"</span>,<span class="hljs-string">"Object"</span>],
+            class2type = {};
+        
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>,il=classes.length; i&lt;il; i++) {
+            class2type[ <span class="hljs-string">"[object "</span> + classes[i] + <span class="hljs-string">"]"</span> ] = classes[i].toLowerCase();
+        }
+        
+        <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value)</span> {</span>
+            <span class="hljs-keyword">return</span> value == <span class="hljs-literal">null</span> ? <span class="hljs-comment">// match null and undefined</span>
+                   <span class="hljs-built_in">String</span>( value ) :
+                   class2type[ <span class="hljs-built_in">Object</span>.prototype.toString.call(value) ] || <span class="hljs-string">"object"</span>;
+        };
+        
+    })();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Even if they have String.prototype.trim, browsers discord
+on the whitespace characters, so we use a custom trim.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> trim = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str)</span> {</span>
+        <span class="hljs-keyword">if</span> (str == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">''</span>; <span class="hljs-comment">// null and undefined</span>
+        <span class="hljs-comment">/* modified version of trim12 from
+           http://blog.stevenlevithan.com/archives/faster-trim-javascript */</span>
+        str = str.replace(<span class="hljs-regexp">/^[\s\u200B\u0085]+/</span>, <span class="hljs-string">''</span>);
+        <span class="hljs-keyword">var</span> ws = <span class="hljs-regexp">/[\s\u200B\u0085]/</span>,
+            i = str.length;
+        <span class="hljs-keyword">while</span> (ws.test(str.charAt(--i)));
+        <span class="hljs-keyword">return</span> str.slice(<span class="hljs-number">0</span>, i + <span class="hljs-number">1</span>);
+    };
     
-    <span class="kd">var</span> <span class="nx">valib</span> <span class="o">=</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <h2>Type Functions</h2>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nx">Type</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">isNumber</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">getType</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;number&#39;</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">isString</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">getType</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;string&#39;</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">isBoolean</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">getType</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;boolean&#39;</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">isArray</span><span class="o">:</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span> <span class="o">||</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">getType</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;array&#39;</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">isObject</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// note: doesn&#39;t treat arrays as objects</span>
-                <span class="k">return</span> <span class="nx">getType</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;object&#39;</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">isFunction</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">getType</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">isUndefined</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">getType</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;undefined&#39;</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">isNull</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>not really a Javascript type, but certainly not an object
-(typeof null === 'object')</p>             </td>             <td class="code">               <div class="highlight"><pre>                <span class="k">return</span> <span class="nx">getType</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;null&#39;</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nb">isNaN</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>Test if <code>value</code> is NaN, this is not the same as calling
+    <span class="hljs-keyword">var</span> valib = {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <h2 id="type-functions">Type Functions</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        Type: {
+            isNumber : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value)</span> {</span>
+                <span class="hljs-keyword">return</span> !<span class="hljs-keyword">this</span>.isNaN(value) &amp;&amp; getType(value) === <span class="hljs-string">'number'</span>;
+            },
+            isString: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value)</span> {</span>
+                <span class="hljs-keyword">return</span> getType(value) === <span class="hljs-string">'string'</span>;
+            },
+            isBoolean: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value)</span> {</span>
+                <span class="hljs-keyword">return</span> getType(value) === <span class="hljs-string">'boolean'</span>;
+            },
+            isArray: <span class="hljs-built_in">Array</span>.isArray || <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value)</span> {</span>
+                <span class="hljs-keyword">return</span> getType(value) === <span class="hljs-string">'array'</span>;
+            },
+            isObject: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value)</span> {</span> <span class="hljs-comment">// note: doesn't treat arrays as objects</span>
+                <span class="hljs-keyword">return</span> getType(value) === <span class="hljs-string">'object'</span>;
+            },
+            isFunction: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value)</span> {</span>
+                <span class="hljs-keyword">return</span> getType(value) === <span class="hljs-string">'function'</span>;
+            },
+            isUndefined: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value)</span> {</span>
+                <span class="hljs-keyword">return</span> getType(value) === <span class="hljs-string">'undefined'</span>;
+            },
+            isNull: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value)</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>not really a Javascript type, but certainly not an object
+(typeof null === ‘object’)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="hljs-keyword">return</span> getType(value) === <span class="hljs-string">'null'</span>;
+            },
+            <span class="hljs-built_in">isNaN</span>: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value)</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Test if <code>value</code> is NaN, this is not the same as calling
 the standard isNaN() (which checks if a value is coercible
-to a number)</p>             </td>             <td class="code">               <div class="highlight"><pre>                </pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>not really a Javascript type, but certainly not a number
-(typeof NaN === 'number')</p>             </td>             <td class="code">               <div class="highlight"><pre>                <span class="k">return</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="s1">&#39;number&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span> <span class="o">!=</span> <span class="nx">value</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">isDate</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">getType</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;date&#39;</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">isRegExp</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">getType</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;regexp&#39;</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <h2>Number Functions</h2>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nb">Number</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">isInteger</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">){</span>
-              <span class="k">return</span> <span class="nx">n</span><span class="o">===+</span><span class="nx">n</span> <span class="o">&amp;&amp;</span> <span class="nx">n</span><span class="o">===</span><span class="p">(</span><span class="nx">n</span><span class="o">|</span><span class="mi">0</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="nx">isFloat</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
-              <span class="k">return</span> <span class="nx">n</span><span class="o">===+</span><span class="nx">n</span> <span class="o">&amp;&amp;</span> <span class="nx">n</span><span class="o">!==</span><span class="p">(</span><span class="nx">n</span><span class="o">|</span><span class="mi">0</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="nx">isInfinity</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">n</span> <span class="o">===</span> <span class="kc">Infinity</span> <span class="o">||</span> <span class="nx">n</span> <span class="o">===</span> <span class="o">-</span><span class="kc">Infinity</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">isZero</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">){</span>
-                <span class="k">return</span> <span class="nx">n</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">inRange</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span><span class="nx">min</span><span class="p">,</span><span class="nx">max</span><span class="p">,</span><span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">opts</span> <span class="o">=</span> <span class="nx">opts</span> <span class="o">||</span> <span class="p">{</span><span class="nx">l_exc</span> <span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">r_exc</span> <span class="o">:</span> <span class="kc">false</span><span class="p">};</span>
-                <span class="k">return</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">l_exc</span> <span class="o">?</span> <span class="nx">n</span> <span class="o">&gt;</span> <span class="nx">min</span> <span class="o">:</span> <span class="nx">n</span> <span class="o">&gt;=</span> <span class="nx">min</span><span class="p">)</span>
-                        <span class="o">&amp;&amp;</span>
-                       <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">r_exc</span> <span class="o">?</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="nx">max</span> <span class="o">:</span> <span class="nx">n</span> <span class="o">&lt;=</span> <span class="nx">max</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="nx">lt</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span><span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="nx">max</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">lte</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span><span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">n</span> <span class="o">&lt;=</span> <span class="nx">max</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">gt</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span><span class="nx">min</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">n</span> <span class="o">&gt;</span> <span class="nx">min</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">gte</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span><span class="nx">min</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">n</span> <span class="o">&gt;=</span> <span class="nx">min</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">isPositive</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">isNegative</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <h2>String Functions</h2>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nb">String</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">isNumeric</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span><span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">opts</span> <span class="o">=</span> <span class="nx">opts</span> <span class="o">||</span> <span class="p">{};</span></pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <p>This way the user can just pass {simple:true}</p>             </td>             <td class="code">               <div class="highlight"><pre>                <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">canBeSigned</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">canBeSigned</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">simple</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">simple</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+to a number)</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Not really a Javascript type, but certainly not a number
+(typeof NaN === ‘number’).</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="hljs-keyword">return</span> (<span class="hljs-keyword">typeof</span> value === <span class="hljs-string">'number'</span>) &amp;&amp; value != value;
+            },
+            isDate: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value)</span> {</span>
+                <span class="hljs-keyword">return</span> getType(value) === <span class="hljs-string">'date'</span>;
+            },
+            isRegExp: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value)</span> {</span>
+                <span class="hljs-keyword">return</span> getType(value) === <span class="hljs-string">'regexp'</span>;
+            }
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <h2 id="number-functions">Number Functions</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-built_in">Number</span>: {
+            isInteger : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(n)</span> {</span>
+                <span class="hljs-keyword">return</span> n === +n &amp;&amp; n === (n|<span class="hljs-number">0</span>);
+            },
+            isFloat: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(n)</span> {</span>
+                <span class="hljs-keyword">return</span> n === +n &amp;&amp; n !== (n|<span class="hljs-number">0</span>);
+            },
+            isInfinity: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(n)</span> {</span>
+                <span class="hljs-keyword">return</span> n === <span class="hljs-literal">Infinity</span> || n === -<span class="hljs-literal">Infinity</span>;
+            },
+            isZero : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(n)</span> {</span>
+                <span class="hljs-keyword">return</span> n === <span class="hljs-number">0</span>;
+            },
+            inRange : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(n,min,max,opts)</span> {</span>
+                opts = opts || {l_exc : <span class="hljs-literal">false</span>, r_exc : <span class="hljs-literal">false</span>};
+                <span class="hljs-keyword">return</span> (opts.l_exc ? n &gt; min : n &gt;= min)
+                        &amp;&amp;
+                       (opts.r_exc ? n &lt; max : n &lt;= max);
+            },
+            lt : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(n,max)</span> {</span>
+                <span class="hljs-keyword">return</span> n &lt; max;
+            },
+            lte : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(n,max)</span> {</span>
+                <span class="hljs-keyword">return</span> n &lt;= max;
+            },
+            gt : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(n,min)</span> {</span>
+                <span class="hljs-keyword">return</span> n &gt; min;
+            },
+            gte : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(n,min)</span> {</span>
+                <span class="hljs-keyword">return</span> n &gt;= min;
+            },
+            isPositive: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(n)</span> {</span>
+                <span class="hljs-keyword">return</span> n &gt; <span class="hljs-number">0</span>;
+            },
+            isNegative: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(n)</span> {</span>
+                <span class="hljs-keyword">return</span> n &lt; <span class="hljs-number">0</span>;
+            }
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <h2 id="string-functions">String Functions</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-built_in">String</span>: {
+            isNumeric : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str,opts)</span> {</span>
+                opts = opts || {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>This way the user can just pass {simple:true}</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="hljs-keyword">if</span> (opts.canBeSigned === <span class="hljs-literal">undefined</span>) opts.canBeSigned = <span class="hljs-literal">true</span>;
+                <span class="hljs-keyword">if</span> (opts.simple === <span class="hljs-literal">undefined</span>) opts.simple = <span class="hljs-literal">false</span>;
                 
-                <span class="nx">str</span> <span class="o">=</span> <span class="nx">trim</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
-                </pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <p>Below isFinite() may choke with signed hexadecimals (Firefox
+                str = trim(str);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Below isFinite() may choke with signed hexadecimals (Firefox
 return NaN as the standard requires, others parse them, so
-we remove the sign alltogether)</p>             </td>             <td class="code">               <div class="highlight"><pre>                
-                <span class="kd">var</span> <span class="nx">sign</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="nx">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="s1">&#39;-&#39;</span> <span class="o">||</span> <span class="nx">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="s1">&#39;+&#39;</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">sign</span> <span class="o">=</span> <span class="nx">str</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-                    <span class="nx">str</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-                <span class="p">}</span>
-                </pre></div>             </td>           </tr>                               <tr id="section-16">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-16">&#182;</a>               </div>               <p>see http://stackoverflow.com/questions/18082</p>             </td>             <td class="code">               <div class="highlight"><pre>                <span class="kd">var</span> <span class="nx">isNumeric</span> <span class="o">=</span> <span class="o">!</span><span class="nb">isNaN</span><span class="p">(</span><span class="nb">parseFloat</span><span class="p">(</span><span class="nx">str</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="nb">isFinite</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+we remove the sign alltogether).</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                
+                <span class="hljs-keyword">var</span> sign = <span class="hljs-literal">null</span>;
+                <span class="hljs-keyword">if</span> (str.length &amp;&amp; str[<span class="hljs-number">0</span>] === <span class="hljs-string">'-'</span> || str[<span class="hljs-number">0</span>] === <span class="hljs-string">'+'</span>) {
+                    sign = str[<span class="hljs-number">0</span>];
+                    str = str.slice(<span class="hljs-number">1</span>);
+                }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>see <a href="http://stackoverflow.com/questions/18082">http://stackoverflow.com/questions/18082</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="hljs-keyword">var</span> isNumeric = !<span class="hljs-built_in">isNaN</span>(<span class="hljs-built_in">parseFloat</span>(str)) &amp;&amp; <span class="hljs-built_in">isFinite</span>(str);
                 
-                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isNumeric</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+                <span class="hljs-keyword">if</span> (!isNumeric) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
                 
-                <span class="k">if</span> <span class="p">(</span><span class="nx">sign</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">opts</span><span class="p">.</span><span class="nx">canBeSigned</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+                <span class="hljs-keyword">if</span> (sign &amp;&amp; !opts.canBeSigned) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
                 
-                <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">simple</span><span class="p">)</span> <span class="k">return</span> <span class="sr">/^(0|[1-9][0-9]*)(\.[0-9]+)?$/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+                <span class="hljs-keyword">if</span> (opts.simple) <span class="hljs-keyword">return</span> <span class="hljs-regexp">/^(0|[1-9][0-9]*)(\.[0-9]+)?$/</span>.test(str);
                 
-                <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">toNumber</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">isNumeric</span><span class="p">(</span><span class="nx">str</span><span class="p">))</span> <span class="k">return</span> <span class="kc">NaN</span><span class="p">;</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            },
+            toNumber : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str)</span> {</span>
+                <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.isNumeric(str)) <span class="hljs-keyword">return</span> <span class="hljs-literal">NaN</span>;
                 
-                <span class="k">if</span> <span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">().</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span><span class="mi">16</span><span class="p">);</span> <span class="c1">// hex number</span>
-                <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="sr">/^\s*[+-]?0[1-9]/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">str</span><span class="p">))</span> <span class="k">return</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span><span class="mi">8</span><span class="p">);</span> <span class="c1">// oct number</span>
-                <span class="k">else</span> <span class="k">return</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+                <span class="hljs-keyword">if</span> (str.toUpperCase().indexOf(<span class="hljs-string">'X'</span>) !== -<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">parseInt</span>(str,<span class="hljs-number">16</span>); <span class="hljs-comment">// hex number</span>
+                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-regexp">/^\s*[+-]?0[1-9]/</span>.test(str)) <span class="hljs-keyword">return</span> <span class="hljs-built_in">parseInt</span>(str,<span class="hljs-number">8</span>); <span class="hljs-comment">// oct number</span>
+                <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-built_in">parseFloat</span>(str);
                 
-            <span class="p">},</span>
-            <span class="nx">isUrl</span> <span class="o">:</span> <span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="c1">// only http(s)/ftp urls, requires protocol</span></pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <p>javascript version of the regexp found at <br />
-http://stackoverflow.com/questions/161738</p>             </td>             <td class="code">               <div class="highlight"><pre>                <span class="kd">var</span> <span class="nx">reg</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span>
-                  <span class="s2">&quot;^(https?|ftp)://&quot;</span> <span class="o">+</span>                                             <span class="c1">// protocol</span>
-                  <span class="s2">&quot;(([a-z0-9$_\\.\\+!\\*\\&#39;\\(\\),;\\?&amp;=-]|%[0-9a-f]{2})+&quot;</span> <span class="o">+</span>       <span class="c1">// username</span>
-                  <span class="s2">&quot;(:([a-z0-9$_\\.\\+!\\*\\&#39;\\(\\),;\\?&amp;=-]|%[0-9a-f]{2})+)?&quot;</span> <span class="o">+</span>    <span class="c1">// password</span>
-                  <span class="s2">&quot;@)?&quot;</span> <span class="o">+</span>                                                          <span class="c1">// auth requires @</span>
-                  <span class="s2">&quot;((([a-z0-9][a-z0-9-]*[a-z0-9]\\.)*&quot;</span> <span class="o">+</span>                           <span class="c1">// domain segments AND</span>
-                  <span class="s2">&quot;[a-z][a-z0-9-]*[a-z0-9]&quot;</span> <span class="o">+</span>                                      <span class="c1">// top level domain  OR</span>
-                  <span class="s2">&quot;|((\\d|[1-9]\\d|1\\d{2}|2[0-4][0-9]|25[0-5])\\.){3}&quot;</span> <span class="o">+</span>
-                  <span class="s2">&quot;(\\d|[1-9]\\d|1\\d{2}|2[0-4][0-9]|25[0-5])&quot;</span> <span class="o">+</span>                   <span class="c1">// IP address</span>
-                  <span class="s2">&quot;)(:\\d+)?&quot;</span> <span class="o">+</span>                                                    <span class="c1">// port</span>
-                  <span class="s2">&quot;)(((/+([a-z0-9$_\\.\\+!\\*\\&#39;\\(\\),;:@&amp;=-]|%[0-9a-f]{2})*)*&quot;</span> <span class="o">+</span> <span class="c1">// path</span>
-                  <span class="s2">&quot;(\\?([a-z0-9$_\\.\\+!\\*\\&#39;\\(\\),;:@&amp;=-]|%[0-9a-f]{2})*)&quot;</span> <span class="o">+</span>    <span class="c1">// query string</span>
-                  <span class="s2">&quot;?)?)?&quot;</span> <span class="o">+</span>                                                        <span class="c1">// path and query string optional</span>
-                  <span class="s2">&quot;(#([a-z0-9$_\\.\\+!\\*\\&#39;\\(\\),;:@&amp;=-]|%[0-9a-f]{2})*)?&quot;</span> <span class="o">+</span>     <span class="c1">// fragment</span>
-                  <span class="s2">&quot;$&quot;</span>
-                <span class="p">,</span><span class="s2">&quot;i&quot;</span><span class="p">);</span>
+            },
+            isUrl : (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span> <span class="hljs-comment">// only http(s)/ftp urls, requires protocol</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>Javascript version of the regexp found at
+<a href="http://stackoverflow.com/questions/161738">http://stackoverflow.com/questions/161738</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="hljs-keyword">var</span> reg = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(
+                  <span class="hljs-string">"^(https?|ftp)://"</span> +                                             <span class="hljs-comment">// protocol</span>
+                  <span class="hljs-string">"(([a-z0-9$_\\.\\+!\\*\\'\\(\\),;\\?&amp;=-]|%[0-9a-f]{2})+"</span> +       <span class="hljs-comment">// username</span>
+                  <span class="hljs-string">"(:([a-z0-9$_\\.\\+!\\*\\'\\(\\),;\\?&amp;=-]|%[0-9a-f]{2})+)?"</span> +    <span class="hljs-comment">// password</span>
+                  <span class="hljs-string">"@)?"</span> +                                                          <span class="hljs-comment">// auth requires @</span>
+                  <span class="hljs-string">"((([a-z0-9][a-z0-9-]*[a-z0-9]\\.)*"</span> +                           <span class="hljs-comment">// domain segments AND</span>
+                  <span class="hljs-string">"[a-z][a-z0-9-]*[a-z0-9]"</span> +                                      <span class="hljs-comment">// top level domain  OR</span>
+                  <span class="hljs-string">"|((\\d|[1-9]\\d|1\\d{2}|2[0-4][0-9]|25[0-5])\\.){3}"</span> +
+                  <span class="hljs-string">"(\\d|[1-9]\\d|1\\d{2}|2[0-4][0-9]|25[0-5])"</span> +                   <span class="hljs-comment">// IP address</span>
+                  <span class="hljs-string">")(:\\d+)?"</span> +                                                    <span class="hljs-comment">// port</span>
+                  <span class="hljs-string">")(((/+([a-z0-9$_\\.\\+!\\*\\'\\(\\),;:@&amp;=-]|%[0-9a-f]{2})*)*"</span> + <span class="hljs-comment">// path</span>
+                  <span class="hljs-string">"(\\?([a-z0-9$_\\.\\+!\\*\\'\\(\\),;:@&amp;=-]|%[0-9a-f]{2})*)"</span> +    <span class="hljs-comment">// query string</span>
+                  <span class="hljs-string">"?)?)?"</span> +                                                        <span class="hljs-comment">// path and query string optional</span>
+                  <span class="hljs-string">"(#([a-z0-9$_\\.\\+!\\*\\'\\(\\),;:@&amp;=-]|%[0-9a-f]{2})*)?"</span> +     <span class="hljs-comment">// fragment</span>
+                  <span class="hljs-string">"$"</span>
+                ,<span class="hljs-string">"i"</span>);
                 
-                <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">){</span>
-                  <span class="k">return</span> <span class="nx">reg</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
-                <span class="p">};</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str)</span> {</span>
+                    <span class="hljs-keyword">return</span> reg.test(str);
+                };
                 
-            <span class="p">})(),</span>
-            <span class="nx">isMD5</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">){</span>
-                <span class="k">return</span> <span class="sr">/^[0-9a-f]{32}$/i</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="nx">isSHA1</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">){</span>
-                <span class="k">return</span> <span class="sr">/^[0-9a-f]{40}$/i</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
-            <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-18">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-18">&#182;</a>               </div>               <p>check if it is similar to an e-mail (no hope to comply with the rfc and the mess that's the real world)</p>             </td>             <td class="code">               <div class="highlight"><pre>            <span class="nx">isEmailLike</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">){</span></pre></div>             </td>           </tr>                               <tr id="section-19">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-19">&#182;</a>               </div>               <p>something@something with no spaces, one and only one @</p>             </td>             <td class="code">               <div class="highlight"><pre>                <span class="k">return</span> <span class="sr">/^[^\s@]+@[^\s@]{3,}$/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="cm">/**</span>
-<span class="cm">            * If regOrString is a regular espression check if value match it</span>
-<span class="cm">            * If regOrString is a string check if it&#39;s equal to value</span>
-<span class="cm">            *</span>
-<span class="cm">            * If the option {trim:true} is passed then trailing whitespaces will be ignored on &#39;value&#39;</span>
-<span class="cm">            */</span>
-            <span class="nx">match</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span><span class="nx">regOrString</span><span class="p">,</span><span class="nx">opts</span><span class="p">){</span>
-                <span class="nx">opts</span> <span class="o">=</span> <span class="nx">opts</span> <span class="o">||</span> <span class="p">{</span><span class="nx">trim</span><span class="o">:</span><span class="kc">false</span><span class="p">};</span>
+            })(),
+            isMD5 : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str)</span> {</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-regexp">/^[0-9a-f]{32}$/i</span>.test(str);
+            },
+            isSHA1 : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str)</span> {</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-regexp">/^[0-9a-f]{40}$/i</span>.test(str);
+            },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>Check if it is similar to an e-mail (no hope to comply with the rfc and the mess that’s the real world).</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            isEmailLike : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str)</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>something@something with no spaces, one and only one @</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="hljs-keyword">return</span> <span class="hljs-regexp">/^[^\s@]+@[^\s@]{3,}$/</span>.test(str);
+            },
+            <span class="hljs-comment">/**
+            * If regOrString is a regular espression check if `str` matches it.
+            * If regOrString is a string check if it's equal to `str`.
+            *
+            * If the option {trim:true} is passed then trailing whitespaces will be ignored on `str`.
+            */</span>
+            match: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str, regOrString, opts)</span> {</span>
+                opts = opts || {trim:<span class="hljs-literal">false</span>};
                 
-                <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">trim</span><span class="p">)</span> <span class="nx">str</span> <span class="o">=</span> <span class="nx">trim</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+                <span class="hljs-keyword">if</span> (opts.trim) str = trim(str);
                 
-                <span class="k">if</span> <span class="p">(</span><span class="nx">valib</span><span class="p">.</span><span class="nx">Type</span><span class="p">.</span><span class="nx">isRegExp</span><span class="p">(</span><span class="nx">regOrString</span><span class="p">))</span> <span class="p">{</span>
-                  <span class="k">return</span> <span class="nx">regOrString</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
-                <span class="p">}</span>
-                <span class="k">else</span> <span class="k">return</span> <span class="nx">regOrString</span> <span class="o">===</span> <span class="nx">str</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">startsWith</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span><span class="nx">prefix</span><span class="p">){</span>
-                <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="nx">prefix</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="nx">str</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="o">===</span> <span class="nx">prefix</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">endsWith</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span><span class="nx">suffix</span><span class="p">){</span>
-                <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="nx">suffix</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="nx">str</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="nx">suffix</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="o">===</span> <span class="nx">suffix</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">isEmpty</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">){</span>
-                <span class="k">return</span> <span class="o">!</span><span class="nx">str</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">trim</span> <span class="o">:</span> <span class="nx">trim</span><span class="p">,</span>
-            <span class="nx">length</span><span class="o">:</span> <span class="p">{</span>
-                <span class="nx">eq</span>  <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="nx">n</span><span class="p">},</span>
-                <span class="nx">gt</span>  <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span>   <span class="nx">n</span><span class="p">},</span>
-                <span class="nx">gte</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span>  <span class="nx">n</span><span class="p">},</span>
-                <span class="nx">lt</span>  <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span>   <span class="nx">n</span><span class="p">},</span>
-                <span class="nx">lte</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span>  <span class="nx">n</span><span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-20">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-20">&#182;</a>               </div>               <h2>Array Functions</h2>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nb">Array</span> <span class="o">:</span> <span class="p">{</span>
-            <span class="nx">indexOf</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span><span class="nx">value</span><span class="p">,</span><span class="nx">fromIndex</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// O(n)</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">array</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// null and undefined</span>
+                <span class="hljs-keyword">if</span> (valib.Type.isRegExp(regOrString)) {
+                    <span class="hljs-keyword">return</span> regOrString.test(str);
+                }
+                <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> regOrString === str;
+            },
+            startsWith: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str, prefix)</span> {</span>
+                <span class="hljs-keyword">return</span> str.length &gt;= prefix.length &amp;&amp; str.substring(<span class="hljs-number">0</span>, prefix.length) === prefix;
+            },
+            endsWith: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str, suffix)</span> {</span>
+                <span class="hljs-keyword">return</span> str.length &gt;= suffix.length &amp;&amp; str.substring(str.length - suffix.length) === suffix;
+            },
+            isEmpty : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str)</span> {</span>
+                <span class="hljs-keyword">return</span> !str;
+            },
+            trim : trim,
+            length: {
+                eq  : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str, n)</span> {</span> <span class="hljs-keyword">return</span> str.length === n; },
+                gt  : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str, n)</span> {</span> <span class="hljs-keyword">return</span> str.length &gt;   n; },
+                gte : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str, n)</span> {</span> <span class="hljs-keyword">return</span> str.length &gt;=  n; },
+                lt  : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str, n)</span> {</span> <span class="hljs-keyword">return</span> str.length &lt;   n; },
+                lte : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(str, n)</span> {</span> <span class="hljs-keyword">return</span> str.length &lt;=  n; }
+            }
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <h2 id="array-functions">Array Functions</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-built_in">Array</span> : {
+            indexOf : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(array, value, fromIndex)</span> {</span> <span class="hljs-comment">// O(n)</span>
+                <span class="hljs-keyword">if</span> (array == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>; <span class="hljs-comment">// null and undefined</span>
                 
-                <span class="k">if</span> <span class="p">(</span><span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+                <span class="hljs-keyword">if</span> (array.length === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
                 
-                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">fromIndex</span><span class="p">)</span> <span class="nx">fromIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="nx">fromIndex</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span> <span class="nx">fromIndex</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">Array</span>.prototype.indexOf) {
+                    <span class="hljs-keyword">if</span> (!fromIndex) fromIndex = <span class="hljs-number">0</span>;
+                    <span class="hljs-keyword">if</span> (fromIndex &lt; <span class="hljs-number">0</span>) fromIndex = array.length - <span class="hljs-number">1</span>;
                     
-                    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="nx">fromIndex</span><span class="p">,</span><span class="nx">il</span><span class="o">=</span><span class="nx">array</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">il</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-21">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-21">&#182;</a>               </div>               <p>check if <code>i</code> is inside <code>array</code> to differentiate
-between deleted items and keys set to undefined</p>             </td>             <td class="code">               <div class="highlight"><pre>                        <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="k">in</span> <span class="nx">array</span> <span class="o">&amp;&amp;</span> <span class="nx">array</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="nx">value</span><span class="p">)</span> <span class="k">return</span> <span class="nx">i</span><span class="p">;</span>
-                    <span class="p">}</span>
-                    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i=fromIndex,il=array.length; i&lt;il; i++) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>Check if <code>i</code> is inside <code>array</code> to differentiate
+between deleted items and keys set to undefined.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                        <span class="hljs-keyword">if</span> (i <span class="hljs-keyword">in</span> array &amp;&amp; array[i] === value) <span class="hljs-keyword">return</span> i;
+                    }
+                    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
                     
-                <span class="p">}</span> <span class="k">else</span> <span class="k">return</span> <span class="nx">array</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span><span class="nx">fromIndex</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="nx">has</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span><span class="nx">value</span><span class="p">,</span><span class="nx">fromIndex</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// O(n)</span>
-                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="o">!==</span> <span class="k">this</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span><span class="nx">value</span><span class="p">,</span><span class="nx">fromIndex</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="nx">isEmpty</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">array</span><span class="p">){</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">array</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-                <span class="k">return</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">length</span><span class="o">:</span> <span class="p">{</span>
-                <span class="nx">eq</span>  <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="nx">n</span><span class="p">},</span>
-                <span class="nx">gt</span>  <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span>   <span class="nx">n</span><span class="p">},</span>
-                <span class="nx">gte</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span>  <span class="nx">n</span><span class="p">},</span>
-                <span class="nx">lt</span>  <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span>   <span class="nx">n</span><span class="p">},</span>
-                <span class="nx">lte</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span>  <span class="nx">n</span><span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-22">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-22">&#182;</a>               </div>               <h2>Object Functions</h2>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nb">Object</span> <span class="o">:</span> <span class="p">{</span>
-            <span class="nx">hasKey</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span><span class="nx">key</span><span class="p">){</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">object</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-                <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span><span class="nx">key</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="nx">hasValue</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span><span class="nx">value</span><span class="p">){</span>
-                <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">object</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="nx">object</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">object</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">===</span> <span class="nx">value</span><span class="p">)</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-                <span class="p">}</span>
-                <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">isEmpty</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">object</span><span class="p">){</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">object</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-                <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">object</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hasKey</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span><span class="nx">key</span><span class="p">))</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-                <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">countKeys</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">object</span><span class="p">){</span>
-                <span class="kd">var</span> <span class="nx">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-                <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">object</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="nx">object</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span> <span class="nx">k</span><span class="o">++</span><span class="p">;</span>
-                <span class="p">}</span>
-                <span class="k">return</span> <span class="nx">k</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-23">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-23">&#182;</a>               </div>               <h2>Date Functions</h2>             </td>             <td class="code">               <div class="highlight"><pre>        <span class="nb">Date</span> <span class="o">:</span> <span class="p">{</span>
-            <span class="nx">isToday</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">d</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">yesterday</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">d</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">tomorrow</span><span class="p">();</span>
-            <span class="p">},</span>
-            <span class="nx">isTomorrow</span> <span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nx">tomorrow</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">tomorrow</span><span class="p">();</span>
-                <span class="k">return</span>    <span class="nx">d</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">()</span> <span class="o">===</span> <span class="nx">tomorrow</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">()</span>
-                       <span class="o">&amp;&amp;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">()</span> <span class="o">===</span> <span class="nx">tomorrow</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">()</span>
-                       <span class="o">&amp;&amp;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()</span> <span class="o">===</span> <span class="nx">tomorrow</span><span class="p">.</span><span class="nx">getDate</span><span class="p">();</span>
-            <span class="p">},</span>
-            <span class="nx">isYesterday</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nx">yesterday</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">yesterday</span><span class="p">();</span>
-                <span class="k">return</span>    <span class="nx">d</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">()</span> <span class="o">===</span> <span class="nx">yesterday</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">()</span>
-                       <span class="o">&amp;&amp;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">()</span> <span class="o">===</span> <span class="nx">yesterday</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">()</span>
-                       <span class="o">&amp;&amp;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()</span> <span class="o">===</span> <span class="nx">yesterday</span><span class="p">.</span><span class="nx">getDate</span><span class="p">();</span>
-            <span class="p">},</span>
-            <span class="nx">isTheNextDay</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">future</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">future</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">&amp;&amp;</span>
-                      <span class="p">(</span><span class="nx">future</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">-</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="nx">isThePreviousDay</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">past</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">&gt;</span> <span class="nx">past</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">&amp;&amp;</span>
-                      <span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">-</span> <span class="nx">past</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="nx">elapsedDays</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d1</span><span class="p">,</span><span class="nx">d2</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// the number of calendar days passed (not &gt; 24h)</span>
-                <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">toStartOfTheDay</span><span class="p">(</span><span class="nx">d1</span><span class="p">).</span><span class="nx">getTime</span><span class="p">()</span> 
-                                <span class="o">-</span> 
-                                <span class="k">this</span><span class="p">.</span><span class="nx">toStartOfTheDay</span><span class="p">(</span><span class="nx">d2</span><span class="p">).</span><span class="nx">getTime</span><span class="p">())</span>
-                       <span class="o">/</span> <span class="p">(</span><span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="nx">toStartOfTheDay</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">(),</span><span class="nx">d</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">(),</span><span class="nx">d</span><span class="p">.</span><span class="nx">getDate</span><span class="p">());</span>
-            <span class="p">},</span>
-            <span class="nx">today</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">toStartOfTheDay</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">());</span>
-            <span class="p">},</span>
-            <span class="nx">tomorrow</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
-                <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">nDaysFromDate</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="nx">yesterday</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">nDaysFromDate</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-            <span class="p">},</span>
-            <span class="nx">nDaysFromDate</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">d</span><span class="p">)</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">today</span><span class="p">();</span>
-                <span class="k">else</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">clone</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
-                <span class="nx">d</span><span class="p">.</span><span class="nx">setDate</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()</span> <span class="o">+</span> <span class="nx">n</span><span class="p">);</span>
-                <span class="k">return</span> <span class="nx">d</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">isWithinDays</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">n_days</span><span class="p">,</span><span class="nx">startFrom</span><span class="p">){</span>
-                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">startFrom</span><span class="p">)</span> <span class="nx">startFrom</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">today</span><span class="p">();</span>
-                <span class="k">else</span> <span class="nx">startFrom</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">toStartOfTheDay</span><span class="p">(</span><span class="nx">startFrom</span><span class="p">);</span>
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> array.indexOf(value, fromIndex);
+            },
+            has : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(array, value, fromIndex)</span> {</span> <span class="hljs-comment">// O(n)</span>
+                <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span> !== <span class="hljs-keyword">this</span>.indexOf(array, value, fromIndex);
+            },
+            isEmpty : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(array)</span> {</span>
+                <span class="hljs-keyword">if</span> (array == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+                <span class="hljs-keyword">return</span> array.length === <span class="hljs-number">0</span>;
+            },
+            length: {
+                eq  : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(array, n)</span> {</span> <span class="hljs-keyword">return</span> array.length === n; },
+                gt  : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(array, n)</span> {</span> <span class="hljs-keyword">return</span> array.length &gt;   n; },
+                gte : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(array, n)</span> {</span> <span class="hljs-keyword">return</span> array.length &gt;=  n; },
+                lt  : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(array, n)</span> {</span> <span class="hljs-keyword">return</span> array.length &lt;   n; },
+                lte : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(array, n)</span> {</span> <span class="hljs-keyword">return</span> array.length &lt;=  n; }
+            }
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <h2 id="object-functions">Object Functions</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-built_in">Object</span> : {
+            hasKey : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(object, key)</span> {</span>
+                <span class="hljs-keyword">if</span> (object == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+                <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.prototype.hasOwnProperty.call(object, key);
+            },
+            hasValue : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(object, value)</span> {</span>
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> key <span class="hljs-keyword">in</span> object) {
+                    <span class="hljs-keyword">if</span> (object.hasOwnProperty(key) &amp;&amp; object[key] === value) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+                }
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            },
+            isEmpty : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(object)</span> {</span>
+                <span class="hljs-keyword">if</span> (object == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> key <span class="hljs-keyword">in</span> object) <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.hasKey(object, key)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            },
+            countKeys: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(object)</span> {</span>
+                <span class="hljs-keyword">var</span> k = <span class="hljs-number">0</span>;
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> key <span class="hljs-keyword">in</span> object) {
+                    <span class="hljs-keyword">if</span> (object.hasOwnProperty(key)) k++;
+                }
+                <span class="hljs-keyword">return</span> k;
+            }
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <h2 id="date-functions">Date Functions</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-built_in">Date</span> : {
+            isToday : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> {</span>
+                <span class="hljs-keyword">return</span> d &gt; <span class="hljs-keyword">this</span>.yesterday() &amp;&amp; d &lt; <span class="hljs-keyword">this</span>.tomorrow();
+            },
+            isTomorrow :<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> {</span>
+                <span class="hljs-keyword">var</span> tomorrow = <span class="hljs-keyword">this</span>.tomorrow();
+                <span class="hljs-keyword">return</span>    d.getFullYear() === tomorrow.getFullYear()
+                       &amp;&amp; d.getMonth() === tomorrow.getMonth()
+                       &amp;&amp; d.getDate() === tomorrow.getDate();
+            },
+            isYesterday : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> {</span>
+                <span class="hljs-keyword">var</span> yesterday = <span class="hljs-keyword">this</span>.yesterday();
+                <span class="hljs-keyword">return</span>    d.getFullYear() === yesterday.getFullYear()
+                       &amp;&amp; d.getMonth() === yesterday.getMonth()
+                       &amp;&amp; d.getDate() === yesterday.getDate();
+            },
+            isTheNextDay : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d, future)</span> {</span>
+                <span class="hljs-keyword">return</span>    <span class="hljs-keyword">this</span>.nDaysFromDate(<span class="hljs-number">1</span>, <span class="hljs-keyword">this</span>.toStartOfTheDay(d)).getTime()
+                       == <span class="hljs-keyword">this</span>.toStartOfTheDay(future).getTime();
+            },
+            isThePreviousDay : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d, past)</span> {</span>
+                <span class="hljs-keyword">return</span>    <span class="hljs-keyword">this</span>.nDaysFromDate(-<span class="hljs-number">1</span>, <span class="hljs-keyword">this</span>.toStartOfTheDay(d)).getTime()
+                       == <span class="hljs-keyword">this</span>.toStartOfTheDay(past).getTime();
+            },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p>Get the number of calendar days passed (so if more than 24 hours passed
+it may be still a difference of 1 day. e.g. from 01:00 to 03:00 of the
+next day).</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            elapsedDays : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d1, d2)</span> {</span>
                 
-                <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">toStartOfTheDay</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="k">this</span><span class="p">.</span><span class="nx">toStartOfTheDay</span><span class="p">(</span><span class="nx">startFrom</span><span class="p">)</span>
-                       <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">elapsedDays</span><span class="p">(</span><span class="nx">startFrom</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nx">n_days</span><span class="p">;</span>
-            <span class="p">},</span>
-            <span class="nx">clone</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">getTime</span><span class="p">());</span>
-            <span class="p">},</span>
-            <span class="nx">isEqual</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d1</span><span class="p">,</span><span class="nx">d2</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">===</span> <span class="nx">d2</span><span class="p">.</span><span class="nx">getTime</span><span class="p">();</span>
-            <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-24">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-24">&#182;</a>               </div>               <p>check if two dates are the same day of the same year
-(the dates must be in the same timezone)</p>             </td>             <td class="code">               <div class="highlight"><pre>            <span class="nx">isSameDay</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d1</span><span class="p">,</span><span class="nx">d2</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">isEqual</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">toStartOfTheDay</span><span class="p">(</span><span class="nx">d1</span><span class="p">),</span><span class="k">this</span><span class="p">.</span><span class="nx">toStartOfTheDay</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-            <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-25">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-25">&#182;</a>               </div>               <p>check if two dates are in the same year/month
-(the dates must be in the same timezone)</p>             </td>             <td class="code">               <div class="highlight"><pre>            <span class="nx">isSameMonth</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d1</span><span class="p">,</span><span class="nx">d2</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">()</span> <span class="o">===</span> <span class="nx">d2</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">()</span>
-                       <span class="o">&amp;&amp;</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">()</span> <span class="o">===</span> <span class="nx">d2</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">();</span>
-            <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-26">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-26">&#182;</a>               </div>               <p>check if two dates are in the same week and the same year
-(the dates must be in the same timezone)</p>             </td>             <td class="code">               <div class="highlight"><pre>            <span class="nx">isSameWeek</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d1</span><span class="p">,</span><span class="nx">d2</span><span class="p">,</span><span class="nx">weekStartsAtSunday</span><span class="cm">/*=true*/</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">d2</span> <span class="o">&lt;</span> <span class="nx">d1</span><span class="p">)</span> <span class="p">{</span> <span class="kd">var</span> <span class="nx">tmp</span> <span class="o">=</span> <span class="nx">d1</span><span class="p">;</span> <span class="nx">d1</span> <span class="o">=</span> <span class="nx">d2</span><span class="p">;</span> <span class="nx">d2</span> <span class="o">=</span> <span class="nx">tmp</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// swap</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">weekStartsAtSunday</span> <span class="o">!==</span> <span class="kc">false</span><span class="p">)</span> <span class="nx">weekStartsAtSunday</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.abs(<span class="hljs-built_in">Math</span>.round(( <span class="hljs-comment">// round because of daylight saving</span>
+                                <span class="hljs-keyword">this</span>.toStartOfTheDay(d1).getTime()
+                                - 
+                                <span class="hljs-keyword">this</span>.toStartOfTheDay(d2).getTime())
+                       / (<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>)));
+            },
+            toStartOfTheDay : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> {</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(d.getFullYear(), d.getMonth(), d.getDate());
+            },
+            today : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.toStartOfTheDay(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>());
+            },
+            tomorrow : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.nDaysFromDate(<span class="hljs-number">1</span>);
+            },
+            yesterday : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.nDaysFromDate(-<span class="hljs-number">1</span>);
+            },
+            nDaysFromDate : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(n, d)</span> {</span>
+                <span class="hljs-keyword">if</span> (!d) d = <span class="hljs-keyword">this</span>.today();
+                <span class="hljs-keyword">else</span> d = <span class="hljs-keyword">this</span>.clone(d);
+                d.setDate(d.getDate() + n);
+                <span class="hljs-keyword">return</span> d;
+            },
+            isWithinDays : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d, n_days, startFrom)</span> {</span>
+                <span class="hljs-keyword">if</span> (!startFrom) startFrom = <span class="hljs-keyword">this</span>.today();
+                <span class="hljs-keyword">else</span> startFrom = <span class="hljs-keyword">this</span>.toStartOfTheDay(startFrom);
                 
-                <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">isSameMonth</span><span class="p">(</span><span class="nx">d1</span><span class="p">,</span><span class="nx">d2</span><span class="p">)</span>
-                       <span class="o">&amp;&amp;</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()</span> <span class="o">-</span> <span class="nx">d2</span><span class="p">.</span><span class="nx">getDate</span><span class="p">())</span> <span class="o">&lt;</span> <span class="mi">7</span>
-                       <span class="o">&amp;&amp;</span> <span class="p">(</span>
-                            <span class="p">(</span><span class="o">!</span><span class="nx">weekStartsAtSunday</span> <span class="o">&amp;&amp;</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">getDay</span><span class="p">()</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">7</span> <span class="o">:</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">getDay</span><span class="p">())</span>
-                            <span class="o">&lt;=</span>
-                            <span class="p">(</span><span class="o">!</span><span class="nx">weekStartsAtSunday</span> <span class="o">&amp;&amp;</span> <span class="nx">d2</span><span class="p">.</span><span class="nx">getDay</span><span class="p">()</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">7</span> <span class="o">:</span> <span class="nx">d2</span><span class="p">.</span><span class="nx">getDay</span><span class="p">())</span>
-                          <span class="p">)</span>
-                        <span class="p">;</span> 
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">};</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.toStartOfTheDay(d) &gt;= <span class="hljs-keyword">this</span>.toStartOfTheDay(startFrom)
+                       &amp;&amp; <span class="hljs-keyword">this</span>.elapsedDays(startFrom, d) &lt;= n_days;
+            },
+            clone : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d)</span> {</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(d.getTime());
+            },
+            isEqual : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d1, d2)</span> {</span>
+                <span class="hljs-keyword">return</span> d1.getTime() === d2.getTime();
+            },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>Check if two dates are the same day of the same year
+(the dates must be in the same timezone).</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            isSameDay : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d1, d2)</span> {</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.isEqual(<span class="hljs-keyword">this</span>.toStartOfTheDay(d1), <span class="hljs-keyword">this</span>.toStartOfTheDay(d2));
+            },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>Check if two dates are in the same year/month
+(the dates must be in the same timezone).</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            isSameMonth : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d1, d2)</span> {</span>
+                <span class="hljs-keyword">return</span> d1.getFullYear() === d2.getFullYear()
+                       &amp;&amp; d1.getMonth() === d2.getMonth();
+            },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>Check if two dates are in the same week and the same year
+(the dates must be in the same timezone).</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            isSameWeek : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(d1, d2, weekStartsAtSunday<span class="hljs-comment">/*=true*/</span>)</span> {</span>
+                <span class="hljs-keyword">if</span> (d2 &lt; d1) { <span class="hljs-keyword">var</span> tmp = d1; d1 = d2; d2 = tmp; } <span class="hljs-comment">// swap</span>
+                <span class="hljs-keyword">if</span> (weekStartsAtSunday !== <span class="hljs-literal">false</span>) weekStartsAtSunday = <span class="hljs-literal">true</span>;
+                
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.isSameMonth(d1, d2)
+                       &amp;&amp; <span class="hljs-built_in">Math</span>.abs(d1.getDate() - d2.getDate()) &lt; <span class="hljs-number">7</span>
+                       &amp;&amp; (
+                            (!weekStartsAtSunday &amp;&amp; d1.getDay() === <span class="hljs-number">0</span> ? <span class="hljs-number">7</span> : d1.getDay())
+                            &lt;=
+                            (!weekStartsAtSunday &amp;&amp; d2.getDay() === <span class="hljs-number">0</span> ? <span class="hljs-number">7</span> : d2.getDay())
+                          )
+                        ; 
+            }
+        }
+    };
     
-    <span class="k">return</span> <span class="nx">valib</span><span class="p">;</span>
+    <span class="hljs-keyword">return</span> valib;
 
-<span class="p">}));</span>
-
-</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
+}));</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
