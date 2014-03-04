@@ -353,11 +353,16 @@
                 return    this.nDaysFromDate(-1, this.toStartOfTheDay(d)).getTime()
                        == this.toStartOfTheDay(past).getTime();
             },
-            elapsedDays : function(d1, d2) { // the number of calendar days passed (not > 24h)
-                return Math.abs(this.toStartOfTheDay(d1).getTime() 
+            // Get the number of calendar days passed (so if more than 24 hours passed
+            // it may be still a difference of 1 day. e.g. from 01:00 to 03:00 of the
+            // next day).
+            elapsedDays : function(d1, d2) {
+                
+                return Math.abs(Math.round(( // round because of daylight saving
+                                this.toStartOfTheDay(d1).getTime()
                                 - 
                                 this.toStartOfTheDay(d2).getTime())
-                       / (24 * 60 * 60 * 1000);
+                       / (24 * 60 * 60 * 1000)));
             },
             toStartOfTheDay : function(d) {
                 return new Date(d.getFullYear(), d.getMonth(), d.getDate());

@@ -1494,6 +1494,14 @@ suite('validators',function(){
             assert.equal(3,v.Date.elapsedDays(a,b));
             assert.equal(4,v.Date.elapsedDays(a,c));
             assert.equal(1,v.Date.elapsedDays(b,c));
+
+            // If tested with CET locale, the following
+            // dates have 72h 30m of difference
+            // (daylight saving)
+            var d = new Date('2013/10/26 00:00:00'),
+                e = new Date('2013/10/28 23:30:00');
+            
+            assert.equal(2, v.Date.elapsedDays(e, d));
         });
         
         test('is the same day',function(){
