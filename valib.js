@@ -36,7 +36,7 @@
 }(this, function (/*dependencies*/) {
     "use strict";
     
-    // Detect a variable's type  
+    // Detect a variable's type.
     // (Refactoring of code found in jQuery 1.7.1)
     var getType = (function(){
         
@@ -57,7 +57,7 @@
     })();
     
     // Even if they have String.prototype.trim, browsers discord
-    // on the whitespace characters, so we use a custom trim
+    // on the whitespace characters, so we use a custom trim.
     var trim = function(str) {
         if (str == null) return ''; // null and undefined
         /* modified version of trim12 from
@@ -104,8 +104,8 @@
                 // the standard isNaN() (which checks if a value is coercible
                 // to a number)
                 
-                // not really a Javascript type, but certainly not a number
-                // (typeof NaN === 'number')
+                // Not really a Javascript type, but certainly not a number
+                // (typeof NaN === 'number').
                 return (typeof value === 'number') && value != value;
             },
             isDate: function(value) {
@@ -168,7 +168,7 @@
                 
                 // Below isFinite() may choke with signed hexadecimals (Firefox
                 // return NaN as the standard requires, others parse them, so
-                // we remove the sign alltogether)
+                // we remove the sign alltogether).
                 
                 var sign = null;
                 if (str.length && str[0] === '-' || str[0] === '+') {
@@ -196,7 +196,7 @@
                 
             },
             isUrl : (function(){ // only http(s)/ftp urls, requires protocol
-                // javascript version of the regexp found at  
+                // Javascript version of the regexp found at
                 // http://stackoverflow.com/questions/161738
                 var reg = new RegExp(
                   "^(https?|ftp)://" +                                             // protocol
@@ -226,16 +226,16 @@
             isSHA1 : function(str){
                 return /^[0-9a-f]{40}$/i.test(str);
             },
-            // check if it is similar to an e-mail (no hope to comply with the rfc and the mess that's the real world)
+            // Check if it is similar to an e-mail (no hope to comply with the rfc and the mess that's the real world).
             isEmailLike : function(str){
                 // something@something with no spaces, one and only one @
                 return /^[^\s@]+@[^\s@]{3,}$/.test(str);
             },
             /**
-            * If regOrString is a regular espression check if value match it
-            * If regOrString is a string check if it's equal to value
+            * If regOrString is a regular espression check if `str` matches it.
+            * If regOrString is a string check if it's equal to `str`.
             *
-            * If the option {trim:true} is passed then trailing whitespaces will be ignored on 'value'
+            * If the option {trim:true} is passed then trailing whitespaces will be ignored on `str`.
             */
             match: function(str,regOrString,opts){
                 opts = opts || {trim:false};
@@ -278,8 +278,8 @@
                     if (fromIndex < 0) fromIndex = array.length - 1;
                     
                     for (var i=fromIndex,il=array.length;i<il;i++) {
-                        // check if `i` is inside `array` to differentiate
-                        // between deleted items and keys set to undefined
+                        // Check if `i` is inside `array` to differentiate
+                        // between deleted items and keys set to undefined.
                         if (i in array && array[i] === value) return i;
                     }
                     return -1;
@@ -390,19 +390,19 @@
             isEqual : function(d1,d2) {
                 return d1.getTime() === d2.getTime();
             },
-            // check if two dates are the same day of the same year
-            // (the dates must be in the same timezone)
+            // Check if two dates are the same day of the same year
+            // (the dates must be in the same timezone).
             isSameDay : function(d1,d2) {
                 return this.isEqual(this.toStartOfTheDay(d1),this.toStartOfTheDay(d2));
             },
-            // check if two dates are in the same year/month
-            // (the dates must be in the same timezone)
+            // Check if two dates are in the same year/month
+            // (the dates must be in the same timezone).
             isSameMonth : function(d1,d2) {
                 return d1.getFullYear() === d2.getFullYear()
                        && d1.getMonth() === d2.getMonth();
             },
-            // check if two dates are in the same week and the same year
-            // (the dates must be in the same timezone)
+            // Check if two dates are in the same week and the same year
+            // (the dates must be in the same timezone).
             isSameWeek : function(d1,d2,weekStartsAtSunday/*=true*/) {
                 if (d2 < d1) { var tmp = d1; d1 = d2; d2 = tmp; } // swap
                 if (weekStartsAtSunday !== false) weekStartsAtSunday = true;
