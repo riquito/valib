@@ -6,7 +6,7 @@ A standalone library tailored for validation.
 Works either as
 - a nodeJS module
 - an AMD module
-- a generic library
+- a browser library
 
 You can read through the [annotated source code](http://riquito.github.com/valib/web/docs/valib.html)
 and [run the tests](http://riquito.github.com/valib/web/tests.htm) from your browser

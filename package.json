@@ -1,10 +1,17 @@
 {
     "name": "valib",
-    "description": "A validation library for both the web and Node.js",
+    "version": "1.0.0",
+    "description": "A validation library for both the browser and Node.js",
+    "keywords": ["validation", "amd", "browser", "server", "client", "util"],
     "author": "Riccardo Attilio Galli <riccardo@sideralis.org>",
-    "version": "0.8.0",
-    "dependencies": {
+    "homepage": "https://github.com/riquito/valib",
+    "repository": {"type": "git", "url": "https://github.com/riquito/valib.git"},
+    "bugs": "https://github.com/riquito/valib/issues",
+    "main": "valib.js",
+    "files": ["valib.js", "LICENSE"],
+    "devDependencies": {
       "chai" : "1.x",
       "mocha" : "1.x"
-    }
+    },
+    "license": "Apache-2.0"
 }
