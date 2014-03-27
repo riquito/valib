@@ -29,5 +29,8 @@
           "android-browser/latest"
         ]
     },
+    "scripts": {
+        "test": "make test"
+    },
     "license": "Apache-2.0"
 }
