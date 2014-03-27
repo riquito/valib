@@ -3,23 +3,25 @@
 var v = null;
 var root = {};
 
-// when testing with nodejs use require(), else use the globally loaded scripts
+// I'd like to use chai.js, but it doesn't support old IE
+var assert = {
+    isTrue: function(x){ return x === true; },
+    isFalse: function(x){ return x === false; },
+    equal: function(x, y){ return x === y; },
+    notEqual: function(x, y){ return x !== y; }
+};
+
+
+// When testing with nodejs use require(), else use the globally loaded scripts.
 if (typeof window === 'undefined') {
-    root.chai = require('chai');
     /*
-     * var valib = require('../valib.js'); // can't use it, IE8 obliterate the var
-     *                                     //even if the block isn't executed
+     * var valib = require('../valib.js'); // Can't use it, IE8 obliterate the var
+     *                                     // even if the block isn't executed.
      */
     v = require('../valib.js'); 
 } else {
-    root.chai = chai;
     v = valib;
 }
-
-root.chai.Assertion.includeStack = false; // show backtrace on test error
-
-var assert = root.chai.assert;
-
 
 suite('validators',function(){
     

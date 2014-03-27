@@ -10,7 +10,6 @@
     "main": "valib.js",
     "files": ["valib.js", "LICENSE"],
     "devDependencies": {
-      "chai" : "1.x",
       "mocha" : "1.x"
     },
     "license": "Apache-2.0"
