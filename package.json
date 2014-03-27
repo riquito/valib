@@ -12,5 +12,22 @@
     "devDependencies": {
       "mocha" : "1.x"
     },
+    "testling": {
+        "harness": "mocha-tdd",
+        "files": "test/*.js",
+        "scripts": ["valib.js"],
+        "browsers": [
+          "ie/6..latest",
+          "chrome/latest",
+          "firefox/3.6",
+          "firefox/4.0",
+          "firefox/latest",
+          "safari/latest",
+          "opera/latest",
+          "iphone/latest",
+          "ipad/latest",
+          "android-browser/latest"
+        ]
+    },
     "license": "Apache-2.0"
 }
