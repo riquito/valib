@@ -3,12 +3,35 @@
 var v = null;
 var root = {};
 
-// I'd like to use chai.js, but it doesn't support old IE
+// I'd like to use chai.js for assertions, but it doesn't support old IE
+
+/*
+ * Strict equality test. Ensures that NaN always
+ * equals NaN and `-0` does not equal `+0`.
+ *
+ * NOTE: copied from chai.js 1.9.1
+ */
+function same_value(a, b) {
+    if (a === b) return a !== 0 || 1 / a === 1 / b;
+    return a !== a && b !== b;
+}
+
 var assert = {
-    isTrue: function(x){ return x === true; },
-    isFalse: function(x){ return x === false; },
-    equal: function(x, y){ return x === y; },
-    notEqual: function(x, y){ return x !== y; }
+    isTrue: function(x){
+        if (x !== true) { throw new Error('Not true'); }
+    },
+    isFalse: function(x){
+        if (x !== false) { throw new Error('Not false'); }
+    },
+    isNull: function(x){
+        if (x !== null) { throw new Error('Not null'); }
+    },
+    equal: function(a, b) {
+        if (!same_value(a, b)) { throw new Error('Not equal'); }
+    },
+    notEqual: function(a, b) {
+        if (same_value(a, b)) { throw new Error('Equal (wrongly)'); }
+    }
 };
 
 
