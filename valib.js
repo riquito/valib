@@ -35,6 +35,9 @@
     }
 }(this, function (/*dependencies*/) {
     "use strict";
+
+    // Reset undefined, it may have been overwritten.
+    var undefined = (function(){})();
     
     // Detect a variable's type.
     // (Refactoring of code found in jQuery 1.7.1)
