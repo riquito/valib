@@ -188,11 +188,17 @@
                 return true;
             },
             toNumber : function(str, opts) {
-                if (!this.isNumeric(str, opts)) return NaN;
+                // NOTE: this function returns null instead of NaN in case of errors
+                // because practicality beats purity. Most people would wrongly
+                // use === NaN on the returned element.
+                if (!this.isNumeric(str, opts)) return null;
                 
-                if (str.toUpperCase().indexOf('X') !== -1) return parseInt(str,16); // hex number
-                else if (/^\s*[+-]?0[1-9]/.test(str)) return parseInt(str,8); // oct number
-                else return parseFloat(str);
+                var res = NaN;
+                if (str.toUpperCase().indexOf('X') !== -1) { res = parseInt(str,16); } // hex number
+                else if (/^\s*[+-]?0[1-9]/.test(str)) { res = parseInt(str,8); } // oct number
+                else { res = parseFloat(str); }
+
+                return valib.Type.isNaN(res) ? null : res;
                 
             },
             isUrl : (function() { // only http(s)/ftp urls, requires protocol

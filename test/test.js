@@ -486,19 +486,87 @@ suite('validators',function(){
             assert.equal( 1.23,v.String.toNumber(' 0001.23'));
             assert.equal( 1.23,v.String.toNumber('+0001.23'));
             assert.equal(-1.23,v.String.toNumber('-0001.23'));
+
+            assert.isNull(v.String.toNumber(''));
+            assert.isNull(v.String.toNumber('a'));
+            assert.isNull(v.String.toNumber('1a'));
+            assert.isNull(v.String.toNumber('.'));
+            assert.isNull(v.String.toNumber('Infinity'));
+            assert.isNull(v.String.toNumber('-a'));
+            assert.isNull(v.String.toNumber('-1a'));
+            assert.isNull(v.String.toNumber('-.'));
+            assert.isNull(v.String.toNumber('-Infinity'));
+            assert.isNull(v.String.toNumber(' 0x1H'));
+            assert.isNull(v.String.toNumber('+0x1H'));
+            assert.isNull(v.String.toNumber('-0x1H'));
             
-            assert.isTrue(v.Type.isNaN(v.String.toNumber('')));
-            assert.isTrue(v.Type.isNaN(v.String.toNumber('a')));
-            assert.isTrue(v.Type.isNaN(v.String.toNumber('1a')));
-            assert.isTrue(v.Type.isNaN(v.String.toNumber('.')));
-            assert.isTrue(v.Type.isNaN(v.String.toNumber('Infinity')));
-            assert.isTrue(v.Type.isNaN(v.String.toNumber('-a')));
-            assert.isTrue(v.Type.isNaN(v.String.toNumber('-1a')));
-            assert.isTrue(v.Type.isNaN(v.String.toNumber('-.')));
-            assert.isTrue(v.Type.isNaN(v.String.toNumber('-Infinity')));
-            assert.isTrue(v.Type.isNaN(v.String.toNumber(' 0x1H')));
-            assert.isTrue(v.Type.isNaN(v.String.toNumber('+0x1H')));
-            assert.isTrue(v.Type.isNaN(v.String.toNumber('-0x1H')));
+            assert.equal( 1,   v.String.toNumber(' 1  ',{"simple":true}));
+            assert.equal( 1,   v.String.toNumber('+1  ',{"simple":true}));
+            assert.equal(-1,   v.String.toNumber('-1  ',{"simple":true}));
+            assert.equal( 1.2, v.String.toNumber(' 1.2',{"simple":true}));
+            assert.equal( 1.2, v.String.toNumber('+1.2',{"simple":true}));
+            assert.equal(-1.2, v.String.toNumber('-1.2',{"simple":true}));
+            
+            assert.isNull(v.String.toNumber(' 2e3', {"simple":true}));
+            assert.isNull(v.String.toNumber('+2e3', {"simple":true}));
+            assert.isNull(v.String.toNumber('-2e3', {"simple":true}));
+            assert.isNull(v.String.toNumber(' 010', {"simple":true}));
+            assert.isNull(v.String.toNumber('+010', {"simple":true}));
+            assert.isNull(v.String.toNumber('-010', {"simple":true}));
+            assert.isNull(v.String.toNumber(' 0x15',{"simple":true}));
+            assert.isNull(v.String.toNumber('+0x15',{"simple":true}));
+            assert.isNull(v.String.toNumber('-0x15',{"simple":true}));
+            assert.isNull(v.String.toNumber('0000', {"simple":true}));
+            assert.isNull(v.String.toNumber('0001', {"simple":true}));
+            assert.isNull(v.String.toNumber('0001.23',{"simple":true}));
+            
+            assert.isNull(v.String.toNumber('+0  ',{"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('-0  ',{"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('+1  ',{"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('-1  ',{"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('+1.2',{"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('-1.2',{"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('+2e3',{"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('-2e3',{"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('+0x15',{"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('-0x15',{"canBeSigned":false}));
+            
+            assert.equal(0, v.String.toNumber(' 0  ',{"simple":true,"canBeSigned":false}));
+            assert.equal(0, v.String.toNumber(' 0.0',{"simple":true,"canBeSigned":false}));
+            assert.equal(1, v.String.toNumber(' 1  ',{"simple":true,"canBeSigned":false}));
+            assert.equal(1.2, v.String.toNumber(' 1.2',{"simple":true,"canBeSigned":false}));
+            
+            assert.isNull(v.String.toNumber('+0',{"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('-0',{"simple":true,"canBeSigned":false}));
+            
+            assert.isNull(v.String.toNumber('+1  ',{"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('-1  ',{"simple":true,"canBeSigned":false}));
+            
+            assert.isNull(v.String.toNumber('+1.2',{"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('-1.2',{"simple":true,"canBeSigned":false}));
+            
+            assert.isNull(v.String.toNumber(' 2e3', {"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('+2e3', {"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('-2e3', {"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber(' 010', {"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('+010', {"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('-010', {"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber(' 0x15',{"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('+0x15',{"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('-0x15',{"simple":true,"canBeSigned":false}));
+            
+            assert.isNull(v.String.toNumber(' 0000', {"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('+0000', {"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('-0000', {"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber(' 0001', {"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('+0001', {"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('-0001', {"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber(' 0001.23',{"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('+0001.23',{"simple":true,"canBeSigned":false}));
+            assert.isNull(v.String.toNumber('-0001.23',{"simple":true,"canBeSigned":false}));
+
+
+
         });
         
         test('url',function(){
