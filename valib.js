@@ -187,8 +187,8 @@
                 
                 return true;
             },
-            toNumber : function(str) {
-                if (!this.isNumeric(str)) return NaN;
+            toNumber : function(str, opts) {
+                if (!this.isNumeric(str, opts)) return NaN;
                 
                 if (str.toUpperCase().indexOf('X') !== -1) return parseInt(str,16); // hex number
                 else if (/^\s*[+-]?0[1-9]/.test(str)) return parseInt(str,8); // oct number
