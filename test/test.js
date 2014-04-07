@@ -744,8 +744,6 @@ suite('validators',function(){
             
             assert.equal('',v.String.trim('\u0020')); // SPACE
             
-            assert.equal('',v.String.trim('\u0085')); // NEL, Next line
-            
             assert.equal('',v.String.trim('\u00A0')); // NO-BREAK-SPACE
             assert.equal('',v.String.trim('\u1680')); // OGHAM SPACE MARK
             
