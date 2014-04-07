@@ -190,8 +190,8 @@
                 // we remove the sign alltogether).
                 
                 var sign = null;
-                if (str.length && str[0] === '-' || str[0] === '+') {
-                    sign = str[0];
+                if (str.length && str.charAt(0) === '-' || str.charAt(0) === '+') {
+                    sign = str.charAt(0);
                     str = str.slice(1);
                 }
                 
