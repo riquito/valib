@@ -936,10 +936,10 @@ suite('validators',function(){
            assert.equal(-1,v.Array.indexOf(null,'d'));
            assert.equal(-1,v.Array.indexOf(undefined,'d'));
            
-           var x = ['a',undefined,'c'];
-           assert.equal(1,v.Array.indexOf(x,undefined));
-           delete(x[1]);
-           assert.equal(-1,v.Array.indexOf(x,undefined));
+           var x = ['a',null,'c'];
+           assert.equal(1,v.Array.indexOf(x,null));
+           x.splice(1, 1);
+           assert.equal(-1,v.Array.indexOf(x,null));
            
            assert.equal( 1,v.Array.indexOf(['a','b','c'],'b',1));
            assert.equal(-1,v.Array.indexOf(['a','b','c'],'b',2));
@@ -957,10 +957,10 @@ suite('validators',function(){
            assert.isFalse(v.Array.has(null,'d'));
            assert.isFalse(v.Array.has(undefined,'d'));
            
-           var x = ['a',undefined,'c'];
-           assert.isTrue(v.Array.has(x,undefined));
-           delete(x[1]);
-           assert.isFalse(v.Array.has(x,undefined));
+           var x = ['a',null,'c'];
+           assert.isTrue(v.Array.has(x,null));
+           x.splice(1, 1);
+           assert.isFalse(v.Array.has(x,null));
            
            assert.isTrue (v.Array.has(['a','b','c'],'b',1));
            assert.isFalse(v.Array.has(['a','b','c'],'b',2));
