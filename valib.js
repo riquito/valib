@@ -149,11 +149,11 @@
             isZero : function(n) {
                 return n === 0;
             },
-            inRange : function(n,min,max,opts) {
-                opts = opts || {l_exc : false, r_exc : false};
-                return (opts.l_exc ? n > min : n >= min)
+            inRange : function(n, min, max, options) {
+                options = options || {l_exc : false, r_exc : false};
+                return (options.l_exc ? n > min : n >= min)
                         &&
-                       (opts.r_exc ? n < max : n <= max);
+                       (options.r_exc ? n < max : n <= max);
             },
             lt : function(n,max) {
                 return n < max;
@@ -177,11 +177,11 @@
         // String Functions
         // --------------
         String: {
-            isNumeric : function(str,opts) {
-                opts = opts || {};
+            isNumeric : function(str, options) {
+                options = options || {};
                 // This way the user can just pass {simple:true}
-                if (opts.canBeSigned === undefined) opts.canBeSigned = true;
-                if (opts.simple === undefined) opts.simple = false;
+                if (options.canBeSigned === undefined) options.canBeSigned = true;
+                if (options.simple === undefined) options.simple = false;
                 
                 str = trim(str);
                 
@@ -200,17 +200,17 @@
                 
                 if (!isNumeric) return false;
                 
-                if (sign && !opts.canBeSigned) return false;
+                if (sign && !options.canBeSigned) return false;
                 
-                if (opts.simple) return /^(0|[1-9][0-9]*)(\.[0-9]+)?$/.test(str);
+                if (options.simple) return /^(0|[1-9][0-9]*)(\.[0-9]+)?$/.test(str);
                 
                 return true;
             },
-            toNumber : function(str, opts) {
+            toNumber : function(str, options) {
                 // NOTE: this function returns null instead of NaN in case of errors
                 // because practicality beats purity. Most people would wrongly
                 // use === NaN on the returned element.
-                if (!this.isNumeric(str, opts)) return null;
+                if (!this.isNumeric(str, options)) return null;
                 
                 var res = NaN;
                 if (str.toUpperCase().indexOf('X') !== -1) { res = parseInt(str,16); } // hex number
@@ -262,10 +262,10 @@
             *
             * If the option {trim:true} is passed then trailing whitespaces will be ignored on `str`.
             */
-            match: function(str, regOrString, opts) {
-                opts = opts || {trim:false};
+            match: function(str, regOrString, options) {
+                options = options || {trim:false};
                 
-                if (opts.trim) str = trim(str);
+                if (options.trim) str = trim(str);
                 
                 if (valib.Type.isRegExp(regOrString)) {
                     return regOrString.test(str);
