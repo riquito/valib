@@ -57,37 +57,7 @@
         };
         
     })();
-    
-    var trim = (function(str) {
-        // Even if they have String.prototype.trim, browsers may discord
-        // on the whitespace characters, so we use a custom trim.
-
-        // For Ecma-262 5th edition and Ecma-262 6th draft rev23 trim will
-        // remove white spaces and line terminators.
-        // White spaces are defined as:
-        // - <TAB>   <VT>    <FF>    <SP>    <NBSP>  <BOM>
-        //   \u0009  \u000B  \u000C  \u0020  \u00A0  \uFEFF
-        // - symbols in the General category Zs in Unicode >= 5.1 (here 6.3)
-        //   \u0020  \u00A0  \u1680  \u2000-\u200A  \u202F  \u205F  \u3000
-        // Line terminars are defined as:
-        // - <LF>    <CR>    <LS>    <PS>
-        //   \u000A  \u000D  \u2028  \u2029
         
-        var ws = '[\u0009\u000A-\u000D\u0020\u00A0\u1680\u2000-\u200A\u2028\u2029\u202F\u205F\u3000\uFEFF]',
-            regAnyWS = new RegExp(ws),
-            regInitialWS = new RegExp('^' + ws + '+');
-
-        return function(str) {
-            if (str == null) return ''; // null and undefined
-            /* modified version of trim12 from
-               http://blog.stevenlevithan.com/archives/faster-trim-javascript */
-            str = str.replace(regInitialWS, '');
-            var i = str.length;
-            while (regAnyWS.test(str.charAt(--i)));
-            return str.slice(0, i + 1);
-        };
-    })();
-    
     var valib = {
         // Type Functions
         // --------------
@@ -183,7 +153,7 @@
                 if (options.canBeSigned === undefined) options.canBeSigned = true;
                 if (options.simple === undefined) options.simple = false;
                 
-                str = trim(str);
+                str = valib.String.trim(str);
                 
                 // Below isFinite() may choke with signed hexadecimals (Firefox
                 // return NaN as the standard requires, others parse them, so
@@ -265,7 +235,7 @@
             match: function(str, regOrString, options) {
                 options = options || {trim:false};
                 
-                if (options.trim) str = trim(str);
+                if (options.trim) str = valib.String.trim(str);
                 
                 if (valib.Type.isRegExp(regOrString)) {
                     return regOrString.test(str);
@@ -281,7 +251,35 @@
             isEmpty : function(str) {
                 return !str;
             },
-            trim : trim,
+            trim : (function(str) {
+                // Even if they have String.prototype.trim, browsers may discord
+                // on the whitespace characters, so we use a custom trim.
+
+                // For Ecma-262 5th edition and Ecma-262 6th draft rev23 trim will
+                // remove white spaces and line terminators.
+                // White spaces are defined as:
+                // - <TAB>   <VT>    <FF>    <SP>    <NBSP>  <BOM>
+                //   \u0009  \u000B  \u000C  \u0020  \u00A0  \uFEFF
+                // - symbols in the General category Zs in Unicode >= 5.1 (here 6.3)
+                //   \u0020  \u00A0  \u1680  \u2000-\u200A  \u202F  \u205F  \u3000
+                // Line terminars are defined as:
+                // - <LF>    <CR>    <LS>    <PS>
+                //   \u000A  \u000D  \u2028  \u2029
+                
+                var ws = '[\u0009\u000A-\u000D\u0020\u00A0\u1680\u2000-\u200A\u2028\u2029\u202F\u205F\u3000\uFEFF]',
+                    regAnyWS = new RegExp(ws),
+                    regInitialWS = new RegExp('^' + ws + '+');
+
+                return function(str) {
+                    if (str == null) return ''; // null and undefined
+                    /* modified version of trim12 from
+                       http://blog.stevenlevithan.com/archives/faster-trim-javascript */
+                    str = str.replace(regInitialWS, '');
+                    var i = str.length;
+                    while (regAnyWS.test(str.charAt(--i)));
+                    return str.slice(0, i + 1);
+                };
+            })(),
             length: {
                 eq  : function(str, n) { return str.length === n; },
                 gt  : function(str, n) { return str.length >   n; },
