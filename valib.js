@@ -39,12 +39,11 @@
     // Reset undefined, it may have been overwritten.
     var undefined = (function(){})();
     
-    // Detect a variable's type.
-    // (Refactoring of code found in jQuery 1.7.1)
+    // Detect a variable's type (refactoring of code from jQuery 1.7.1).
     var getType = (function() {
         
-        var classes = ["Boolean","Number","String","Function","Array",
-                       "Date","RegExp","Object"],
+        var classes = ["Boolean", "Number", "String", "Function", "Array",
+                       "Date", "RegExp", "Object"],
             class2type = {};
         
         for (var i=0,il=classes.length; i<il; i++) {
@@ -59,9 +58,10 @@
         
     })();
     
-    // Even if they have String.prototype.trim, browsers may discord
-    // on the whitespace characters, so we use a custom trim.
     var trim = (function(str) {
+        // Even if they have String.prototype.trim, browsers may discord
+        // on the whitespace characters, so we use a custom trim.
+
         // For Ecma-262 5th edition and Ecma-262 6th draft rev23 trim will
         // remove white spaces and line terminators.
         // White spaces are defined as:
@@ -119,9 +119,9 @@
                 return getType(value) === 'null';
             },
             isNaN: function(value) {
-                // Test if `value` is NaN, this is not the same as calling
+                // Test if `value` is NaN: this is not the same as calling
                 // the standard isNaN() (which checks if a value is coercible
-                // to a number)
+                // to a number).
                 
                 // Not really a Javascript type, but certainly not a number
                 // (typeof NaN === 'number').
@@ -179,7 +179,7 @@
         String: {
             isNumeric : function(str, options) {
                 options = options || {};
-                // This way the user can just pass {simple:true}
+                // Defaults to {canBeSigned: true}
                 if (options.canBeSigned === undefined) options.canBeSigned = true;
                 if (options.simple === undefined) options.simple = false;
                 
@@ -220,7 +220,9 @@
                 return valib.Type.isNaN(res) ? null : res;
                 
             },
-            isUrl : (function() { // only http(s)/ftp urls, requires protocol
+            // Check if the provided string is an url. The only protocols supported
+            // are http(s) and ftp.
+            isUrl : (function() {
                 // Javascript version of the regexp found at
                 // http://stackoverflow.com/questions/161738
                 var reg = new RegExp(
@@ -251,17 +253,15 @@
             isSHA1 : function(str) {
                 return /^[0-9a-f]{40}$/i.test(str);
             },
-            // Check if it is similar to an e-mail (no hope to comply with the rfc and the mess that's the real world).
+            // Check if `str` is similar to an e-mail (no hope to comply with the RFC and the mess that's the real world).
             isEmailLike : function(str) {
                 // something@something with no spaces, one and only one @
                 return /^[^\s@]+@[^\s@]{3,}$/.test(str);
             },
-            /**
-            * If regOrString is a regular espression check if `str` matches it.
-            * If regOrString is a string check if it's equal to `str`.
-            *
-            * If the option {trim:true} is passed then trailing whitespaces will be ignored on `str`.
-            */
+            // If regOrString is a regular espression check if `str` matches it.
+            // If regOrString is a string check if it's equal to `str`.
+            //
+            // If the option {trim: true} is present then trailing whitespaces will be ignored on `str`.
             match: function(str, regOrString, options) {
                 options = options || {trim:false};
                 
@@ -291,7 +291,7 @@
             }
         },
         // Array Functions
-        // --------------
+        // ---------------
         Array : {
             indexOf : function(array, value, fromIndex) { // O(n)
                 if (array == null) return -1; // null and undefined
@@ -327,7 +327,7 @@
             }
         },
         // Object Functions
-        // --------------
+        // ----------------
         Object : {
             hasKey : function(object, key) {
                 if (object == null) return false;
