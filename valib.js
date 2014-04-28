@@ -36,7 +36,7 @@
 }(this, function (/*dependencies*/) {
     "use strict";
 
-    // Reset undefined, it may have been overwritten.
+    // Reset `undefined`, it may have been overwritten.
     var undefined = (function(){})();
     
     // Detect a variable's type (refactoring of code from jQuery 1.7.1).
@@ -84,16 +84,16 @@
                 return getType(value) === 'undefined';
             },
             isNull: function(value) {
-                // not really a Javascript type, but certainly not an object
+                // not really a Javascript type, but misleading if treated as an object
                 // (typeof null === 'object')
                 return getType(value) === 'null';
             },
+            /* Test if `value` is NaN: this is not the same as calling
+             * the builtin isNaN() (which checks if a value is coercible
+             * to a number).
+             */
             isNaN: function(value) {
-                // Test if `value` is NaN: this is not the same as calling
-                // the standard isNaN() (which checks if a value is coercible
-                // to a number).
-                
-                // Not really a Javascript type, but certainly not a number
+                // not really a Javascript type, but misleading if treated as a number
                 // (typeof NaN === 'number').
                 return (typeof value === 'number') && value != value;
             },
@@ -105,7 +105,7 @@
             }
         },
         // Number Functions
-        // --------------
+        // ----------------
         Number: {
             isInteger : function(n) {
                 return n === +n && n === (n|0);
@@ -119,22 +119,27 @@
             isZero : function(n) {
                 return n === 0;
             },
+            /* Test if `n` is between `min` and `max`. By default both bounds are included: 
+             * you can exclude either bound via the `options` object:
+             * {l_exc: true} means "left bound excluded"
+             * {r_exc: true} means "right bound excluded"
+             */
             inRange : function(n, min, max, options) {
                 options = options || {l_exc : false, r_exc : false};
                 return (options.l_exc ? n > min : n >= min)
                         &&
                        (options.r_exc ? n < max : n <= max);
             },
-            lt : function(n,max) {
+            lt : function(n, max) {
                 return n < max;
             },
-            lte : function(n,max) {
+            lte : function(n, max) {
                 return n <= max;
             },
-            gt : function(n,min) {
+            gt : function(n, min) {
                 return n > min;
             },
-            gte : function(n,min) {
+            gte : function(n, min) {
                 return n >= min;
             },
             isPositive: function(n) {
@@ -145,8 +150,15 @@
             }
         },
         // String Functions
-        // --------------
+        // ----------------
         String: {
+            /* Test if `str` represents a number.
+             * `options` is an optional object and can contain the following fields:
+             * - canBeSigned, boolean, defaults `true`
+             * - simple, boolean, defaults `false`
+             * When the `simple` option is `true` then only decimal notation is
+             * accepted (so 2e3, 0x7, etc. are not allowed).
+             */
             isNumeric : function(str, options) {
                 options = options || {};
                 // Defaults to {canBeSigned: true}
@@ -176,6 +188,10 @@
                 
                 return true;
             },
+            /* Convert a string to a number. `null` is returned if the string
+             * cannot be converted.
+             * `options` is optional and has the same format of `String.isNumeric()`.
+             */
             toNumber : function(str, options) {
                 // NOTE: this function returns null instead of NaN in case of errors
                 // because practicality beats purity. Most people would wrongly
@@ -190,8 +206,9 @@
                 return valib.Type.isNaN(res) ? null : res;
                 
             },
-            // Check if the provided string is an url. The only protocols supported
-            // are http(s) and ftp.
+            /* Check if the provided string is an url. The only protocols supported
+             * are http(s) and ftp.
+             */
             isUrl : (function() {
                 // Javascript version of the regexp found at
                 // http://stackoverflow.com/questions/161738
@@ -223,15 +240,20 @@
             isSHA1 : function(str) {
                 return /^[0-9a-f]{40}$/i.test(str);
             },
-            // Check if `str` is similar to an e-mail (no hope to comply with the RFC and the mess that's the real world).
+            /* Check if `str` is similar to an e-mail (no hope to comply 
+             * with the RFC and the mess that's the real world).
+             */
             isEmailLike : function(str) {
                 // something@something with no spaces, one and only one @
                 return /^[^\s@]+@[^\s@]{3,}$/.test(str);
             },
-            // If regOrString is a regular espression check if `str` matches it.
-            // If regOrString is a string check if it's equal to `str`.
-            //
-            // If the option {trim: true} is present then trailing whitespaces will be ignored on `str`.
+            /* If regOrString is a regular espression check if `str` matches it.
+             * If regOrString is a string check if it's equal to `str`.
+             *
+             * `options` is an optional object. It can have the following keys:
+             *  - trim: boolean (default `false`).
+             *    If true then trailing whitespaces will be ignored on `str`.
+             */
             match: function(str, regOrString, options) {
                 options = options || {trim:false};
                 
@@ -291,6 +313,12 @@
         // Array Functions
         // ---------------
         Array : {
+            /* Test if `value` is inside `array`.
+             * If the optional parameter `fromIndex` is provided
+             * then the search start from that index.
+             *
+             * Return the index found or -1.
+             */
             indexOf : function(array, value, fromIndex) { // O(n)
                 if (array == null) return -1; // null and undefined
                 
@@ -302,13 +330,15 @@
                     
                     for (var i=fromIndex,il=array.length; i<il; i++) {
                         // Check if `i` is inside `array` to differentiate
-                        // between deleted items and keys set to undefined.
+                        // between deleted items and keys set to `undefined`.
                         if (i in array && array[i] === value) return i;
                     }
                     return -1;
                     
                 } else return array.indexOf(value, fromIndex);
             },
+            /* Like valib.Array.indexOf, but returns a boolean instead.
+             */
             has : function(array, value, fromIndex) { // O(n)
                 return -1 !== this.indexOf(array, value, fromIndex);
             },
@@ -342,6 +372,8 @@
                 for (var key in object) if (this.hasKey(object, key)) return false;
                 return true;
             },
+            /* Returns the number of properties inside an object.
+             */
             countKeys: function(object) {
                 var k = 0;
                 for (var key in object) {
@@ -376,9 +408,10 @@
                 return    this.nDaysFromDate(-1, this.toStartOfTheDay(d)).getTime()
                        == this.toStartOfTheDay(past).getTime();
             },
-            // Get the number of calendar days passed (so if more than 24 hours passed
-            // it may be still a difference of 1 day. e.g. from 01:00 to 03:00 of the
-            // next day).
+            /* Return the number of calendar days passed (so if more than 24 hours passed
+             * it may be still a difference of 1 day. e.g. from 01:00 to 03:00 of the
+             * next day).
+             */
             elapsedDays : function(d1, d2) {
                 
                 return Math.abs(Math.round(( // round because of daylight saving
@@ -405,12 +438,17 @@
                 d.setDate(d.getDate() + n);
                 return d;
             },
-            isWithinDays : function(d, n_days, startFrom) {
+            /* Test if `d` will occur at most `nDays` after `startFrom`.
+             * If `startFrom` is missing the current date is used.
+             * If `d` is an earlier date than `startFrom` the function 
+             * will always return `false`.
+             */
+            isWithinDays : function(d, nDays, startFrom) {
                 if (!startFrom) startFrom = this.today();
                 else startFrom = this.toStartOfTheDay(startFrom);
                 
                 return this.toStartOfTheDay(d) >= this.toStartOfTheDay(startFrom)
-                       && this.elapsedDays(startFrom, d) <= n_days;
+                       && this.elapsedDays(startFrom, d) <= nDays;
             },
             clone : function(d) {
                 return new Date(d.getTime());
@@ -418,19 +456,22 @@
             isEqual : function(d1, d2) {
                 return d1.getTime() === d2.getTime();
             },
-            // Check if two dates are the same day of the same year
-            // (the dates must be in the same timezone).
+            /* Check if two dates are the same day of the same year
+             * (the dates must be in the same timezone).
+             */
             isSameDay : function(d1, d2) {
                 return this.isEqual(this.toStartOfTheDay(d1), this.toStartOfTheDay(d2));
             },
-            // Check if two dates are in the same year/month
-            // (the dates must be in the same timezone).
+            /* Check if two dates are in the same year/month
+             * (the dates must be in the same timezone).
+             */
             isSameMonth : function(d1, d2) {
                 return d1.getFullYear() === d2.getFullYear()
                        && d1.getMonth() === d2.getMonth();
             },
-            // Check if two dates are in the same week and the same year
-            // (the dates must be in the same timezone).
+            /* Check if two dates are in the same week and the same year
+             * (the dates must be in the same timezone).
+             */
             isSameWeek : function(d1, d2, weekStartsAtSunday/*=true*/) {
                 if (d2 < d1) { var tmp = d1; d1 = d2; d2 = tmp; } // swap
                 if (weekStartsAtSunday !== false) weekStartsAtSunday = true;
