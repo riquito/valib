@@ -1,0 +1,18 @@
+2.0.0 - 2014-05-01
+
+ * String.toNumber() now returns null instead of NaN
+ * String.toNumber() accept the same options of String.isNumeric()
+ * Date.isTheNextDay() has been renamed to Date.isNextDay
+ * Date.isThePreviousDay() has been renamed to Date.isPreviousDay()
+ * Reviewed internal documentation
+ * Refactoring to follow common naming and formatting rules
+ * Refactored trim() to adhere with standards
+ * Reset undefined to ensure that nobody modified it
+ * Tests can be run either with 'make test' or 'npm test'
+ * Added testling support in package.json
+ * Removed chai.js dependencies
+ * New documentation website at http://www.sideralis.org/valib/
+
+1.0.0 - 2014-03-10 
+
+ * First stable release

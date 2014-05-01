@@ -1,6 +1,6 @@
 {
     "name": "valib",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "A validation library for both the browser and Node.js",
     "keywords": ["validation", "amd", "browser", "server", "client", "util"],
     "author": "Riccardo Attilio Galli <riccardo@sideralis.org>",
