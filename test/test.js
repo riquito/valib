@@ -1524,9 +1524,9 @@ suite('validators',function(){
                 b = new Date('2020/01/02 10:14:30'),
                 c = new Date('2020/01/03 10:14:30');
             
-            assert.isTrue(v.Date.isTheNextDay(b,c));
+            assert.isTrue(v.Date.isNextDay(b,c));
             
-            assert.isFalse(v.Date.isTheNextDay(b,a));
+            assert.isFalse(v.Date.isNextDay(b,a));
 
             // If tested with CET locale, the following 
             // dates have 48h 30m of difference
@@ -1534,7 +1534,7 @@ suite('validators',function(){
             var d = new Date('2013/10/26 00:00:00'),
                 e = new Date('2013/10/27 23:30:00');
             
-            assert.isTrue(v.Date.isTheNextDay(d, e));
+            assert.isTrue(v.Date.isNextDay(d, e));
         });
         
         test('is the previous day',function(){
@@ -1542,9 +1542,9 @@ suite('validators',function(){
                 b = new Date('2020/01/02 10:14:30'),
                 c = new Date('2020/01/03 10:14:30');
             
-            assert.isTrue(v.Date.isThePreviousDay(b,a));
+            assert.isTrue(v.Date.isPreviousDay(b,a));
             
-            assert.isFalse(v.Date.isThePreviousDay(b,c));
+            assert.isFalse(v.Date.isPreviousDay(b,c));
             
             // If tested with CET locale, the following 
             // dates have 48h 30m of difference
@@ -1552,7 +1552,7 @@ suite('validators',function(){
             var d = new Date('2013/10/26 00:00:00'),
                 e = new Date('2013/10/27 23:30:00');
             
-            assert.isTrue(v.Date.isThePreviousDay(e, d));
+            assert.isTrue(v.Date.isPreviousDay(e, d));
         });
         
         test('clone',function(){

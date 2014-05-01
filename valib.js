@@ -400,11 +400,11 @@
                        && d.getMonth() === yesterday.getMonth()
                        && d.getDate() === yesterday.getDate();
             },
-            isTheNextDay : function(d, future) {
+            isNextDay : function(d, future) {
                 return    this.nDaysFromDate(1, this.toStartOfTheDay(d)).getTime()
                        == this.toStartOfTheDay(future).getTime();
             },
-            isThePreviousDay : function(d, past) {
+            isPreviousDay : function(d, past) {
                 return    this.nDaysFromDate(-1, this.toStartOfTheDay(d)).getTime()
                        == this.toStartOfTheDay(past).getTime();
             },
