@@ -363,7 +363,7 @@
             },
             hasValue : function(object, value) {
                 for (var key in object) {
-                    if (object.hasOwnProperty(key) && object[key] === value) return true;
+                    if (this.hasKey(object, key) && object[key] === value) return true;
                 }
                 return false;
             },
@@ -377,7 +377,7 @@
             countKeys: function(object) {
                 var k = 0;
                 for (var key in object) {
-                    if (object.hasOwnProperty(key)) k++;
+                    if (this.hasKey(object, key)) k++;
                 }
                 return k;
             }
