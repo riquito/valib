@@ -2,31 +2,46 @@
     "name": "valib",
     "version": "2.0.0",
     "description": "A validation library for both the browser and Node.js",
-    "keywords": ["validation", "amd", "browser", "server", "client", "util"],
+    "keywords": [
+        "validation",
+        "amd",
+        "browser",
+        "server",
+        "client",
+        "util"
+    ],
     "author": "Riccardo Attilio Galli <riccardo@sideralis.org>",
     "homepage": "https://github.com/riquito/valib",
-    "repository": {"type": "git", "url": "https://github.com/riquito/valib.git"},
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/riquito/valib.git"
+    },
     "bugs": "https://github.com/riquito/valib/issues",
     "main": "valib.js",
-    "files": ["valib.js", "LICENSE"],
+    "files": [
+        "valib.js",
+        "LICENSE"
+    ],
     "devDependencies": {
-      "mocha" : "1.x"
+        "mocha": "1.x"
     },
     "testling": {
         "harness": "mocha-tdd",
         "files": "test/*.js",
-        "scripts": ["valib.js"],
+        "scripts": [
+            "valib.js"
+        ],
         "browsers": [
-          "ie/6..latest",
-          "chrome/latest",
-          "firefox/3.6",
-          "firefox/4.0",
-          "firefox/latest",
-          "safari/latest",
-          "opera/latest",
-          "iphone/latest",
-          "ipad/latest",
-          "android-browser/latest"
+            "ie/6..latest",
+            "chrome/latest",
+            "firefox/3.6",
+            "firefox/4.0",
+            "firefox/latest",
+            "safari/latest",
+            "opera/latest",
+            "iphone/latest",
+            "ipad/latest",
+            "android-browser/latest"
         ]
     },
     "scripts": {
